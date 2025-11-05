@@ -1,0 +1,78 @@
+.benifits_sticky .stack_card {
+    background-color: #002F5F;
+}
+.benifits_sticky h4 span:last-child {
+    color: var(--tertiary-color);
+    font-size: calc(20px + 1.5vw);
+    font-weight: 300;
+}
+.benifits_sticky h4 {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+.service_excerpt .btn {
+    width: 100%;
+}
+.fintech_solution ul {
+    margin: 0;
+    padding-left: 20px;
+}
+.delivery_process .service-accorion-item:hover, 
+.delivery_process .service-accorion-item.active {
+    background-color: #002F5F;
+    border-color: #002F5F;
+    color: #ffffff;
+}
+.delivery_process .service-accorion-item:hover *,
+.delivery_process .service-accorion-item.active * {
+    color: #ffffff;
+}
+.delivery_process.service-accordion h4 {
+    text-decoration: none;
+}
+.delivery_process .service-accorion-item:hover .process_number_count,
+.delivery_process .service-accorion-item.active .process_number_count{
+    color: var(--tertiary-color);
+}
+.process_number_count {
+    font-size: calc(32px + 1.1vw);
+    font-family: var(--heading-font-family);
+    line-height: 1em;
+    color: var(--heading-color);
+    font-weight: 200;
+    
+}
+.on-hover-text ul {
+    display: block !important;
+    margin: 0 !important;
+    border: none !important;
+    padding: 0 0 0 20px;
+}
+.benefits_item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: sticky;
+    top: 90px;
+    padding-left: 2rem;
+}
+.benefits_item .circle span {
+    width: 45px;
+    height: 45px;
+    background: var(--primary-color);
+    display: inline-block;
+    border-radius: 100%;
+}
+.benefits_content {
+    background: var(--body-bg);
+    margin-bottom: 25px;
+    min-height: 40vh;
+}
+.ceo-info-content h4{ color: var(--purple);}
+
+.service_benifites .benefits_item:nth-child(2) .circle span{ background: var(--secondary-color); margin-left: 25px;}
+.service_benifites .benefits_item:nth-child(3) .circle span{ background: var(--tertiary-color); margin-left: 50px;}
+.service_benifites .benefits_item:nth-child(4) .circle span{ background: rgba(0, 0, 0, 0.5); margin-left: 75px;}
+.service_benifites .benefits_item:nth-child(2) .benefits_content{ margin-top: 50px;}
+.service_benifites .benefits_item:nth-child(3) .benefits_content{ margin-top: 100px;}
+.service_benifites .benefits_item:nth-child(4) .benefits_content{ margin-top: 150px;}

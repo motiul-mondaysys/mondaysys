@@ -1,0 +1,32 @@
+.cmb2-postbox .cmb-row:not(:last-of-type) {
+    border-bottom: none !important;
+}
+p.cmb2-metabox-description, .cmb2-metabox-title {
+    color: black !important;
+    font-size: 20px !important;
+    line-height: 1.2em;
+    padding-bottom: 0 !important;
+    border-top: 1px solid #ddd;
+    padding-top: 1.5rem !important;
+}
+.cmb2-metabox.cmb-field-list .cmb-row:first-child .cmb2-metabox-title {
+    border-top: none !important;
+}
+.cmb-type-group .cmb-remove-field-row, .cmb-type-group .cmb-repeat-group-field, .cmb2-postbox .cmb-remove-field-row, .cmb2-postbox .cmb-repeat-group-field {
+    padding: 0.5rem 0 0 !important;
+}
+.cmb-type-group .cmb2-wrap>.cmb-field-list>.cmb-row, .cmb2-postbox .cmb2-wrap>.cmb-field-list>.cmb-row {
+    padding-bottom: 0.5rem !important;
+    padding-top: 0 !important;
+
+}
+.cmb-remove-row button.cmb-remove-group-row {
+    background: red !important;
+    color: white !important;
+    border-color: red !important;
+}
+.cmb-add-row button.cmb-add-group-row.button-secondary {
+    background: #2271b1 !important;
+    color: white !important;
+    border-color: #2271b1 !important;
+}

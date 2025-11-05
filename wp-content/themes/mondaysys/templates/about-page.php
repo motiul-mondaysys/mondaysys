@@ -1,0 +1,355 @@
+<?php
+/**
+ * Template Name: About Page
+ */
+get_header();
+global $post;
+    while ( have_posts() ) : the_post();
+    $featured_image_url = get_the_post_thumbnail_url( $post->ID, 'full' ); ?>
+
+    <section class="about_page_titlebar position-relative" style="--banner-bg:url(
+        <?php if($featured_image_url){ 
+            echo $featured_image_url; } 
+        else { 
+            echo 'var(--body-bg)';
+        } ?>);">
+        <div class="titbar_bottom py-3 py-md-0">
+            <div class="container grid-row" style="--desk-col:7fr 5fr; --mob-col:1fr">
+                <h1><?php the_title() ?></h1>
+                <?php 
+                    $content = apply_filters( 'the_content', get_the_content() );
+                    if ( preg_match( '/<p>(.*?)<\/p>/i', $content, $matches ) ) {
+                        $paragraph = preg_replace('/<p>/', '<p class="border-left mb-0">', $matches[0], 1);
+                        echo $paragraph;
+                    }
+                ?>
+            </div>
+        </div>
+        <div class="fw-btn-section position-relative py-1 px-1 px-md-2">
+            <div class="container global-grid align-item-center" style="--grid-col: 2; --gap: 0;--mob-grid-col:2;">
+                <span class="h4 text-light">Book a Discovery Call</span>
+                <a class="view_all_casestuday btn" href="#"></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="border-container sevice_solutions">
+        <div class="empty-column"></div>
+        <div class="section-column border-top py-3 py-md-4 py-lg-7">
+            <div class="grid-row px-1 px-md-2 align-items-center" style="--desk-col: 5fr 7fr; --mob-col:1fr; --desk-gap:20px; --mob-gap:30px">
+                <div class="order-md-1">
+                    <?php 
+                        if(meta('choose_sub_title')):
+                            echo '<h5 style="color:#5A0000">'.meta('choose_sub_title').'</h5>';
+                        endif;
+                        if(meta('why_choose_title')):
+                            echo '<p class="pt-1 h3 mb-1 mb-md-3">'.meta('why_choose_title').'</p>';
+                        endif;
+                        if(meta('why_choose_desc')):
+                            echo '<p class="fw-300 mb-0">'.meta('why_choose_desc').'</p>';
+                        endif;
+                    ?>
+                </div>
+                <div class="text-center order-md-0">
+                    <?php 
+                        $image_url_1 = meta('why_choose_image');
+                        if ( $image_url_1 ) {
+                            $attachment_id = attachment_url_to_postid($image_url_1);
+                            $alt = get_post_meta($attachment_id, '_wp_attachment_image_alt', true);
+                            $title = get_the_title($attachment_id);
+                            if (empty($alt)) {
+                                $alt = $title;
+                            }
+                            echo '<img src="' . esc_url($image_url_1) . '" alt="' . esc_attr($alt) . '" title="' . esc_attr($title) . '">';
+                        }
+                        ?>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php $experience_group = meta('experience_group');
+    if ( ! empty( $experience_group ) ) : ?>
+        <section class="border-container">
+            <div class="empty-column"></div>
+            <div class="section-column number_counter_items border-top grid-row" style="--desk-col:repeat(4, 1fr); --mob-col:repeat(2, 1fr);">
+                <?php foreach ( $experience_group as $item ) : 
+                    $number = isset( $item['counter_number'] ) ? esc_html( $item['counter_number'] ) : '';
+                    $suffix = isset( $item['suffix'] ) ? esc_html( $item['suffix'] ) : '';
+                    $title  = isset( $item['title'] ) ? esc_html( $item['title'] ) : '';
+                    $animation_speed = rand(1000, 3000);
+                ?>
+                    <div class="counter">
+                        <span class="counter_number" 
+                            ending-number="<?php echo $number; ?>" 
+                            counter-animation="<?php echo $animation_speed; ?>">
+                            <?php echo $number . $suffix; ?>
+                        </span>
+                        <?php if ( ! empty( $suffix ) ) : ?>
+                            <span class="counter_suffix"><?php echo $suffix; ?></span>
+                        <?php endif; ?>
+                        <p class="number_title fw-300 mb-0 mt-1"><?php echo $title; ?></p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </section>
+    <?php endif; ?>
+    <section class="border-container">
+        <div class="empty-column"></div>
+        <div class="section-column number_counter_items border-top grid-row py-4  py-lg-7 px-1 px-md-2" style="--desk-col:repeat(2, 1fr); --mob-col:repeat(1, 1fr);">
+            <?php 
+            $ceo_image       = meta('ceo_image' );
+            $ceo_name        = meta('ceo_name' );
+            $ceo_designation = meta('ceo_designation' );
+            $ceo_info        = meta('ceo_info' );
+            if ( $ceo_image ) {
+                $attachment_id = attachment_url_to_postid( $ceo_image );
+                $alt   = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
+                $title = get_the_title( $attachment_id );
+                if ( empty( $alt ) ) {
+                    $alt = $ceo_name ? $ceo_name : $title;
+                }
+            }
+            ?>
+
+            <div class="ceo-bio-left">
+                <?php if ( $ceo_image ) : ?>
+                    <img class="mb-1" src="<?php echo esc_url( $ceo_image ); ?>" alt="<?php echo esc_attr( $alt ); ?>">
+                <?php endif; ?>
+
+                <?php if ( $ceo_name ) : ?>
+                    <h4 class="mb-0"><?php echo esc_html( $ceo_name ); ?></h4>
+                <?php endif; ?>
+
+                <?php if ( $ceo_designation ) : ?>
+                    <p class="fw-300"><?php echo esc_html( $ceo_designation ); ?></p>
+                <?php endif; ?>
+            </div>
+
+            <div class="ceo-bio-right">
+                <?php if ( $ceo_info ) : ?>
+                    <div class="ceo-info-content">
+                        <?php echo wp_kses_post( wpautop( $ceo_info ) ); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </section>
+    <?php if(meta('industry_service_title')): ?>
+        <section class="border-container indistrial_service overflow-hidden">
+            <div class="empty-column"></div>
+            <div class="section-column border-top">
+                    <h2 class="m-0 section-spacing"><?php echo meta('industry_service_title'); ?></h2>
+                    <div class="global-grid indistry-item-grid" style="
+                                    --grid-col:4; 
+                                    --gap:0;  
+                                    --mob-grid-col:2; 
+                                    ">
+                        <?php echo do_shortcode('[display_industries]'); ?>
+                    </div>
+            </div>
+        </section>
+    <?php endif; ?>
+    <section class="border-container">
+        <div class="empty-column"></div>
+        <div class="section-column overflow-hidden">
+            <div class="grid-row section-spacing" style="--desk-col: 8fr 4fr; --mob-col:1fr; --desk-gap:0;">
+                <div>
+                    <h2 class="mb-2"><?php meta('technology_partner_title'); ?></h2>
+                    <p class="mb-0"><?php echo meta('technology_partner_description'); ?></p>
+                </div>
+            </div>
+            <div class="d-block overflow-hidden px-1 border-top py-3 py-lg-4">
+                <mondaysys-carousel 
+                    data-desktop="6"
+                    data-tablet="5"
+                    data-mobile="3"
+                    data-extra-small="2"
+                    data-autoplay="true"
+                    data-autoplay-delay="1"
+                    data-deskitemspace="0"
+                    data-mobitemspace="0"
+                    data-item-speed="4000"
+                    data-infinite-loop="true"
+                    data-center-mode="false">
+                        <?php 
+                            echo do_shortcode('[technology_slider cat_slug="technology-partner"]');
+                        ?>
+                    </mondaysys-carousel> 
+            </div>
+            <?php 
+            $tech_partner_image = meta('technology_partner_image' );
+            $tech_partner_desc  = meta('technology_partner_large_desc' );
+            if ( $tech_partner_image ) {
+                $attachment_id = attachment_url_to_postid( $tech_partner_image );
+                $alt   = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
+                $title = get_the_title( $attachment_id );
+                if ( empty( $alt ) ) {
+                    $alt = $title ? $title : 'Technology Partner Logo';
+                }
+            }
+            ?>
+
+            <div class="about-inner-bg">
+                <?php if ( $tech_partner_image ) : ?>
+                    <img src="<?php echo esc_url( $tech_partner_image ); ?>" alt="<?php echo esc_attr( $alt ); ?>">
+                <?php endif; ?>
+            </div>
+
+            <?php if ( $tech_partner_desc ) : ?>
+                <p class="px-1 px-md-2 h3 py-3 py-lg-4">
+                    <?php echo esc_html( $tech_partner_desc ); ?>
+                </p>
+            <?php endif; ?>
+        </div>
+    </section>
+    <section class="border-container">
+        <div class="empty-column"></div>
+        <div class="section-column border-top">
+            <div class="grid-row section-spacing" style="--desk-col:1fr 1fr; --mob-col:1fr;">
+                <div></div>
+                <?php if ( meta('process_main_title' ) ) : ?>
+                    <h2 class="mb-0"><?php echo esc_html( meta('process_main_title' ) ); ?></h2>
+                <?php endif; ?>
+            </div>
+
+            <?php 
+            $why_choose_us = meta('why_choose_us' );
+            if ( ! empty( $why_choose_us ) ) : ?>
+                <div class="delivery_process service-accordion">
+                    <?php 
+                    $count = 1;
+                    foreach ( $why_choose_us as $item ) : 
+                        $title = isset( $item['title'] ) ? esc_html( $item['title'] ) : '';
+                        $desc  = isset( $item['description'] ) ? esc_html( $item['description'] ) : '';
+                        $active_class = ( $count === 1 ) ? 'active' : ''; 
+                    ?>
+                        <div class="service-accorion-item px-1 px-md-2 grid-row <?php echo esc_attr( $active_class ); ?>" 
+                            style="--desk-col:repeat(2, 1fr); --mob-col: 3fr 9fr; --mob-gap:10px">
+
+                            <span class="process_number_count">
+                                <?php echo sprintf('%02d', $count); ?>
+                            </span>
+
+                            <div class="service-accordion-content">
+                                <?php if ( $title ) : ?>
+                                    <h4><?php echo $title; ?></h4>
+                                <?php endif; ?>
+
+                                <?php if ( $desc ) : ?>
+                                    <div class="on-hover-text">
+                                        <p class="mb-0"><?php echo $desc; ?></p>   
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php 
+                        $count++;
+                    endforeach; 
+                    ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </section>
+
+
+    <section class="border-container px-0">
+        <div class="empty-column"></div>
+        <!--start .section-column-->
+        <div class="section-column">
+            <?php 
+                if (meta('benifits_section_title' )):
+                echo '<h2 class="mb-0 section-spacing border-top">'.meta('benifits_section_title' ).'</h2>';
+                endif;
+            ?>
+            <div class="service_benifites position-relative border-top pt-2 px-1 px-lg-2">
+                <?php 
+                $benifite_items  = meta('benifits_group');
+                if ( $benifite_items ) : 
+                    foreach ( $benifite_items as $item ) : 
+                        echo '<div class="benefits_item">';
+                            echo '<div class="circle"><span>&nbsp;</span></div>';
+                            echo '<div class="benefits_content">';
+                                if ( ! empty( $item['title'] ) ) {
+                                    echo '<h4>'. esc_html( $item['title'] ) .'</h4>';
+                                }
+                                if ( ! empty( $item['content'] ) ) {
+                                    echo '<p>'. esc_html( $item['content'] ) .'</p>';
+                                }
+                            echo '</div>';
+                        echo '</div>'; 
+                    endforeach; 
+                endif; ?>
+            </div>
+        </div>
+    </section>
+    <section class="border-container programming-skills">
+        <div class="empty-column"></div>
+        <div class="section-column overflow-hidden border-top">
+            <div class="title_box section-spacing">
+                <?php 
+                    if(meta('tech_stack_title')):
+                        echo '<h2>'.meta('tech_stack_title').'</h2>';
+                    endif;
+                    if(meta('tech_stack_desc')):
+                        echo '<p class="mb-0">'.meta('tech_stack_desc').'</p>';
+                    endif;
+                ?>
+            </div>
+            <hr class="m-0">
+            <div class="marquee-container pt-2 pt-md-4">
+                <?php 
+                    echo do_shortcode('[technology_slider cat_slug="technology-expertise"]');
+                ?>
+            </div>
+            <div class="marquee-container reverse-marqee pt-1 pb-2 pb-md-4">
+                <?php 
+                    echo do_shortcode('[technology_slider cat_slug="technology-expertise"]');
+                ?>
+            </div>
+        </div>
+    </section>
+    <section class="border-container testimonial-section">
+        <div class="empty-column position-relative">&nbsp;</div>
+        <div class="section-column position-relative overflow-hidden">
+            <div class="testimonial">
+                <?php echo testimonial_slider(); ?>
+            </div>
+        </div>
+    </section>
+    <?php if(meta('map_title')): ?>
+        <section class="border-container">
+            <div class="empty-column">&nbsp;</div>
+            <div class="section-column pb-0">
+                <div class="grid-row section-spacing" style="--desk-col: 8fr 4fr; --mob-col:1fr;">
+                    <h3><?php echo meta('map_title'); ?></h3>
+                </div>
+                <div class="map px-1 px-md-2 pb-2">
+                    <iframe src="https://lottie.host/embed/8d707625-999b-4947-9853-d276d9863149/ND2S541JuF.lottie"></iframe>
+                </div>
+                
+            </div>
+        </section>
+    <?php endif; ?>
+    <?php if (meta('title_faqs')): ?>
+        <section class="border-container section-faq">
+            <div class="empty-column"></div>
+            <div class="section-column border-top">
+                <h2 class="mb-0 section-spacing"><?php echo meta('title_faqs'); ?></h2>
+                <?php echo display_faqs_init(); ?>
+            </div>
+        </section>
+    <?php endif ; ?>
+    <?php if (meta('footer_above_title')): ?>
+        <section class="border-container">
+            <div class="empty-column"></div>
+            <div class="section-column">
+                <div class="footer_above_business_growth text-light">
+                    <h2 class="h1"><?php echo meta('footer_above_title'); ?></h2>
+                </div>
+            </div>
+        </section>
+    <?php endif; ?>
+<?php  endwhile;
+get_footer(); 
+?>
