@@ -88,36 +88,31 @@ global $post;
                     </mondaysys-carousel>
                 <?php endif; ?>
             </section>
-            
-            <?php if (meta('technology_partner_title')): ?>
-                <section class="border-container">
+            <section class="border-container">
                     <div class="empty-column"></div>
-                        <div class="section-column  overflow-hidden">
-                            <div class="our-client-title section-spacing">
-                            <h2 class="mb-2"><?php echo meta('technology_partner_title'); ?></h2>
-                            <p class="mb-0"><?php echo meta('technology_partner_description'); ?></p>
+                    <div class="section-column section-spacing">
+                        <?php 
+                            $content = apply_filters('the_content', get_the_content());
+                            if ( preg_match('/<p>(.*?)<\/p>/s', $content, $matches) ) {
+                                echo '<p class="h3">'.$matches[1].'</p>'; 
+                            }
+                        ?>
+                        <div class="grid-row pt-3" style="--desk-col:1fr 1fr; --mob-col: 1fr;">
+                            <div></div>
+                            <div class="home-entry-content">
+                                <?php
+                                    if (preg_match_all('/<p>(.*?)<\/p>/s', $content, $matches)) {
+                                        if (count($matches[1]) > 1) {
+                                            for ($i = 1; $i < count($matches[1]); $i++) {
+                                                echo '<p>' . $matches[1][$i] . '</p>';
+                                            }
+                                        }
+                                    }
+                                    ?>
+                            </div>
                         </div>
-                        <div class="border-top py-2 py-md-3 py-lg-4 overflow-hidden">
-                            <mondaysys-carousel 
-                            data-desktop="6"
-                            data-tablet="5"
-                            data-mobile="3"
-                            data-extra-small="2"
-                            data-autoplay="true"
-                            data-autoplay-delay="1"
-                            data-deskitemspace="0"
-                            data-mobitemspace="0"
-                            data-item-speed="4000"
-                            data-infinite-loop="true"
-                            data-center-mode="false">
-                                <?php 
-                                    echo do_shortcode('[technology_slider cat_slug="technology-partner"]');
-                                ?>
-                            </mondaysys-carousel> 
-                        </div>       
                     </div>
-                </section>
-            <?php endif ?>
+            </section>
             
             <?php if(meta('mondaysys_service_title')): ?>
                 <section class="border-container mondaysys_main_service">
@@ -156,17 +151,41 @@ global $post;
                     </div>
                 </section>
             <?php endif; ?>
- 
+
+            <?php if (meta('technology_partner_title')): ?>
+                <section class="border-container">
+                    <div class="empty-column"></div>
+                        <div class="section-column  overflow-hidden">
+                            <div class="our-client-title section-spacing">
+                            <h2 class="mb-2"><?php echo meta('technology_partner_title'); ?></h2>
+                            <p class="mb-0"><?php echo meta('technology_partner_description'); ?></p>
+                        </div>
+                        <div class="border-top py-2 py-md-3 py-lg-4 overflow-hidden">
+                            <mondaysys-carousel 
+                            data-desktop="6"
+                            data-tablet="5"
+                            data-mobile="3"
+                            data-extra-small="2"
+                            data-autoplay="true"
+                            data-autoplay-delay="1"
+                            data-deskitemspace="0"
+                            data-mobitemspace="0"
+                            data-item-speed="4000"
+                            data-infinite-loop="true"
+                            data-center-mode="false">
+                                <?php 
+                                    echo do_shortcode('[technology_slider cat_slug="technology-partner"]');
+                                ?>
+                            </mondaysys-carousel> 
+                        </div>       
+                    </div>
+                </section>
+            <?php endif ?>
 
             <?php if(meta('process_main_title') || meta('process_inner_title')): ?>
                 <section class="border-container">
                     <div class="empty-column">&nbsp;</div>
-                    <div class="section-column overflow-hidden">
-                        <div class="global-grid section-spacing" style=" --grid-col:2; --gap:0; --mob-grid-col:1">
-                            <?php if(meta('process_main_title')):
-                                echo '<h2 class="mb-0">'. meta('process_main_title') .'</h2>';
-                            endif; ?>
-                        </div>
+                    <div class="section-column overflow-hidden border-top">
                         <div class="how_itwork_title">
                             <div></div>
                             <?php if(meta('process_main_title')):

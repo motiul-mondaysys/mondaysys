@@ -4,7 +4,9 @@
 if ( have_posts() ) {
   while ( have_posts() ) {
     the_post();
-    $terms = get_the_terms( get_the_ID(), 'case_study_cat' );
+    $industry_term = get_the_terms( get_the_ID(), 'case_study_cat' );
+    $service_term = get_the_terms( get_the_ID(), 'services_cat' );
+    $technology_terms = get_the_terms( get_the_ID(), 'case_technology_cat' );
     ?>
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
         <section class="single_case_study_hero">
@@ -14,10 +16,20 @@ if ( have_posts() ) {
                 </div>
                 <div class="service_list_area">
                     <ul class="unorder-list">
-                        <li><span>Industry</span><strong><?php echo $terms[0]->name; ?></strong></li>
+                        <li><span>Industry</span><strong><?php echo $industry_term[0]->name; ?></strong></li>
                         <li><span>Client Name</span><strong>John doe</strong></li>
-                        <li><span>Services</span><strong>Web development</strong></li>
-                        <li><span>Category</span><strong>Website</strong></li>
+                        <li><span>Services</span><strong><?php echo $service_term[0]->name ?></strong></li>
+                        <li>
+                            <span>Technologies Used</span>
+                            <strong>
+                                <?php 
+                                if ( !empty($technology_terms) && !is_wp_error($technology_terms) ) {
+                                    $tech_names = wp_list_pluck($technology_terms, 'name'); 
+                                    echo esc_html(implode(', ', $tech_names));
+                                }
+                                ?>
+                            </strong>
+                        </li>
                     </ul>
                 </div>
             </div>

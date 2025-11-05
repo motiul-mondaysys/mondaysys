@@ -1246,12 +1246,7 @@ $cmb_home = new_cmb2_box( array(
 		'type'    => 'title',
 	) );
 	$cmb_home->add_field( array(
-		'name'    => esc_html__( 'Section Main Title', 'cmb2' ),
-		'id'      => $prefix . 'process_main_title',
-		'type'    => 'text',
-	) );
-	$cmb_home->add_field( array(
-		'name'    => esc_html__( 'Section Inner Title', 'cmb2' ),
+		'name'    => esc_html__( 'Section Title', 'cmb2' ),
 		'id'      => $prefix . 'process_inner_title',
 		'type'    => 'text',
 	) );

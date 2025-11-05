@@ -591,6 +591,8 @@ body.admin-bar .site-header{ top: 32px; }
 }
 .hover_logo img {
   filter: brightness(0) invert(1);
+  width: 100%;
+  max-width: 200px;
 }
 .on-hover-text:hover .hover_logo  {
     opacity: 1;
@@ -1048,7 +1050,14 @@ ul.footer_menu_list {
     justify-content: center;
     flex-direction: column;
 }
+.service_content_area h3 {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+.service_content_area h3 a,
 .service_content_area h3{ color: var(--text-color);}
+.service_content_area h3 a svg{ fill:var(--text-color); width: 16px;}
 .service_image_area img {
     height: 100%;
     width: 100%;
@@ -1543,6 +1552,11 @@ button.submenu-toggle svg {
         object-fit: cover;
     }
     .service_list_area ul span{ font-size: calc(-2px + 1.19048vw);}
+    .service_content_area h3 span{ font-size: calc(-2px + 3.5vw);}
+    .service_content_area h3 a svg {
+        width: calc(3px + 1.3vw);
+        margin-left: 0.3vw;
+    }
     
 }
 

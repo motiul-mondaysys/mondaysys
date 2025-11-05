@@ -148,7 +148,7 @@ function register_modaysys_cpt() {
         'rewrite'             => false,
         'supports'            => array('title', 'thumbnail', 'page-attributes'),
     );
-    register_post_type('technology', $args_technology); sfsafdsa
+    register_post_type('technology', $args_technology);
 
     $taxonomy_labels_technology = array(
         'name'              => __( 'Technology Categories', 'mondaysys' ),

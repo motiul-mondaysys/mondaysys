@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function mondaysys_enqueue_assets() {
     wp_enqueue_style( 'swiper-style', get_theme_file_uri('/assets/css/swiper-bundle.min.css') );
-    wp_enqueue_style( 'parent-style', get_theme_file_uri('/style.css'), array(), '1.2.7');
+    wp_enqueue_style( 'parent-style', get_theme_file_uri('/style.css'), array(), '1.2.8');
     wp_enqueue_style( 'spacing-style', get_theme_file_uri('/assets/css/spacing.css'),array(), '1.0.4' );
     if(is_page_template ('templates/about-page.php')){
         wp_enqueue_style( 'about-page-style', get_theme_file_uri('/assets/css/about-us.css'), array(), '1.0.5' );
