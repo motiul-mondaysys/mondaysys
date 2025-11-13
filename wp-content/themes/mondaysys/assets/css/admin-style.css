@@ -30,6 +30,27 @@ p.cmb2-metabox-description, .cmb2-metabox-title {
     color: white !important;
     border-color: #2271b1 !important;
 }
+input[type="text"].custom-section-title {
+    width: 100%;
+    border-width: 1px 0 0 !important;
+    border-radius: 0 !important;
+    font-weight: 600;
+    color: black !important;
+    font-size: 20px !important;
+    padding: 3px 0 0!important;
+    border-color: #ddd !important;
+    margin: 0;
+    background-color: #fffff8 !important;
+}
+input[type="text"].custom-section-title::placeholder {
+    color: #000; 
+    opacity: 1;  
+}
+input[type="text"].custom-section-title:focus{
+    outline: none !important;
+    box-shadow:none !important;
+    border-color: #D60001 !important;
+}
 @media(min-width: 1024px){
     .cmb-type-group .cmb-th, .cmb2-postbox .cmb-th {
         width: 30% !important;

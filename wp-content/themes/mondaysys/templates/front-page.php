@@ -117,25 +117,23 @@ global $post;
             <?php if(meta('mondaysys_service_title')): ?>
                 <section class="border-container mondaysys_main_service">
                     <div class="empty-column"></div>
-                    <div class="section-column border-top service_sticky">
+                    <div class="section-column border-top">
+                        <div class="global-grid section-spacing" style="
+                            --grid-col:2; 
+                            --gap:0; 
+                            --mob-grid-col:1; 
+                            ">
+                            <div>&nbsp;</div>
+                            <h2 class="m-0 px-1 px-md-0"><?php echo meta('mondaysys_service_title'); ?></h2>
+                        </div>
                         <div class="sections_features_new position-relative">
-                            <div class="stack_header_container">
-                                <div class="global-grid pb-0" style="
-                                    --grid-col:2; 
-                                    --gap:0; 
-                                    --mob-grid-col:1; 
-                                    ">
-                                    <div>&nbsp;</div>
-                                    <h2 class="m-0 px-1 px-md-0"><?php echo meta('mondaysys_service_title'); ?></h2>
-                                </div>
-                            </div>
+                            <div class="stack_header_container"></div>
                                 <?php echo do_shortcode('[mondaysys_services]')?>
                         </div>
                     </div>
                 </section>
             <?php endif; ?>
         
-            
             <?php if(meta('industry_service_title')): ?>
                 <section class="border-container indistrial_service overflow-hidden">
                     <div class="empty-column"></div>
@@ -275,7 +273,7 @@ global $post;
        
             <section class="border-container programming-skills">
                 <div class="empty-column"></div>
-                <div class="section-column overflow-hidden">
+                <div class="section-column overflow-hidden border-top">
                     <div class="title_box section-spacing">
                         <?php 
                             if(meta('section_title_25')):
@@ -283,7 +281,7 @@ global $post;
                             endif;
                         ?>
                         <?php 
-                            if(get_post_meta($post->ID, '_cmb2_section_title_description_25')):
+                            if(meta('section_title_description_25')):
                                 echo '<p class="mb-0">'.meta('section_title_description_25').'</p>';
                             endif;
                         ?>

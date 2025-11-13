@@ -277,7 +277,7 @@ $service_meta = new_cmb2_box( array(
 	'object_types'  => array( 'mondaysys_services' ),
 	) );
 	$service_meta->add_field( array(
-		'name'    => esc_html__( 'Sevice Page Settings', 'cmb2' ),
+		'name'    => esc_html__( 'Sevice Page Home Settings', 'cmb2' ),
 		'id'      => $prefix . 'title_1',
 		'type'    => 'title',
 	) );
@@ -294,9 +294,24 @@ $service_meta = new_cmb2_box( array(
 		'default' => '#ffffff',
 	) );
 	$service_meta->add_field( array(
-		'name'    => esc_html__( 'Hero Bottom Text', 'cmb2' ),
-		'id'      => $prefix . 'title_2',
+		'name'    => esc_html__( 'Home Page Image', 'cmb2' ),
+		'id'      => $prefix . 'home_service_image',
+		'type'    => 'file',
+		'preview_size' => array( 200, 200 )
+	) );
+	$service_meta->add_field( array(
+		'name'    => esc_html__( 'Sevice Details Page Settings', 'cmb2' ),
+		'id'      => $prefix . 'title_15',
 		'type'    => 'title',
+	) );
+	$service_meta->add_field( array(
+		'id'      => $prefix . 'title_2',
+		'type'       => 'text',
+		'default' => 'Hero Bottom Text',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$service_meta->add_field( array(
 		'name'    => esc_html__( 'Section Order', 'cmb2' ),
@@ -326,9 +341,13 @@ $service_meta = new_cmb2_box( array(
 	) );
 	//Service Solutions
 	$service_meta->add_field( array(
-		'name'    => esc_html__( 'Service Solutions', 'cmb2' ),
 		'id'      => $prefix . 'title_3',
-		'type'    => 'title',
+		'type'       => 'text',
+		'default' => 'Service Solutions',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$service_meta->add_field( array(
 		'name'    => esc_html__( 'Section Order', 'cmb2' ),
@@ -377,9 +396,13 @@ $service_meta = new_cmb2_box( array(
     ) );
 	//Tools & Technology
 	$service_meta->add_field( array(
-		'name'    => esc_html__( 'Tools & Technology', 'cmb2' ),
 		'id'      => $prefix . 'title_4',
-		'type'    => 'title',
+		'type' => 'text',
+		'default' => 'Tools & Technology',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$service_meta->add_field( array(
 		'name'    => esc_html__( 'Section Order', 'cmb2' ),
@@ -408,6 +431,11 @@ $service_meta = new_cmb2_box( array(
         'name' => __( 'Section Description', 'mondaysys' ),
         'id'   => $prefix . 'technology_section_des',
         'type' => 'textarea_small',
+    ) );
+	$service_meta->add_field( array(
+        'name' => __( 'Section Image', 'mondaysys' ),
+        'id'   => $prefix . 'technology_section_image',
+        'type' => 'file',
     ) );
     $group_field_technology = $service_meta->add_field( array(
         'id'          => $prefix . 'technology_group',
@@ -439,9 +467,13 @@ $service_meta = new_cmb2_box( array(
 
 	//Service Benifits
 	$service_meta->add_field( array(
-		'name'    => esc_html__( 'Service Benifits', 'cmb2' ),
 		'id'      => $prefix . 'title_5',
-		'type'    => 'title',
+		'type' => 'text',
+		'default' => 'Service Benifits',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$service_meta->add_field( array(
 		'name'    => esc_html__( 'Section Order', 'cmb2' ),
@@ -490,9 +522,13 @@ $service_meta = new_cmb2_box( array(
 
 	//Service Capabilities
 	$service_meta->add_field( array(
-		'name'    => esc_html__( 'Service Capabilities', 'cmb2' ),
 		'id'      => $prefix . 'title_6',
-		'type'    => 'title',
+		'type' => 'text',
+		'default' => 'Service Capabilities',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$service_meta->add_field( array(
 		'name'    => esc_html__( 'Section Order', 'cmb2' ),
@@ -541,9 +577,13 @@ $service_meta = new_cmb2_box( array(
 
 	//Our Approach
 	$service_meta->add_field( array(
-		'name'    => esc_html__( 'Service Approach', 'cmb2' ),
 		'id'      => $prefix . 'title_7',
-		'type'    => 'title',
+		'type' => 'text',
+		'default' => 'Service Approach',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$service_meta->add_field( array(
 		'name'    => esc_html__( 'Section Order', 'cmb2' ),
@@ -591,9 +631,13 @@ $service_meta = new_cmb2_box( array(
     ) );
 	// Testimonial
 	$service_meta->add_field( array(
-		'name'    => esc_html__( 'Testimonials', 'cmb2' ),
 		'id'      => $prefix . 'title_8',
-		'type'    => 'title',
+		'type'       => 'text',
+		'default' => 'Testimonials',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$service_meta->add_field( array(
 		'name'    => esc_html__( 'Section Order', 'cmb2' ),
@@ -625,9 +669,13 @@ $service_meta = new_cmb2_box( array(
     ) );
 	//Case Study
 	$service_meta->add_field( array(
-		'name'    => esc_html__( 'Case Studies', 'cmb2' ),
 		'id'      => $prefix . 'title_9',
-		'type'    => 'title',
+		'type'       => 'text',
+		'default' => 'Case Studies',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$service_meta->add_field( array(
 		'name'    => esc_html__( 'Section Order', 'cmb2' ),
@@ -654,9 +702,13 @@ $service_meta = new_cmb2_box( array(
     ) );
 	//FAQ
 	$service_meta->add_field( array(
-		'name'    => esc_html__( 'FAQs', 'cmb2' ),
 		'id'      => $prefix . 'title_10',
-		'type'    => 'title',
+		'type'       => 'text',
+		'default' => 'FAQs',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$service_meta->add_field( array(
 		'name'    => esc_html__( 'Section Order', 'cmb2' ),
@@ -683,9 +735,19 @@ $service_meta = new_cmb2_box( array(
     ) );
     //Footer Above
 	$service_meta->add_field( array(
-		'name'    => esc_html__( 'Footer Above', 'cmb2' ),
 		'id'      => $prefix . 'title_11',
-		'type'    => 'title',
+		'type'       => 'text',
+		'default' => 'Footer Above',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
+	) );
+	$service_meta->add_field( array(
+		'name'    => esc_html__( 'Section Image', 'cmb2' ),
+		'id'      => $prefix . 'footer_above_image',
+		'type'    => 'file',
+		'preview_size' => array( 200, 200 )
 	) );
 	$service_meta->add_field( array(
         'name' => __( 'Section Title', 'mondaysys' ),

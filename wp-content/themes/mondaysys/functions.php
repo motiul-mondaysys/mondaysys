@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function mondaysys_enqueue_assets() {
     wp_enqueue_style( 'swiper-style', get_theme_file_uri('/assets/css/swiper-bundle.min.css') );
-    wp_enqueue_style( 'parent-style', get_theme_file_uri('/style.css'), array(), '1.2.9');
+    wp_enqueue_style( 'parent-style', get_theme_file_uri('/style.css'), array(), '1.3.0');
     wp_enqueue_style( 'spacing-style', get_theme_file_uri('/assets/css/spacing.css'),array(), '1.0.4' );
     if(is_page_template ('templates/about-page.php')){
         wp_enqueue_style( 'about-page-style', get_theme_file_uri('/assets/css/about-us.css'), array(), '1.0.5' );
@@ -54,7 +54,7 @@ function mondaysys_enqueue_assets() {
 add_action( 'wp_enqueue_scripts', 'mondaysys_enqueue_assets' );
 
 function mondaysys_admin_enqueue() {
-    wp_enqueue_style( 'custom-admin-style', get_theme_file_uri('/assets/css/admin-style.css'), array(), '1.0.2' );
+    wp_enqueue_style( 'custom-admin-style', get_theme_file_uri('/assets/css/admin-style.css'), array(), '1.0.3' );
 }
 add_action( 'admin_enqueue_scripts', 'mondaysys_admin_enqueue' );
 
@@ -71,6 +71,37 @@ function meta($key, $post_id = null) {
     $prefix = '_cmb2_';
     return get_post_meta($post_id, $prefix . $key, true);
 }
+
+// Global Meta Image Function
+function meta_image($key, $size = 'full', $class = 'attachment-full size-full wp-post-image', $post_id = null) {
+    $prefix = '_cmb2_';
+    if (is_null($post_id)) {
+        $post_id = get_the_ID();
+    }
+    $image_url = get_post_meta($post_id, $prefix . $key, true);
+
+    if (empty($image_url)) {
+        return ''; 
+    }
+    $image_id = attachment_url_to_postid($image_url);
+
+    if ($image_id) {
+        $alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
+        if (empty($alt)) {
+            $alt = get_the_title($post_id);
+        }
+        return wp_get_attachment_image($image_id, $size, false, [
+            'alt'      => esc_attr($alt),
+            'class'    => esc_attr($class),
+            'loading'  => 'lazy',
+            'decoding' => 'async',
+        ]);
+    } else {
+        $alt = get_the_title($post_id);
+        return '<img src="' . esc_url($image_url) . '" alt="' . esc_attr($alt) . '" class="' . esc_attr($class) . '" loading="lazy" decoding="async">';
+    }
+}
+
 
 
 add_filter('use_block_editor_for_post_type', function($can_edit, $post_type) {

@@ -37,23 +37,41 @@ if ( have_posts() ) {
             <div class="titbar_bottom position-relative grid-row" style="--desk-col:7.2fr 14fr; --tab-col: 7.4fr 16fr; --mob-col:1fr">
                 <a href="#" class="btn btn-primary radious-0">Book a Discovery Call</a>
                 <?php 
-                    $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' ); 
-                    if ( $featured_image_url ) : ?>
-                        <img src="<?php echo esc_url( $featured_image_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>">
-                <?php endif; ?>
+                    if ( has_post_thumbnail() ) {
+                        echo get_the_post_thumbnail( $post->ID, 'full' ); 
+                    } 
+                ?>
             </div>
         </section>
 <?php foreach ($sections as $key => $order) : 
     switch ($key) :
         case 'hero_bottom':
             if ( empty( meta('section_hide_1') ) ) : ?>
-                <section class="border-container border-top">
+                <section class="border-container">
                         <div class="empty-column"></div>
-                        <div class="section-column">
+                        <div class="section-column overflow-hidden">
+                            <div class="py-2 py-md-3 py-lg-4 overflow-hidden">
+                                <mondaysys-carousel 
+                                data-desktop="6"
+                                data-tablet="5"
+                                data-mobile="3"
+                                data-extra-small="2"
+                                data-autoplay="true"
+                                data-autoplay-delay="1"
+                                data-deskitemspace="0"
+                                data-mobitemspace="0"
+                                data-item-speed="4000"
+                                data-infinite-loop="true"
+                                data-center-mode="false">
+                                    <?php 
+                                        echo do_shortcode('[technology_slider cat_slug="technology-partner"]');
+                                    ?>
+                                </mondaysys-carousel> 
+                            </div>  
                             <?php 
                             $hero_bottom_text = meta('hero_bottom_text' ); 
                             if($hero_bottom_text): ?>
-                                <div class="px-md-2 px-1 py-3 py-lg-5">
+                                <div class="px-md-2 border-top px-1 py-3 py-lg-5">
                                     <h5 class="py-1" style="color:#5A0000"><?php the_title(); ?></h5>
                                     <?php 
                                         if ( $hero_bottom_text ) {
@@ -120,21 +138,20 @@ if ( have_posts() ) {
                 <section class="border-container">
                     <div class="empty-column"></div>
                     <div class="section-column border-top">
-                        <?php
-                            $technology_title = meta('technology_section_title' );
-                            $technology_description = meta('technology_section_des');
-                        ?>
-                        <div class="grid-row position-relative technologies_use py-3 py-lg-6 px-md-2 px-1" style="--desk-col:1fr 1fr; --tab-col:5fr 7fr; --mob-col:1fr; --desk-gap:5vw; --tab-gap:10px;">
-                            
+                        <div class="grid-row position-relative technologies_use py-3 py-lg-6 px-md-2 px-1" style="--desk-col:1fr 1fr; --tab-col:5fr 7fr; --mob-col:1fr; --desk-gap:5vw; --tab-gap:10px;"> 
                             <div class="technology-left-area position-relative">
                                 <div class="stikcy_area">
-                                    <?php if ( $technology_title ) : ?>
-                                        <h2><?php echo esc_html( $technology_title ); ?></h2>
-                                    <?php endif; ?>
-
-                                    <?php if ( $technology_description ) : ?>
-                                        <p><?php echo esc_html( $technology_description ); ?></p>
-                                    <?php endif; ?>
+                                    <?php 
+                                    if ( meta('technology_section_title') ) : 
+                                        echo '<h2>'.esc_html( meta('technology_section_title') ).'</h2>';
+                                    endif;
+                                    if ( meta('technology_section_des') ):
+                                        echo '<p>'.esc_html( meta('technology_section_des')).'</p>';
+                                    endif;
+                                    if(meta('technology_section_image')):
+                                        echo '<img src="'.meta('technology_section_image').'" alt=""/>';
+                                    endif;
+                                    ?>
                                 </div>   
                             </div>
 
@@ -256,8 +273,8 @@ if ( have_posts() ) {
                                 data-tablet="2"
                                 data-mobile="1"
                                 data-extra-small="1"
-                                data-autoplay="false"
-                                data-autoplay-delay="50000"
+                                data-autoplay="true"
+                                data-autoplay-delay="5000"
                                 data-deskitemspace="0"
                                 data-mobitemspace="0"
                                 data-item-speed="500"
@@ -363,22 +380,28 @@ if ( have_posts() ) {
     endswitch;
 endforeach; ?>
         <?php 
-            $footer_above_title = meta('footer_above_title');
-            $footer_above_desc = meta('footer_above_desc');
-            $small_feature_img = get_the_post_thumbnail_url( get_the_ID(), 'large' );
-        if ($footer_above_title || $footer_above_desc): ?>
+        if (meta('footer_above_title') || meta('footer_above_desc')): ?>
             <section class="border-container">
                 <div class="empty-column"></div>
                 <div class="section-column">
                     <div class="grid-row" style="--desk-col: 1fr 1fr; --mob-col:1fr;">
-                        <div class="lh-0"><img src="<?php echo esc_url( $small_feature_img ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>"></div>
+                        <div class="lh-0">
+                            <?php 
+                                if(meta('footer_above_image')):
+                                    echo meta_image('footer_above_image');
+                                else:
+                                    echo get_the_post_thumbnail($post->ID, 'full');
+                                endif;
+                            ?>
+                            
+                        </div>
                         <div class="footer_above_right text-light px-1 px-lg-3 py-4 d-flex flex-wrap flex-column justify-content-center">
                             <?php 
-                                if($footer_above_title):
-                                    echo '<h2>'.$footer_above_title.'</h2>';
+                                if(meta('footer_above_title')):
+                                    echo '<h2>'.meta('footer_above_title').'</h2>';
                                 endif;
-                                if($footer_above_desc):
-                                    echo '<p class="mb-0">'.$footer_above_desc.'</p>';
+                                if(meta('footer_above_desc')):
+                                    echo '<p class="mb-0">'.meta('footer_above_desc').'</p>';
                                 endif;
                             ?>
                         </div>

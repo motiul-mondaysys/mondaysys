@@ -89,14 +89,14 @@ if ( ! function_exists( 'testimonial_slider' ) ) {
             data-tablet="1"
             data-mobile="1"
             data-extra-small="1"
-            data-autoplay="false"
+            data-autoplay="true"
             data-autoplay-delay="7000"
             data-deskitemspace="20"
             data-mobitemspace="10"
             data-item-speed="1000"
             data-infinite-loop="true"
             data-center-mode="false"
-            data-direction="right"
+            data-direction="left"
             class="testimonial-slideshow">
 
             <div class="swiper mondaysys_carousel">
@@ -432,8 +432,8 @@ function mondaysys_services_shortcode($atts) {
                             --gap:0; 
                             --mob-grid-col:1; 
                             --mob-gap:0px;
-                            --bg-color:'.get_post_meta($post->ID, '_cmb2_accent_bg', true).';
-                            --text-color:'.get_post_meta($post->ID, '_cmb2_accent_color', true).';
+                            --bg-color:'.meta('accent_bg').';
+                            --text-color:'.meta('accent_color').';
                             ">';
                             $output .='<div class="service_content_area">';
                                 $output .='<h3><a href="' . get_permalink() . '">'.esc_html($title).' <svg  viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.2778 4.88889L0.611111 19.5556L2.44444 21.3889L17.7222 6.11111H18.9444V22H22V0H0V3.05556H15.2778V4.88889Z"/></svg></a> <span>'.sprintf('%02d', $counter).'</span></h3>';
@@ -443,7 +443,13 @@ function mondaysys_services_shortcode($atts) {
                                 //$output .='<div class="service_btn_wrap"><a href="' . get_permalink() . '" class="btn btn-tertiary">Learn more</a></div>';
                             $output .='</div>';
                             $output .='<div class="service_image_area lh-0">';
-                                $output .='<a href="'.get_permalink().'"><img src="' . esc_url($image) . '" alt="' . esc_attr($title) . '"></a>';
+                                $output .='<a href="'.get_permalink().'">';
+                                    if (meta('home_service_image')) {
+                                        $output .= meta_image('home_service_image');
+                                    } else {
+                                        $output .= get_the_post_thumbnail($post->ID, 'full');
+                                    }
+                                $output .='</a>';
                             $output .='</div>';
                         $output .='</div>';
             $output .='</div>';
