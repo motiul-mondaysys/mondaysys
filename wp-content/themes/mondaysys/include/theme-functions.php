@@ -436,9 +436,11 @@ function mondaysys_services_shortcode($atts) {
                             --text-color:'.get_post_meta($post->ID, '_cmb2_accent_color', true).';
                             ">';
                             $output .='<div class="service_content_area">';
-                                $output .='<h3>'.esc_html($title).'</h3>';
+                                $output .='<h3><a href="' . get_permalink() . '">'.esc_html($title).' <svg  viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.2778 4.88889L0.611111 19.5556L2.44444 21.3889L17.7222 6.11111H18.9444V22H22V0H0V3.05556H15.2778V4.88889Z"/></svg></a> <span>'.sprintf('%02d', $counter).'</span></h3>';
+                                
                                 $output .='<div class="service_excerpt">'.apply_filters('the_content', get_the_content()).'</div>';
-                                $output .='<div class="service_btn_wrap"><a href="' . get_permalink() . '" class="btn btn-tertiary">Learn more</a></div>';
+
+                                //$output .='<div class="service_btn_wrap"><a href="' . get_permalink() . '" class="btn btn-tertiary">Learn more</a></div>';
                             $output .='</div>';
                             $output .='<div class="service_image_area lh-0">';
                                 $output .='<a href="'.get_permalink().'"><img src="' . esc_url($image) . '" alt="' . esc_attr($title) . '"></a>';

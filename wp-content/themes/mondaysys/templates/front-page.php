@@ -186,7 +186,7 @@ global $post;
                 <section class="border-container">
                     <div class="empty-column">&nbsp;</div>
                     <div class="section-column overflow-hidden border-top">
-                        <div class="how_itwork_title">
+                        <div class="how_itwork_title" style="--section-bg:url(<?php echo meta('process_bg')?>)">
                             <div></div>
                             <?php if(meta('process_main_title')):
                                 echo '<h2 class="m-0">'.meta('process_inner_title').'</h2>';

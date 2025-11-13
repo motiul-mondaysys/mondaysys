@@ -126,9 +126,13 @@
 .service_benifites .benefits_item:nth-child(2) .circle span{ background: var(--secondary-color); margin-left: 25px;}
 .service_benifites .benefits_item:nth-child(3) .circle span{ background: var(--tertiary-color); margin-left: 50px;}
 .service_benifites .benefits_item:nth-child(4) .circle span{ background: rgba(0, 0, 0, 0.5); margin-left: 75px;}
+.service_benifites .benefits_item:nth-child(5) .circle span{ background: #BBBDC1; margin-left: 100px;}
+.service_benifites .benefits_item:nth-child(6) .circle span{ background: var(--secondary-color); margin-left: 125px;}
 .service_benifites .benefits_item:nth-child(2) .benefits_content{ margin-top: 50px;}
 .service_benifites .benefits_item:nth-child(3) .benefits_content{ margin-top: 100px;}
 .service_benifites .benefits_item:nth-child(4) .benefits_content{ margin-top: 150px;}
+.service_benifites .benefits_item:nth-child(5) .benefits_content{ margin-top: 200px;}
+.service_benifites .benefits_item:nth-child(6) .benefits_content{ margin-top: 250px;}
 
 .personilize_item {
     border-right: 1px solid var(--border-color);

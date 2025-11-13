@@ -683,7 +683,7 @@ ul.programming-knowledge {
 .how_itwork_title {
     display: grid;
     grid-template-columns: repeat(1, 12fr 12fr);
-    background-image: url(assets/images/work-process-bg.jpg);
+    background-image: var(--section-bg, #EBEBED);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;

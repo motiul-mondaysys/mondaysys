@@ -30,3 +30,11 @@ p.cmb2-metabox-description, .cmb2-metabox-title {
     color: white !important;
     border-color: #2271b1 !important;
 }
+@media(min-width: 1024px){
+    .cmb-type-group .cmb-th, .cmb2-postbox .cmb-th {
+        width: 30% !important;
+    }
+    .cmb-type-group .cmb-th+.cmb-td, .cmb2-postbox .cmb-th+.cmb-td {
+        width: 68% !important;
+    }
+}
