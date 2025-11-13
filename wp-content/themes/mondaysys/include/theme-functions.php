@@ -444,11 +444,9 @@ function mondaysys_services_shortcode($atts) {
                             $output .='</div>';
                             $output .='<div class="service_image_area lh-0">';
                                 $output .='<a href="'.get_permalink().'">';
-                                    if (meta('home_service_image')) {
-                                        $output .= meta_image('home_service_image');
-                                    } else {
-                                        $output .= get_the_post_thumbnail($post->ID, 'full');
-                                    }
+                                if ( has_post_thumbnail() ):
+                                    $output .= get_the_post_thumbnail($post->ID, 'full');
+                                endif;
                                 $output .='</a>';
                             $output .='</div>';
                         $output .='</div>';

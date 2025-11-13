@@ -32,7 +32,7 @@ get_header();
             <section class="border-container">
                 <div class="empty-column"></div>
                 <div class="section-column">
-                    <?php 
+                    <?php /*
                         for ($i = 1; $i <= 5; $i++):
                             $cat_name = meta('service_cat_name_' . $i);
                             $service_items = meta('service_box_items_' . $i);
@@ -54,8 +54,47 @@ get_header();
                                 endforeach;
                                 echo '</div>';
                             endif;
-                        endfor;
-                    ?>
+                        endfor;*/
+                        ?>
+                        <h2 class="section-spacing"><?php echo meta('all_service_title') ?></h2>
+                        <div class="service_item_grid">
+                            <?php 
+                            $args = array(
+                                'post_type'      => 'mondaysys_services',
+                                'posts_per_page' => -1,
+                                'post_status'    => 'publish',
+                                'orderby'        => 'menu_order',
+                                'order'          => 'ASC'
+                            );
+
+                            $services_query = new WP_Query($args);
+                            $counter = 0;
+
+                            if ( $services_query->have_posts() ) :
+                                while ( $services_query->have_posts() ) : $services_query->the_post();
+                                    $counter++;
+                                    ?>
+                                    <div class="service_list_item position-relative">
+                                        <span class="h2 pb-lg-4 pb-3 d-block">
+                                            <?php echo sprintf('%02d', $counter); ?>
+                                        </span>
+                                        <h4>
+                                            <a href="<?php the_permalink(); ?>">
+                                                <?php the_title(); ?>
+                                            </a>
+                                        </h4>
+                                        <p class="mb-0">
+                                            <?php echo wp_trim_words( get_the_excerpt(), 20, '...' ); ?>
+                                        </p>
+                                    </div>
+                                <?php 
+                                endwhile; 
+                                wp_reset_postdata();
+                            else :
+                                echo '<p>No services found.</p>';
+                            endif;
+                            ?>
+                    </div>
                 </div>
             </section>
             <section class="border-container">
@@ -119,8 +158,8 @@ get_header();
                                 data-tablet="2"
                                 data-mobile="1"
                                 data-extra-small="1"
-                                data-autoplay="false"
-                                data-autoplay-delay="50000"
+                                data-autoplay="true"
+                                data-autoplay-delay="5000"
                                 data-deskitemspace="0"
                                 data-mobitemspace="0"
                                 data-item-speed="500"

@@ -15,7 +15,7 @@ function mondaysys_enqueue_assets() {
         wp_enqueue_style( 'about-page-style', get_theme_file_uri('/assets/css/about-us.css'), array(), '1.0.5' );
     }
     if(is_page_template ('templates/services.php') || is_singular( 'mondaysys_services' )){
-        wp_enqueue_style( 'service-page-style', get_theme_file_uri('/assets/css/services.css'), array(), '1.1.4' );
+        wp_enqueue_style( 'service-page-style', get_theme_file_uri('/assets/css/services.css'), array(), '1.1.8' );
     }
     if(is_page_template ('templates/contact-page.php')){
         wp_enqueue_style( 'contact-page-style', get_theme_file_uri('/assets/css/contact.css'), array(), '1.0.2' );

@@ -135,7 +135,7 @@ global $post;
             </div>
         </div>
     </section>
-    <?php if(meta('industry_service_title')): ?>
+    <?php if(empty(meta('section_hide_4'))): ?>
         <section class="border-container indistrial_service overflow-hidden">
             <div class="empty-column"></div>
             <div class="section-column border-top">
@@ -155,7 +155,7 @@ global $post;
         <div class="section-column overflow-hidden">
             <div class="grid-row section-spacing" style="--desk-col: 8fr 4fr; --mob-col:1fr; --desk-gap:0;">
                 <div>
-                    <h2 class="mb-2"><?php meta('technology_partner_title'); ?></h2>
+                    <h2 class="mb-2"><?php echo meta('technology_partner_title'); ?></h2>
                     <p class="mb-0"><?php echo meta('technology_partner_description'); ?></p>
                 </div>
             </div>

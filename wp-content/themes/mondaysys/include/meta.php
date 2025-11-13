@@ -294,15 +294,32 @@ $service_meta = new_cmb2_box( array(
 		'default' => '#ffffff',
 	) );
 	$service_meta->add_field( array(
-		'name'    => esc_html__( 'Home Page Image', 'cmb2' ),
-		'id'      => $prefix . 'home_service_image',
-		'type'    => 'file',
-		'preview_size' => array( 200, 200 )
-	) );
-	$service_meta->add_field( array(
 		'name'    => esc_html__( 'Sevice Details Page Settings', 'cmb2' ),
 		'id'      => $prefix . 'title_15',
 		'type'    => 'title',
+	) );
+	$service_meta->add_field( array(
+		'name'    => esc_html__( 'Hero Settings', 'cmb2' ),
+		'id'      => $prefix . 'title_16',
+		'type'    => 'title',
+	) );
+	$service_meta->add_field( array(
+		'name'    => esc_html__( 'Button Text', 'cmb2' ),
+		'id'      => $prefix . 'btn_text',
+		'type'    => 'text',
+		'default' => 'Book a Discovery Call'
+	) );
+	$service_meta->add_field( array(
+		'name'    => esc_html__( 'Button Link', 'cmb2' ),
+		'id'      => $prefix . 'btn_url',
+		'type'    => 'text_url',
+		'default'    => '#',
+	) );
+	$service_meta->add_field( array(
+		'name'    => esc_html__( 'Hero Image', 'cmb2' ),
+		'id'      => $prefix . 'hero_image',
+		'type'    => 'file',
+		'preview_size' => array( 200, 200 )
 	) );
 	$service_meta->add_field( array(
 		'id'      => $prefix . 'title_2',
@@ -313,6 +330,7 @@ $service_meta = new_cmb2_box( array(
 			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
 		)
 	) );
+	
 	$service_meta->add_field( array(
 		'name'    => esc_html__( 'Section Order', 'cmb2' ),
 		'id'      => $prefix . 'section_order_1',
@@ -331,6 +349,12 @@ $service_meta = new_cmb2_box( array(
 		'id'      => $prefix . 'section_hide_1',
 		'type'    => 'checkbox',
 	) );
+	$service_meta->add_field( array(
+        'name' => __( 'Technology Logo', 'mondaysys' ),
+        'id'   => $prefix .'tech_logo',
+        'type'         => 'file_list',
+		'preview_size' => array( 100, 100 ),
+    ) );
 	$service_meta->add_field( array(
 		'name'    => esc_html__( 'Heo Bottom Text', 'cmb2' ),
 		'id'      => $prefix . 'hero_bottom_text',
@@ -509,6 +533,30 @@ $service_meta = new_cmb2_box( array(
 			'closed'      => true,
         ),
     ) );
+	$service_meta->add_group_field( $group_field_benifits, array(
+		'name'    => esc_html__( 'Accent Background', 'cmb2' ),
+		'id'      => 'accent_bg',
+		'type'    => 'colorpicker',
+		'default' => '#002F5F',
+	) );
+	$service_meta->add_group_field( $group_field_benifits, array(
+		'name'    => esc_html__( 'Font Color', 'cmb2' ),
+		'id'      => 'accent_color',
+		'type'    => 'colorpicker',
+		'default' => '#ffffff',
+	) );
+	$service_meta->add_group_field( $group_field_benifits, array(
+		'name'    => esc_html__( 'Number Color', 'cmb2' ),
+		'id'      => 'number_color',
+		'type'    => 'colorpicker',
+		'default' => '#AEFF2C',
+	) );
+	$service_meta->add_group_field( $group_field_benifits, array(
+        'name' => __( 'Image', 'mondaysys' ),
+        'id'   => 'image',
+        'type' => 'file',
+		'preview_size' => array( 100, 100 )
+    ) );
     $service_meta->add_group_field( $group_field_benifits, array(
         'name' => __( 'Title', 'mondaysys' ),
         'id'   => 'title',
@@ -517,7 +565,10 @@ $service_meta = new_cmb2_box( array(
     $service_meta->add_group_field( $group_field_benifits, array(
         'name' => __( 'Content', 'mondaysys' ),
         'id'   => 'content',
-        'type' => 'textarea_small',
+        'type'    => 'wysiwyg',
+		'options' => array(
+			'textarea_rows' => 4,
+		),
     ) );
 
 	//Service Capabilities
@@ -1130,9 +1181,31 @@ $cmb_about = new_cmb2_box( array(
         'show_on'       => array( 'key' => 'page-template', 'value' => 'templates/about-page.php' ),
     ) );
 	$cmb_about->add_field( array(
-		'name'    => esc_html__( 'Why Choose Mondaysys', 'cmb2' ),
 		'id'      => $prefix . 'title_1',
-		'type'    => 'title',
+		'type'       => 'text',
+		'default' => 'Why Choose Mondaysys',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_1',
+		'type'    => 'text_small',
+		'default' => '1',
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_1',
+		'type'    => 'checkbox',
 	) );
 	$cmb_about->add_field( array(
 		'name'    => esc_html__( 'Sub Title', 'cmb2' ),
@@ -1156,9 +1229,31 @@ $cmb_about = new_cmb2_box( array(
 	) );
 	// Experience
 	$cmb_about->add_field( array(
-		'name'    => esc_html__( 'Experience', 'cmb2' ),
 		'id'      => $prefix . 'title_2',
-		'type'    => 'title',
+		'type'       => 'text',
+		'default' => 'Experience',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_2',
+		'type'    => 'text_small',
+		'default' => '2',
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_2',
+		'type'    => 'checkbox',
 	) );
     $group_field_experience = $cmb_about->add_field( array(
         'id'          => $prefix . 'experience_group',
@@ -1184,6 +1279,11 @@ $cmb_about = new_cmb2_box( array(
 		),
     ) );
 	$cmb_about->add_group_field( $group_field_experience, array(
+        'name' => __( 'Prefix', 'mondaysys' ),
+        'id'   => 'prefix',
+        'type' => 'text_small',
+    ) );
+	$cmb_about->add_group_field( $group_field_experience, array(
         'name' => __( 'Suffix', 'mondaysys' ),
         'id'   => 'suffix',
         'type' => 'text_small',
@@ -1195,9 +1295,31 @@ $cmb_about = new_cmb2_box( array(
     ) );
 	//About CEO
 	$cmb_about->add_field( array(
-		'name'    => esc_html__( 'About CEO', 'cmb2' ),
 		'id'      => $prefix . 'title_3',
-		'type'    => 'title',
+		'type'       => 'text',
+		'default' => 'About CEO',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_3',
+		'type'    => 'text_small',
+		'default' => '3',
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_3',
+		'type'    => 'checkbox',
 	) );
 	$cmb_about->add_field( array(
 		'name'    => esc_html__( 'CEO Image', 'cmb2' ),
@@ -1224,9 +1346,31 @@ $cmb_about = new_cmb2_box( array(
 	) );
 	//Industrial Service
 	$cmb_about->add_field( array(
-		'name'    => esc_html__( 'Industrial Service', 'cmb2' ),
 		'id'      => $prefix . 'title_4',
-		'type'    => 'title',
+		'type'       => 'text',
+		'default' => 'Industrial Service',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_4',
+		'type'    => 'text_small',
+		'default' => '4',
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_4',
+		'type'    => 'checkbox',
 	) );
 	$cmb_about->add_field( array(
 		'name'    => esc_html__( 'Title', 'cmb2' ),
@@ -1235,9 +1379,31 @@ $cmb_about = new_cmb2_box( array(
 	) );
 	//Technology Partner
 	$cmb_about->add_field( array(
-		'name'    => esc_html__( 'Section Technology Partner', 'cmb2' ),
 		'id'      => $prefix . 'title_5',
-		'type'    => 'title',
+		'type'       => 'text',
+		'default' => 'Section Technology Partner',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_5',
+		'type'    => 'text_small',
+		'default' => '5',
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_5',
+		'type'    => 'checkbox',
 	) );
 	$cmb_about->add_field( array(
 		'name'    => esc_html__( 'Title', 'cmb2' ),
@@ -1261,9 +1427,31 @@ $cmb_about = new_cmb2_box( array(
 	) );
 	//Delivery Process
 	$cmb_about->add_field( array(
-		'name'    => esc_html__( 'Delivery Process', 'cmb2' ),
 		'id'      => $prefix . 'title_6',
-		'type'    => 'title',
+		'type'       => 'text',
+		'default' => 'Delivery Process',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_6',
+		'type'    => 'text_small',
+		'default' => '6',
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_6',
+		'type'    => 'checkbox',
 	) );
 	$cmb_about->add_field( array(
 		'name'    => esc_html__( 'Section Main Title', 'cmb2' ),
@@ -1294,9 +1482,31 @@ $cmb_about = new_cmb2_box( array(
 
 	//Service Benifits
 	$cmb_about->add_field( array(
-		'name'    => esc_html__( 'Service Benifits', 'cmb2' ),
-		'id'      => $prefix . 'title_8',
-		'type'    => 'title',
+		'id'      => $prefix . 'title_7',
+		'type'       => 'text',
+		'default' => 'Service Benifits',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_7',
+		'type'    => 'text_small',
+		'default' => '7',
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_7',
+		'type'    => 'checkbox',
 	) );
 	$cmb_about->add_field( array(
         'name' => __( 'Section Title', 'mondaysys' ),
@@ -1326,9 +1536,31 @@ $cmb_about = new_cmb2_box( array(
     ) );
 	//Tech Stack
 	$cmb_about->add_field( array(
-		'name'    => esc_html__( 'Section Tech Stack', 'cmb2' ),
-		'id'      => $prefix . 'title_9',
-		'type'    => 'title',
+		'id'      => $prefix . 'title_8',
+		'type'       => 'text',
+		'default' => 'Section Tech Stack',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_8',
+		'type'    => 'text_small',
+		'default' => '8',
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_8',
+		'type'    => 'checkbox',
 	) );
 	$cmb_about->add_field( array(
 		'name'    => esc_html__( 'Title', 'cmb2' ),
@@ -1342,9 +1574,31 @@ $cmb_about = new_cmb2_box( array(
 	) );
 	//Map
 	$cmb_about->add_field( array(
-		'name'    => esc_html__( 'Map', 'cmb2' ),
-		'id'      => $prefix . 'title_10',
-		'type'    => 'title',
+		'id'      => $prefix . 'title_9',
+		'type'       => 'text',
+		'default' => 'Map',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_9',
+		'type'    => 'text_small',
+		'default' => '9',
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_9',
+		'type'    => 'checkbox',
 	) );
 	$cmb_about->add_field( array(
 		'name'    => esc_html__( 'Title', 'cmb2' ),
@@ -1353,9 +1607,31 @@ $cmb_about = new_cmb2_box( array(
 	) );
 	//FAQs
 	$cmb_about->add_field( array(
-		'name'    => esc_html__( 'Section FAQs', 'cmb2' ),
-		'id'      => $prefix . 'title_11',
-		'type'    => 'title',
+		'id'      => $prefix . 'title_10',
+		'type'       => 'text',
+		'default' => 'FAQs',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_10',
+		'type'    => 'text_small',
+		'default' => '10',
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_10',
+		'type'    => 'checkbox',
 	) );
 	$cmb_about->add_field( array(
 		'name'    => esc_html__( 'Title', 'cmb2' ),
@@ -1364,9 +1640,31 @@ $cmb_about = new_cmb2_box( array(
 	) );
 	//About Footer Above
 	$cmb_about->add_field( array(
-		'name'    => esc_html__( 'Section Footer Above', 'cmb2' ),
-		'id'      => $prefix . 'title_12',
-		'type'    => 'title',
+		'id'      => $prefix . 'title_11',
+		'type'       => 'text',
+		'default' => 'Section Footer Above',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_11',
+		'type'    => 'text_small',
+		'default' => '11',
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_11',
+		'type'    => 'checkbox',
 	) );
 	$cmb_about->add_field( array(
 		'name'    => esc_html__( 'Title', 'cmb2' ),
@@ -2276,177 +2574,19 @@ $all_service_meta = new_cmb2_box( array(
         'show_on'       => array( 'key' => 'page-template', 'value' => 'templates/services.php' ),
     ) );
 	$all_service_meta->add_field( array(
-        'name' => __( 'Service Category List', 'mondaysys' ),
-        'id'   => $prefix . 'title_1',
-        'type' => 'title',
-    ) );
-	//Category 1
-	$all_service_meta->add_field( array(
-        'name' => __( 'Category #1', 'mondaysys' ),
-        'id'   => $prefix . 'service_cat_name_1',
+        'name' => __( 'All Service Title', 'mondaysys' ),
+        'id'   => $prefix . 'all_service_title',
         'type' => 'text',
     ) );
-	$service_box_group_1 = $all_service_meta->add_field( array(
-        'id'          => $prefix . 'service_box_items_1',
-        'type'        => 'group',
-        'options'     => array(
-            'group_title'   => __( '{#}', 'mondaysys' ),
-            'add_button'    => __( 'Add Another', 'mondaysys' ),
-            'remove_button' => __( 'Remove', 'mondaysys' ),
-            'sortable'      => true,
-			'closed'      => true,
-        ),
-    ) );
-	$all_service_meta->add_group_field( $service_box_group_1, array(
-        'name' => __( 'Title', 'mondaysys' ),
-        'id'   => 'title',
-        'type' => 'text',
-    ) );
-	$all_service_meta->add_group_field( $service_box_group_1, array(
-        'name' => __( 'Service Excerpt', 'mondaysys' ),
-        'id'   => 'content',
-        'type' => 'textarea_small',
-    ) );
-	$all_service_meta->add_group_field( $service_box_group_1, array(
-        'name' => __( 'Service Link', 'mondaysys' ),
-        'id'   => 'link',
-        'type' => 'text_url',
-    ) );
-	//Category 2
-	$all_service_meta->add_field( array(
-        'name' => __( 'Category #2', 'mondaysys' ),
-        'id'   => $prefix . 'service_cat_name_2',
-        'type' => 'text',
-    ) );
-	$service_box_group_2 = $all_service_meta->add_field( array(
-        'id'          => $prefix . 'service_box_items_2',
-        'type'        => 'group',
-        'options'     => array(
-            'group_title'   => __( '{#}', 'mondaysys' ),
-            'add_button'    => __( 'Add Another', 'mondaysys' ),
-            'remove_button' => __( 'Remove', 'mondaysys' ),
-            'sortable'      => true,
-			'closed'      => true,
-        ),
-    ) );
-	$all_service_meta->add_group_field( $service_box_group_2, array(
-        'name' => __( 'Title', 'mondaysys' ),
-        'id'   => 'title',
-        'type' => 'text',
-    ) );
-	$all_service_meta->add_group_field( $service_box_group_2, array(
-        'name' => __( 'Service Excerpt', 'mondaysys' ),
-        'id'   => 'content',
-        'type' => 'textarea_small',
-    ) );
-	$all_service_meta->add_group_field( $service_box_group_2, array(
-        'name' => __( 'Service Link', 'mondaysys' ),
-        'id'   => 'link',
-        'type' => 'text_url',
-    ) );
-	// Category 3
-	$all_service_meta->add_field( array(
-		'name' => __( 'Category #3', 'mondaysys' ),
-		'id'   => $prefix . 'service_cat_name_3',
-		'type' => 'text',
-	) );
-
-	$service_box_group_3 = $all_service_meta->add_field( array(
-		'id'          => $prefix . 'service_box_items_3',
-		'type'        => 'group',
-		'options'     => array(
-			'group_title'   => __( '{#}', 'mondaysys' ),
-			'add_button'    => __( 'Add Another', 'mondaysys' ),
-			'remove_button' => __( 'Remove', 'mondaysys' ),
-			'sortable'      => true,
-			'closed'        => true,
-		),
-	) );
-	$all_service_meta->add_group_field( $service_box_group_3, array(
-		'name' => __( 'Title', 'mondaysys' ),
-		'id'   => 'title',
-		'type' => 'text',
-	) );
-	$all_service_meta->add_group_field( $service_box_group_3, array(
-		'name' => __( 'Service Excerpt', 'mondaysys' ),
-		'id'   => 'content',
-		'type' => 'textarea_small',
-	) );
-	$all_service_meta->add_group_field( $service_box_group_3, array(
-		'name' => __( 'Service Link', 'mondaysys' ),
-		'id'   => 'link',
-		'type' => 'text_url',
-	) );
-	// Category 4
-	$all_service_meta->add_field( array(
-		'name' => __( 'Category #4', 'mondaysys' ),
-		'id'   => $prefix . 'service_cat_name_4',
-		'type' => 'text',
-	) );
-	$service_box_group_4 = $all_service_meta->add_field( array(
-		'id'          => $prefix . 'service_box_items_4',
-		'type'        => 'group',
-		'options'     => array(
-			'group_title'   => __( '{#}', 'mondaysys' ),
-			'add_button'    => __( 'Add Another', 'mondaysys' ),
-			'remove_button' => __( 'Remove', 'mondaysys' ),
-			'sortable'      => true,
-			'closed'        => true,
-		),
-	) );
-	$all_service_meta->add_group_field( $service_box_group_4, array(
-		'name' => __( 'Title', 'mondaysys' ),
-		'id'   => 'title',
-		'type' => 'text',
-	) );
-	$all_service_meta->add_group_field( $service_box_group_4, array(
-		'name' => __( 'Service Excerpt', 'mondaysys' ),
-		'id'   => 'content',
-		'type' => 'textarea_small',
-	) );
-	$all_service_meta->add_group_field( $service_box_group_4, array(
-		'name' => __( 'Service Link', 'mondaysys' ),
-		'id'   => 'link',
-		'type' => 'text_url',
-	) );
-	// Category 5
-	$all_service_meta->add_field( array(
-		'name' => __( 'Category #5', 'mondaysys' ),
-		'id'   => $prefix . 'service_cat_name_5',
-		'type' => 'text',
-	) );
-
-	$service_box_group_5 = $all_service_meta->add_field( array(
-		'id'          => $prefix . 'service_box_items_5',
-		'type'        => 'group',
-		'options'     => array(
-			'group_title'   => __( '{#}', 'mondaysys' ),
-			'add_button'    => __( 'Add Another', 'mondaysys' ),
-			'remove_button' => __( 'Remove', 'mondaysys' ),
-			'sortable'      => true,
-			'closed'        => true,
-		),
-	) );
-	$all_service_meta->add_group_field( $service_box_group_5, array(
-		'name' => __( 'Title', 'mondaysys' ),
-		'id'   => 'title',
-		'type' => 'text',
-	) );
-	$all_service_meta->add_group_field( $service_box_group_5, array(
-		'name' => __( 'Service Excerpt', 'mondaysys' ),
-		'id'   => 'content',
-		'type' => 'textarea_small',
-	) );
-	$all_service_meta->add_group_field( $service_box_group_5, array(
-		'name' => __( 'Service Link', 'mondaysys' ),
-		'id'   => 'link',
-		'type' => 'text_url',
-	) );
 	//Tools & Technology
 	$all_service_meta->add_field( array(
-		'name'    => esc_html__( 'Tools & Technology', 'cmb2' ),
 		'id'      => $prefix . 'title_2',
-		'type'    => 'title',
+		'type'       => 'text',
+		'default' => 'Tools & Technology',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$all_service_meta->add_field( array(
         'name' => __( 'Section Title', 'mondaysys' ),
@@ -2488,9 +2628,13 @@ $all_service_meta = new_cmb2_box( array(
 
 	//Our Approach
 	$all_service_meta->add_field( array(
-		'name'    => esc_html__( 'Our Approach', 'cmb2' ),
 		'id'      => $prefix . 'title_3',
-		'type'    => 'title',
+		'type'       => 'text',
+		'default' => 'Our Approach',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$all_service_meta->add_field( array(
         'name' => __( 'Section Title', 'mondaysys' ),
@@ -2520,9 +2664,13 @@ $all_service_meta = new_cmb2_box( array(
     ) );
 	// Testimonial
 	$all_service_meta->add_field( array(
-		'name'    => esc_html__( 'Testimonials', 'cmb2' ),
 		'id'      => $prefix . 'title_4',
-		'type'    => 'title',
+		'type'       => 'text',
+		'default' => 'Testimonials',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$all_service_meta->add_field( array(
         'name' => __( 'Section Title', 'mondaysys' ),
@@ -2537,9 +2685,13 @@ $all_service_meta = new_cmb2_box( array(
 
 	// Footer Above
 	$all_service_meta->add_field( array(
-		'name'    => esc_html__( 'Section Footer Above', 'cmb2' ),
 		'id'      => $prefix . 'title_5',
-		'type'    => 'title',
+		'type'       => 'text',
+		'default' => 'Section Footer Above',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$all_service_meta->add_field( array(
 		'name'    => esc_html__( 'Title', 'cmb2' ),

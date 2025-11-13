@@ -35,12 +35,15 @@ if ( have_posts() ) {
                 </div>
             </div> 
             <div class="titbar_bottom position-relative grid-row" style="--desk-col:7.2fr 14fr; --tab-col: 7.4fr 16fr; --mob-col:1fr">
-                <a href="#" class="btn btn-primary radious-0">Book a Discovery Call</a>
+                <a href="<?php echo meta('btn_url'); ?>" class="btn btn-primary radious-0"><?php echo meta('btn_text'); ?></a>
                 <?php 
-                    if ( has_post_thumbnail() ) {
-                        echo get_the_post_thumbnail( $post->ID, 'full' ); 
-                    } 
+                    if (meta('hero_image')) {
+                        echo meta_image('hero_image');
+                    } else {
+                        echo get_the_post_thumbnail($post->ID, 'full');
+                    }
                 ?>
+                
             </div>
         </section>
 <?php foreach ($sections as $key => $order) : 
@@ -50,24 +53,32 @@ if ( have_posts() ) {
                 <section class="border-container">
                         <div class="empty-column"></div>
                         <div class="section-column overflow-hidden">
-                            <div class="py-2 py-md-3 py-lg-4 overflow-hidden">
-                                <mondaysys-carousel 
-                                data-desktop="6"
-                                data-tablet="5"
-                                data-mobile="3"
-                                data-extra-small="2"
-                                data-autoplay="true"
-                                data-autoplay-delay="1"
-                                data-deskitemspace="0"
-                                data-mobitemspace="0"
-                                data-item-speed="4000"
-                                data-infinite-loop="true"
-                                data-center-mode="false">
-                                    <?php 
-                                        echo do_shortcode('[technology_slider cat_slug="technology-partner"]');
-                                    ?>
-                                </mondaysys-carousel> 
-                            </div>  
+                            <?php if ( ! empty(meta('tech_logo'))) { ?>
+                                <div class="py-2 py-md-3 py-lg-4 overflow-hidden">
+                                    <mondaysys-carousel 
+                                    data-desktop="6"
+                                    data-tablet="5"
+                                    data-mobile="3"
+                                    data-extra-small="2"
+                                    data-autoplay="true"
+                                    data-autoplay-delay="1"
+                                    data-deskitemspace="0"
+                                    data-mobitemspace="0"
+                                    data-item-speed="4000"
+                                    data-infinite-loop="true"
+                                    data-center-mode="false">
+                                    <div class="swiper mondaysys_carousel marquee_slide"> 
+                                        <ul class="swiper-wrapper unorder-list">
+                                        <?php 
+                                            foreach ( meta('tech_logo') as $attachment_id => $attachment_url ) {
+                                                echo '<li class="swiper-slide"><span class="marqee_logo"><img src="'. esc_url( $attachment_url ) .'" alt=""></span></li>';
+                                            }
+                                        ?>
+                                        </ul>
+                                    </div>
+                                    </mondaysys-carousel> 
+                                </div>  
+                            <?php } ?>
                             <?php 
                             $hero_bottom_text = meta('hero_bottom_text' ); 
                             if($hero_bottom_text): ?>
@@ -200,21 +211,34 @@ if ( have_posts() ) {
                             ?>
                             
                         </div>
-                        <div class="service_benifites position-relative border-top pt-2 px-1 px-lg-2">
+                        <div class="sections_features_new benifits_sticky position-relative">
+                            <div class="stack_header_container"></div>
                             <?php 
                             $benifite_items  = meta('benifits_group');
+                            $counter = 0;
                             if ( $benifite_items ) : 
                                 foreach ( $benifite_items as $item ) : 
-                                    echo '<div class="benefits_item">';
-                                        echo '<div class="circle"><span>&nbsp;</span></div>';
-
-                                        echo '<div class="benefits_content">';
-                                            if ( ! empty( $item['title'] ) ) {
-                                                echo '<h4>'. esc_html( $item['title'] ) .'</h4>';
-                                            }
-                                            if ( ! empty( $item['content'] ) ) {
-                                                echo '<p>'. esc_html( $item['content'] ) .'</p>';
-                                            }
+                                    $counter ++;
+                                    echo'<div class="stack_card is-' . $counter . '"        style="--item-bg:'.$item['accent_bg'].';
+                                            --item-color:'.$item['accent_color'].';
+                                            --item-number-color:'.$item['number_color'].';
+                                        ">';
+                                        echo '<div class="global-grid" style="
+                                            --grid-col:2; 
+                                            --gap:0; 
+                                            --mob-grid-col:1; 
+                                            --mob-gap:0px;
+                                            ">';
+                                                echo '<div class="service_content_area">';
+                                                    echo '<h4 class="justify-content-between d-flex"><span>'.esc_html( $item['title'] ).'</span><span>'.sprintf('%02d', $counter).'</span></h4>';
+                                                    echo '<div class="service_excerpt fw-200">'.wpautop($item['content']).'</div>';
+                                                echo '</div>';
+                                                echo '<div class="service_image_area lh-0">';
+                                                    if(!empty($item['image'])):
+                                                        echo '<img src="' . esc_html( $item['image']) . '" alt="' . esc_html( $item['title'] ). '">';
+                                                    endif;
+                                                echo '</div>';
+                                                
                                         echo '</div>';
                                     echo '</div>'; 
                                 endforeach; 

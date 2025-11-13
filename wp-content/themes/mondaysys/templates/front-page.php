@@ -60,41 +60,40 @@ global $post;
                         <p class="mb-0 position-relative">Available for new Projects</p>
                     </div>
                 </div>
-                <?php 
-                    $images = meta('case_studay_image'); 
-                    if (!empty($images) && is_array($images)): ?>
-                    <mondaysys-carousel 
-                        data-desktop="5"
-                        data-tablet="3"
-                        data-mobile="2"
-                        data-extra-small="2"
-                        data-autoplay="true"
-                        data-autoplay-delay="1"
-                        data-deskitemspace="0"
-                        data-mobitemspace="0"
-                        data-item-speed="4000"
-                        data-infinite-loop="true"
-                        data-center-mode="false" class="lh-0">
-                        
-                        <div class="swiper mondaysys_carousel marquee_slide"> 
-                            <ul class="swiper-wrapper unorder-list">
-                                <?php foreach($images as $image_id => $image_url): ?>
-                                    <li class="swiper-slide">
-                                        <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" />
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div> 
-                    </mondaysys-carousel>
-                <?php endif; ?>
             </section>
-            <section class="border-container">
+            <section class="border-container border-top">
                     <div class="empty-column"></div>
-                    <div class="section-column section-spacing">
+                    <div class="section-column overflow-hidden">
+                        <?php 
+                            $images = meta('case_studay_image'); 
+                            if (!empty($images) && is_array($images)): ?>
+                            <mondaysys-carousel 
+                                data-desktop="5"
+                                data-tablet="3"
+                                data-mobile="2"
+                                data-extra-small="2"
+                                data-autoplay="true"
+                                data-autoplay-delay="1"
+                                data-deskitemspace="0"
+                                data-mobitemspace="0"
+                                data-item-speed="4000"
+                                data-infinite-loop="true"
+                                data-center-mode="false" class="lh-0">
+                                <div class="swiper mondaysys_carousel marquee_slide"> 
+                                    <ul class="swiper-wrapper unorder-list">
+                                        <?php foreach($images as $image_id => $image_url): ?>
+                                            <li class="swiper-slide">
+                                                <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" />
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div> 
+                            </mondaysys-carousel>
+                        <?php endif; ?>
                         <?php 
                             $content = apply_filters('the_content', get_the_content());
                             if ( preg_match('/<p>(.*?)<\/p>/s', $content, $matches) ) {
-                                echo '<p class="h3">'.$matches[1].'</p>'; 
+                                echo '<p class="h3 section-spacing">'.$matches[1].'</p>'; 
                             }
                         ?>
                         <div class="grid-row pt-3" style="--desk-col:1fr 1fr; --mob-col: 1fr;">
