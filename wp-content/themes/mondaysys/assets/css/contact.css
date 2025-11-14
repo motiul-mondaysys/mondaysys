@@ -21,7 +21,7 @@
 }
 .support-box{ background-color: #E4E4EA;}
 .support-box {
-    max-width: 500px;
+    max-width: 80%;
 }
 
 .left-icon-box {
@@ -65,4 +65,5 @@
         margin-right: -1rem;
     }
     .address_box:last-child{ border-bottom: none;}
+    .support-box { max-width: 100%;}
 }

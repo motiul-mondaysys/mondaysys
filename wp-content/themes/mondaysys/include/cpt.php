@@ -129,6 +129,31 @@ function register_modaysys_cpt() {
         'menu_icon'           => 'dashicons-editor-help',
     );
     register_post_type('faqs', $args_faq);
+    $taxonomy_labels_faq = array(
+        'name'              => __( 'FAQ Categories', 'mondaysys' ),
+        'singular_name'     => __( 'FAQ Category', 'mondaysys' ),
+        'search_items'      => __( 'Search FAQ', 'mondaysys' ),
+        'all_items'         => __( 'All Categories', 'mondaysys' ),
+        'parent_item'       => __( 'Parent Category', 'mondaysys' ),
+        'parent_item_colon' => __( 'Parent Category:', 'mondaysys' ),
+        'edit_item'         => __( 'Edit Category', 'mondaysys' ),
+        'update_item'       => __( 'Update Category', 'mondaysys' ),
+        'add_new_item'      => __( 'Add New Category', 'mondaysys' ),
+        'new_item_name'     => __( 'New Category Name', 'mondaysys' ),
+        'menu_name'         => __( 'FAQ Categories', 'mondaysys' ),
+    );
+
+    $taxonomy_args_faq = array(
+        'hierarchical'      => true,
+        'labels'            => $taxonomy_labels_faq,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'public'            => false, 
+        'show_in_nav_menus' => false,
+        'rewrite'           => false,
+    );
+    register_taxonomy( 'faq_cat', array( 'faqs' ), $taxonomy_args_faq );
 
     $labels_technology = array(
         'name'          => __('Technology', 'mondaysys' ),

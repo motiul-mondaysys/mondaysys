@@ -784,6 +784,12 @@ $service_meta = new_cmb2_box( array(
         'id'   => $prefix . 'title_faqs',
         'type' => 'text',
     ) );
+	$service_meta->add_field( array(
+		'name'       => 'Select FAQ Category',
+		'id'         => $prefix .'faq_category',
+		'taxonomy'   => 'faq_cat', 
+		'type'       => 'taxonomy_select',
+	) );
     //Footer Above
 	$service_meta->add_field( array(
 		'id'      => $prefix . 'title_11',
@@ -1181,6 +1187,32 @@ $cmb_about = new_cmb2_box( array(
         'show_on'       => array( 'key' => 'page-template', 'value' => 'templates/about-page.php' ),
     ) );
 	$cmb_about->add_field( array(
+		'id'      => $prefix . 'title_15',
+		'type'       => 'text',
+		'default' => 'Hero Section',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Custom Title', 'cmb2' ),
+		'id'      => $prefix . 'custom_title',
+		'type'    => 'text',
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Button Text', 'cmb2' ),
+		'id'      => $prefix . 'btn_text',
+		'type'    => 'text',
+		'default' => 'Book a Discovery Call'
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Button Link', 'cmb2' ),
+		'id'      => $prefix . 'btn_url',
+		'type'    => 'text_url',
+		'default'    => '#',
+	) );
+	$cmb_about->add_field( array(
 		'id'      => $prefix . 'title_1',
 		'type'       => 'text',
 		'default' => 'Why Choose Mondaysys',
@@ -1280,6 +1312,11 @@ $cmb_about = new_cmb2_box( array(
     ) );
 	$cmb_about->add_group_field( $group_field_experience, array(
         'name' => __( 'Prefix', 'mondaysys' ),
+        'id'   => 'prefix',
+        'type' => 'text_small',
+    ) );
+	$cmb_about->add_group_field( $group_field_experience, array(
+        'name' => __( 'Suffix', 'mondaysys' ),
         'id'   => 'prefix',
         'type' => 'text_small',
     ) );
@@ -1525,6 +1562,30 @@ $cmb_about = new_cmb2_box( array(
         ),
     ) );
     $cmb_about->add_group_field( $group_field_benifits, array(
+		'name'    => esc_html__( 'Accent Background', 'cmb2' ),
+		'id'      => 'accent_bg',
+		'type'    => 'colorpicker',
+		'default' => '#002F5F',
+	) );
+	$cmb_about->add_group_field( $group_field_benifits, array(
+		'name'    => esc_html__( 'Font Color', 'cmb2' ),
+		'id'      => 'accent_color',
+		'type'    => 'colorpicker',
+		'default' => '#ffffff',
+	) );
+	$cmb_about->add_group_field( $group_field_benifits, array(
+		'name'    => esc_html__( 'Number Color', 'cmb2' ),
+		'id'      => 'number_color',
+		'type'    => 'colorpicker',
+		'default' => '#AEFF2C',
+	) );
+	$cmb_about->add_group_field( $group_field_benifits, array(
+        'name' => __( 'Image', 'mondaysys' ),
+        'id'   => 'image',
+        'type' => 'file',
+		'preview_size' => array( 100, 100 )
+    ) );
+    $cmb_about->add_group_field( $group_field_benifits, array(
         'name' => __( 'Title', 'mondaysys' ),
         'id'   => 'title',
         'type' => 'text',
@@ -1532,7 +1593,10 @@ $cmb_about = new_cmb2_box( array(
     $cmb_about->add_group_field( $group_field_benifits, array(
         'name' => __( 'Content', 'mondaysys' ),
         'id'   => 'content',
-        'type' => 'textarea_small',
+        'type'    => 'wysiwyg',
+		'options' => array(
+			'textarea_rows' => 4,
+		),
     ) );
 	//Tech Stack
 	$cmb_about->add_field( array(
@@ -1572,15 +1636,11 @@ $cmb_about = new_cmb2_box( array(
 		'id'      => $prefix . 'tech_stack_desc',
 		'type'    => 'textarea_small',
 	) );
-	//Map
+	//Testimonials
 	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Testimonials', 'cmb2' ),
 		'id'      => $prefix . 'title_9',
-		'type'       => 'text',
-		'default' => 'Map',
-		'attributes' => array(
-			'class'       => 'custom-section-title',
-			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
-		)
+		'type'       => 'title',
 	) );
 	$cmb_about->add_field( array(
 		'name'    => esc_html__( 'Section Order', 'cmb2' ),
@@ -1600,16 +1660,11 @@ $cmb_about = new_cmb2_box( array(
 		'id'      => $prefix . 'section_hide_9',
 		'type'    => 'checkbox',
 	) );
-	$cmb_about->add_field( array(
-		'name'    => esc_html__( 'Title', 'cmb2' ),
-		'id'      => $prefix . 'map_title',
-		'type'    => 'text',
-	) );
-	//FAQs
+	//Map
 	$cmb_about->add_field( array(
 		'id'      => $prefix . 'title_10',
 		'type'       => 'text',
-		'default' => 'FAQs',
+		'default' => 'Map',
 		'attributes' => array(
 			'class'       => 'custom-section-title',
 			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
@@ -1635,14 +1690,14 @@ $cmb_about = new_cmb2_box( array(
 	) );
 	$cmb_about->add_field( array(
 		'name'    => esc_html__( 'Title', 'cmb2' ),
-		'id'      => $prefix . 'title_faqs',
+		'id'      => $prefix . 'map_title',
 		'type'    => 'text',
 	) );
-	//About Footer Above
+	//FAQs
 	$cmb_about->add_field( array(
 		'id'      => $prefix . 'title_11',
 		'type'       => 'text',
-		'default' => 'Section Footer Above',
+		'default' => 'FAQs',
 		'attributes' => array(
 			'class'       => 'custom-section-title',
 			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
@@ -1660,6 +1715,32 @@ $cmb_about = new_cmb2_box( array(
 			'pattern' => '\d*',  
 			'inputmode' => 'numeric', 
 		),
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_11',
+		'type'    => 'checkbox',
+	) );
+	$cmb_about->add_field( array(
+		'name'    => esc_html__( 'Title', 'cmb2' ),
+		'id'      => $prefix . 'title_faqs',
+		'type'    => 'text',
+	) );
+	$cmb_about->add_field( array(
+		'name'       => 'Select FAQ Category',
+		'id'         => $prefix .'faq_category',
+		'taxonomy'   => 'faq_cat', 
+		'type'       => 'taxonomy_select',
+	) );
+	//About Footer Above
+	$cmb_about->add_field( array(
+		'id'      => $prefix . 'title_12',
+		'type'       => 'text',
+		'default' => 'Section Footer Above',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$cmb_about->add_field( array(
 		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
@@ -1858,6 +1939,12 @@ $cmb_home = new_cmb2_box( array(
 		'name'    => esc_html__( 'Title', 'cmb2' ),
 		'id'      => $prefix . 'title_faqs',
 		'type'    => 'text',
+	) );
+	$cmb_home->add_field( array(
+		'name'       => 'Select FAQ Category',
+		'id'         => $prefix .'faq_category',
+		'taxonomy'   => 'faq_cat', 
+		'type'       => 'taxonomy_select',
 	) );
 
 	$cmb_home->add_field( array(
@@ -2409,33 +2496,6 @@ $solution_meta = new_cmb2_box( array(
 			'textarea_rows' => 4,
 		),
     ) );
-	//Solution Key Benifits
-	$solution_meta->add_field( array(
-		'name'    => esc_html__( 'Solution Key Benifits', 'cmb2' ),
-		'id'      => $prefix . 'title_6',
-		'type'    => 'title',
-	) );
-	$solution_meta->add_field( array(
-        'name' => __( 'Section Title', 'mondaysys' ),
-        'id'   => $prefix . 'key_benefits_title',
-        'type' => 'text',
-    ) );
-    $key_benifits_group = $solution_meta->add_field( array(
-        'id'          => $prefix . 'key_benifits_group',
-        'type'        => 'group',
-        'options'     => array(
-            'group_title'   => __( '{#}', 'mondaysys' ),
-            'add_button'    => __( 'Add Another', 'mondaysys' ),
-            'remove_button' => __( 'Remove', 'mondaysys' ),
-            'sortable'      => true,
-			'closed'      => true,
-        ),
-    ) );
-    $solution_meta->add_group_field( $key_benifits_group, array(
-        'name' => __( 'Title', 'mondaysys' ),
-        'id'   => 'title',
-        'type' => 'text',
-    ) );
 	//Our Approach
 	$solution_meta->add_field( array(
 		'name'    => esc_html__( 'Our Approach', 'cmb2' ),
@@ -2524,6 +2584,11 @@ $solution_meta = new_cmb2_box( array(
 			'pattern' => '\d*',  
 			'inputmode' => 'numeric', 
 		),
+    ) );
+	$solution_meta->add_group_field( $group_field_experience, array(
+        'name' => __( 'Prefix', 'mondaysys' ),
+        'id'   => 'prefix',
+        'type' => 'text_small',
     ) );
 	$solution_meta->add_group_field( $group_field_experience, array(
         'name' => __( 'Suffix', 'mondaysys' ),

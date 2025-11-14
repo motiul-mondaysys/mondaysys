@@ -190,33 +190,6 @@ global $post;
         
         <section class="border-container">
             <div class="empty-column"></div>
-            <div class="section-column">
-                <?php 
-                    if (meta('key_benefits_title' )):
-                        echo '<h2 class="mb-0 section-spacing border-top">'.meta('key_benefits_title' ).'</h2>';
-                    endif;
-                ?>
-                <div class="service_benifites position-relative border-top pt-2 px-1 px-lg-2">
-                    <?php 
-                    $key_benifits_group  = meta('key_benifits_group');
-                    if ( $key_benifits_group ) : 
-                        foreach ( $key_benifits_group as $item ) : 
-                            echo '<div class="benefits_item">';
-                                echo '<div class="circle"><span>&nbsp;</span></div>';
-                                echo '<div class="benefits_content">';
-                                    if ( ! empty( $item['title'] ) ) {
-                                        echo '<h4>'. esc_html( $item['title'] ) .'</h4>';
-                                    }
-                                echo '</div>';
-                            echo '</div>'; 
-                        endforeach; 
-                    endif; ?>
-                </div>
-            </div>
-        </section>
-
-        <section class="border-container">
-            <div class="empty-column"></div>
             <div class="section-column overflow-hidden">
                 <div class="client_approach border-top">
                     <?php 
@@ -230,8 +203,8 @@ global $post;
                             data-tablet="2"
                             data-mobile="1"
                             data-extra-small="1"
-                            data-autoplay="false"
-                            data-autoplay-delay="50000"
+                            data-autoplay="true"
+                            data-autoplay-delay="5000"
                             data-deskitemspace="0"
                             data-mobitemspace="0"
                             data-item-speed="500"
@@ -307,7 +280,7 @@ global $post;
         <?php endif; ?>
 
 
-        <?php $experience_group = get_post_meta( get_the_ID(), '_cmb2_experience_group', true );
+        <?php $experience_group = meta('experience_group');
         if ( ! empty( $experience_group ) ) : ?>
             <section class="border-container">
                 <div class="empty-column"></div>
@@ -323,11 +296,15 @@ global $post;
                     <div class="number_counter_items border-top grid-row" style="--desk-col:repeat(4, 1fr); --mob-col:repeat(2, 1fr);">
                         <?php foreach ( $experience_group as $item ) : 
                             $number = isset( $item['counter_number'] ) ? esc_html( $item['counter_number'] ) : '';
+                            $prefix = isset( $item['prefix'] ) ? esc_html( $item['prefix'] ) : '';
                             $suffix = isset( $item['suffix'] ) ? esc_html( $item['suffix'] ) : '';
                             $title  = isset( $item['title'] ) ? esc_html( $item['title'] ) : '';
                             $animation_speed = rand(1000, 3000);
                         ?>
                             <div class="counter">
+                                <?php if ( ! empty( $prefix ) ) : ?>
+                                    <span class="counter_suffix"><?php echo $prefix; ?></span>
+                                <?php endif; ?>
                                 <span class="counter_number" 
                                     ending-number="<?php echo $number; ?>" 
                                     counter-animation="<?php echo $animation_speed; ?>">
@@ -379,5 +356,18 @@ global $post;
                 </div>
             </section>
         <?php endif; ?>
+        <section>
+            <div class="grid-row" style="--desk-col: repeat(3, 1fr);">
+                <div>dsafasfasf</div>
+                <div>gfgfgdfsgfds</div>
+                <div>fasdfdasfdasfdsa</div>
+                <div>dsafasfasf</div>
+                <div>gfgfgdfsgfds</div>
+                <div>fasdfdasfdasfdsa</div>
+                <div>dsafasfasf</div>
+                <div>gfgfgdfsgfds</div>
+                <div>fasdfdasfdasfdsa</div>
+            </div>
+        </section>
 
 <?php endwhile; get_footer(); ?>

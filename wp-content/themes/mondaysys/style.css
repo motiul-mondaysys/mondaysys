@@ -98,6 +98,7 @@ input:not(input[type="submit"]):not(input[type="checkbox"]):not(input[type="radi
     padding: calc(10px + 0.9vw) 2rem;
     border-radius: 0;
     outline: none;
+    transition: all 0.4s;
 }
 input:not(input[type="submit"]):not(input[type="checkbox"]):not(input[type="radio"]):focus, textarea:focus, select:focus{ border-color: var(--secondary-color);}
 input[type="submit"], button[type="submit"]{
@@ -901,41 +902,30 @@ ul.programming-knowledge {
 }
 .site_footer{ background-color: #333333; color: #FFFFFF;} 
 .site_footer a{ color:#FFFFFF;}
-.footer_subscribe form {
-    position: relative;
-    font-size: 12px;
-    max-width: 400px;
-    line-height: 1.3em;
-    color: #6B6B6B;
-}
 .site_footer form a{color: #6B6B6B;}
-.footer_subscribe form button {
-    position: absolute;
-    top: 6px;
-    right: 0;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-}
-.footer_subscribe p {
-    font-size: 24px;
-    padding-bottom: 30px;
-    max-width: 500px;
-    line-height: 1.5em;
-    font-weight: 300;
-}
-.footer_subscribe form input[type="email"] {
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #575757 !important;
-    padding: 10px 0px !important;
-    font-size: 14px !important;
-}
 .footer_widget_area_1, .footer_widget_area_2 {
     display: grid;
     grid-template-columns: 2fr 12fr 10fr;  
 }
+.footer_widget_area .wpcf7-form input:not(input[type="submit"]), 
+.footer_widget_area .wpcf7-form textarea {
+    color: white;
+    padding: 10px 0 !important;
+    border-color: white !important;
+}
+.footer_widget_area .wpcf7-form input:not(input[type="submit"]):focus,
+.footer_widget_area .wpcf7-form textarea:focus{ 
+    border-color: var(--primary-color) !important;
+}
+.footer_widget_area .wpcf7-form p {
+    margin-bottom: 5px;
+}
+.footer_widget_area .form-btn-wrap input{ width: 100%; margin-left: 0;}
+.footer_widget_area input::placeholder,
+.footer_widget_area textarea::placeholder{ color: white; opacity: 0.8; transition: all 0.4s;}
+
+.footer_widget_area input:focus::placeholder,
+.footer_widget_area textarea:focus::placeholder{ opacity: 0;}
 
 .footer_widget_area_1 > div:not(.blank_space) {
     padding: 80px 30px;
@@ -1401,7 +1391,7 @@ button.submenu-toggle svg {
     .why_choose_item_content h5 { margin-bottom: calc(-10px + 1.5vw); }
     .footer_widget_area > div:nth-child(1), .footer_widget_area > div:nth-child(2){
         padding-top: calc(-2px + 5vw);
-        padding-bottom: calc(-2px + 5vw);
+        padding-bottom: calc(-2px + 1vw);
     }
     .section-spacing{ 
         padding: calc(-27.4286px + 13.0952vw) calc(-5.71429px + 2.38095vw) calc(-7.28571px + 3.45238vw);
@@ -1554,6 +1544,9 @@ button.submenu-toggle svg {
         width: calc(3px + 1.3vw);
         margin-left: 0.3vw;
     }
+    .footer_address {
+        font-size: calc(-1px + 1.19048vw);
+    }
     
 }
 
@@ -1680,7 +1673,6 @@ button.submenu-toggle svg {
         gap: var(--tab-gap);
     }
     .container{ max-width: 1024px;}
-    .footer_subscribe p { font-size: 18px; }
     .footer_widget_area > div {
         padding: 2rem 1rem;
         width: 50% !important;
@@ -1794,7 +1786,6 @@ button.submenu-toggle svg {
     .footer_widget_area > div:nth-child(even), .footer_widget_area > div:nth-child(odd){
         width: 50%;
     }
-    .footer_subscribe p{ font-size: 18px; padding-bottom: 0; max-width: 400px;}
     .footer_widget_area > div{ font-size: 15px;}
     .accordion_link svg { width: 14px; }
     .icon-with-title::before {

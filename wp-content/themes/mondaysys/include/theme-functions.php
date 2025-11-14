@@ -242,19 +242,35 @@ if ( ! function_exists( 'display_working_process' ) ) {
 * Output FAQs
 */
 if ( ! function_exists( 'display_faqs_init' ) ) {
-    function display_faqs_init() {
+    function display_faqs_init( $atts ) {
+        $atts = shortcode_atts( array(
+            'cat_name' => '', 
+        ), $atts );
+
+        $tax_query = array();
+
+        if ( ! empty( $atts['cat_name'] ) ) {
+            $tax_query[] = array(
+                'taxonomy' => 'faq_cat',
+                'field'    => 'term_id',
+                'terms'    => array( $atts['cat_name'] ), // FIXED
+            );
+        }
+
         $args = array(
             'post_type'      => 'faqs',
             'posts_per_page' => -1,
             'orderby'        => 'menu_order',
             'order'          => 'ASC',
+            'tax_query'      => $tax_query,
         );
 
         $faq_query = new WP_Query($args);
 
         if ($faq_query->have_posts()) :
             ob_start(); 
-             while ($faq_query->have_posts()) : $faq_query->the_post(); ?>
+            
+            while ($faq_query->have_posts()) : $faq_query->the_post(); ?>
                 <div class="toggle-item">
                     <div class="toggle-header">
                         <h4><?php the_title(); ?></h4>
@@ -264,14 +280,16 @@ if ( ! function_exists( 'display_faqs_init' ) ) {
                         <?php the_content(); ?>
                     </div>
                 </div>
-                <?php 
+            <?php 
             endwhile; 
+
             wp_reset_postdata();
             return ob_get_clean();
         endif;
     }
     add_shortcode('display_faqs', 'display_faqs_init');
 }
+
 
 
 function mondaysys_case_studies_loop() {

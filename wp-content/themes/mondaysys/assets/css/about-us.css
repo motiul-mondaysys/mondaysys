@@ -81,6 +81,16 @@
 .testimonial-section .section-column {
     padding-bottom: 0px;
 }
+.benifits_sticky .stack_card {
+    background-color: var(--item-bg, #002F5F);
+    color: var(--item-color, #fff);
+}
+.benifits_sticky .service_content_area h4{ color: var(--item-color, #fff);}
+.benifits_sticky h4 span:last-child {
+    color: var(--item-number-color, #AEFF2C);
+    font-size: calc(20px + 1.5vw);
+    font-weight: 300;
+}
 
 @media (min-width: 1480px){
     .about_page_titlebar:after { width: calc(3% + 3.4vw); }

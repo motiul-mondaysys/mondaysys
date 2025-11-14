@@ -230,8 +230,12 @@ if ( have_posts() ) {
                                             --mob-gap:0px;
                                             ">';
                                                 echo '<div class="service_content_area">';
-                                                    echo '<h4 class="justify-content-between d-flex"><span>'.esc_html( $item['title'] ).'</span><span>'.sprintf('%02d', $counter).'</span></h4>';
-                                                    echo '<div class="service_excerpt fw-200">'.wpautop($item['content']).'</div>';
+                                                    if(!empty($item['title'])):
+                                                        echo '<h4 class="justify-content-between d-flex"><span>'.esc_html( $item['title'] ).'</span><span>'.sprintf('%02d', $counter).'</span></h4>';
+                                                    endif;
+                                                    if(!empty($item['content'])):
+                                                        echo '<div class="service_excerpt fw-200">'.wpautop($item['content']).'</div>';
+                                                    endif;
                                                 echo '</div>';
                                                 echo '<div class="service_image_area lh-0">';
                                                     if(!empty($item['image'])):
@@ -392,11 +396,19 @@ if ( have_posts() ) {
          break;
          case 'faqs':
             if ( empty( meta('section_hide_9') ) ) :?>
-                <section class="border-container section-faq">
+                <section class="border-container">
                     <div class="empty-column"></div>
-                    <div class="section-column">
+                    <div class="section-column border-top">
                         <h2 class="mb-0 section-spacing"><?php echo meta('title_faqs'); ?></h2>
-                        <?php echo display_faqs_init(); ?>
+                        <?php 
+                            $faq_cat = wp_get_post_terms( get_the_ID(), 'faq_cat' );
+                            if ( ! empty( $faq_cat ) ) {
+                                $cat_id = $faq_cat[0]->term_id;
+                                echo do_shortcode('[display_faqs cat_name="'.$cat_id.'"]');
+                            } else {
+                                echo do_shortcode('[display_faqs]');
+                            }
+                        ?>
                     </div>
                 </section><?php
             endif;

@@ -96,7 +96,7 @@ global $post;
                                 echo '<p class="h3 section-spacing">'.$matches[1].'</p>'; 
                             }
                         ?>
-                        <div class="grid-row pt-3" style="--desk-col:1fr 1fr; --mob-col: 1fr;">
+                        <div class="grid-row pt-1 pt-md-3 px-1 px-md-2 pb-1" style="--desk-col:1fr 1fr; --mob-col: 1fr;">
                             <div></div>
                             <div class="home-entry-content">
                                 <?php
@@ -235,7 +235,7 @@ global $post;
                 </div>
             </section>
 
-            <section class="border-container md-px-0 testimonial-section">
+            <section class="border-container md-px-0 left-square-bg">
                 <div class="empty-column position-relative">&nbsp;</div>
                 <div class="section-column position-relative overflow-hidden">
                     <div class="testimonial">
@@ -306,7 +306,15 @@ global $post;
                 <div class="empty-column"></div>
                 <div class="section-column border-top">
                     <h2 class="mb-0 section-spacing"><?php echo meta('title_faqs'); ?></h2>
-                    <?php echo display_faqs_init(); ?>
+                    <?php 
+                        $faq_cat = wp_get_post_terms( get_the_ID(), 'faq_cat' );
+                        if ( ! empty( $faq_cat ) ) {
+                            $cat_id = $faq_cat[0]->term_id;
+                            echo do_shortcode('[display_faqs cat_name="'.$cat_id.'"]');
+                        } else {
+                            echo do_shortcode('[display_faqs]');
+                        }
+                    ?>
                 </div>
             </section>
             <?php endif ; ?>
