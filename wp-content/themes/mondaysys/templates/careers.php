@@ -167,7 +167,8 @@ global $post;
                         data-infinite-loop="true"
                         data-center-mode="false">
                             <?php 
-                                echo do_shortcode('[technology_slider cat_slug="technology-partner"]');
+                                $career_tech_id = get_post_meta( get_queried_object_id(), '_cmb2_select_technology_post', true );
+                                echo do_shortcode('[technology_slider post_id="'.$career_tech_id.'"]')
                             ?>
                         </mondaysys-carousel> 
                     </div>       
@@ -344,36 +345,6 @@ global $post;
             </div>
         </section>
     <?php endif; ?>
-
-    <section class="border-container">
-        <div class="empty-column"></div>
-        <div class="section-column border-top px-1 px-lg-2 py-3 py-lg-7">
-            <div class="grid-row" style="--desk-col: 1fr 1fr; --mob-col:1fr;">
-                <div></div>
-                <div class="pb-1 pb-lg-2">
-                   <h2>Got questions? Let’s chat!</h2> 
-                   <p>Our friendly team is ready to answer your questions and guide you through your journey with us.</p>
-                </div>
-            </div>
-            <div class="grid-row address_box_wrap" style="--desk-col:1fr 1fr; --mob-col:1fr;">
-                <div></div>
-                <div>
-                    <h3 class="fw-400">Contact us via </h3>
-                    <div>
-                        <a class="left-icon-box icon-email" href="mailto:info@mondaysys.com"><span>info@mondaysys.com</span></a>
-                    </div>
-                    <div class="pb-1">
-                        <a class="left-icon-box icon_phone" target="_blank" href="https://api.whatsapp.com/send?phone=8801973482251"><span>+880-1973482251</span>
-                        </a>
-                    </div>
-                    <div class="contact-button-wrap d-flex flex-row flex-wrap">
-                        <a href="tel:+880248957899" class="btn btn-tertiary">Whatsapp</a>
-                        <a href="mailto:hello@mondaysys.com" class="btn btn-tertiary">Mail</a>
-                    </div>
-                </div>
-            </div><!--.address_box_wrap-->
-        </div>
-    </section>
 
     <?php 
         $footer_above_title = meta('footer_above_title');

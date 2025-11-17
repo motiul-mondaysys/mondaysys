@@ -270,7 +270,7 @@
 }
 .service_item_grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 }
 .service_item_grid .service_list_item {
     padding: calc(25px + 1.5vw) calc(15px + 1.5vw);
@@ -313,8 +313,7 @@
 }
 @media (min-width: 768px){
     .titbar_bottom .btn{ padding-top: calc(20px + 1.5vw); align-items: flex-start;}
-    .service_item_grid .service_list_item:nth-child(3n),
-    .service_item_grid .service_list_item:last-child{ border-right: 0;}
+    .service_item_grid .service_list_item:nth-child(2n){ border-right: 0;}
 }
 
 @media (max-width: 1024px){

@@ -32,6 +32,27 @@ add_action( 'admin_footer', function() {
     <?php
 });
 
+function get_technology_posts_list() {
+    $posts = get_posts( array(
+        'post_type'      => 'technology',
+        'posts_per_page' => -1,
+        'orderby'        => 'title',
+        'order'          => 'ASC',
+    ) );
+
+    $options = array(
+        '' => '— None —'
+    );
+
+    if ( $posts ) {
+        foreach ( $posts as $post ) {
+            $options[$post->ID] = $post->post_title;
+        }
+    }
+
+    return $options;
+}
+
 add_action( 'cmb2_admin_init', 'mondaysys_metaboxes' );
 function mondaysys_metaboxes() {
 
@@ -349,12 +370,18 @@ $service_meta = new_cmb2_box( array(
 		'id'      => $prefix . 'section_hide_1',
 		'type'    => 'checkbox',
 	) );
+	//$service_meta->add_field( array(
+        //'name' => __( 'Technology Logo', 'mondaysys' ),
+        //'id'   => $prefix .'tech_logo',
+        //'type'         => 'file_list',
+		//'preview_size' => array( 100, 100 ),
+    //) );
 	$service_meta->add_field( array(
-        'name' => __( 'Technology Logo', 'mondaysys' ),
-        'id'   => $prefix .'tech_logo',
-        'type'         => 'file_list',
-		'preview_size' => array( 100, 100 ),
-    ) );
+		'name'    => 'Select Technology Post',
+		'id'      => $prefix . 'select_technology_post',
+		'type'    => 'select',
+		'options' => get_technology_posts_list(),
+	) );
 	$service_meta->add_field( array(
 		'name'    => esc_html__( 'Heo Bottom Text', 'cmb2' ),
 		'id'      => $prefix . 'hero_bottom_text',
@@ -1159,6 +1186,12 @@ $industry_meta = new_cmb2_box( array(
         'id'   => $prefix . 'title_faqs',
         'type' => 'text',
     ) );
+	$service_meta->add_field( array(
+		'name'       => 'Select FAQ Category',
+		'id'         => $prefix .'faq_category',
+		'taxonomy'   => 'faq_cat', 
+		'type'       => 'taxonomy_select',
+	) );
 	//Footer Above
 	$industry_meta->add_field( array(
 		'name'    => esc_html__( 'Footer Above', 'cmb2' ),
@@ -1453,6 +1486,12 @@ $cmb_about = new_cmb2_box( array(
 		'type'    => 'textarea_small',
 	) );
 	$cmb_about->add_field( array(
+		'name'    => 'Select Technology Post',
+		'id'      => $prefix . 'select_technology_post',
+		'type'    => 'select',
+		'options' => get_technology_posts_list(),
+	) );
+	$cmb_about->add_field( array(
 		'name'    => esc_html__( 'Technology Partner Image', 'cmb2' ),
 		'id'      => $prefix . 'technology_partner_image',
 		'type'    => 'file',
@@ -1635,6 +1674,12 @@ $cmb_about = new_cmb2_box( array(
 		'name'    => esc_html__( 'Description', 'cmb2' ),
 		'id'      => $prefix . 'tech_stack_desc',
 		'type'    => 'textarea_small',
+	) );
+	$cmb_about->add_field( array(
+		'name'    => 'Select Technology Post',
+		'id'      => $prefix . 'select_technology_title',
+		'type'    => 'select',
+		'options' => get_technology_posts_list(),
 	) );
 	//Testimonials
 	$cmb_about->add_field( array(
@@ -1822,6 +1867,12 @@ $cmb_home = new_cmb2_box( array(
 		'id'      => $prefix . 'technology_partner_description',
 		'type'    => 'textarea_small',
 	) );
+	$cmb_home->add_field( array(
+		'name'    => 'Select Technology',
+		'id'      => $prefix . 'select_technology_post',
+		'type'    => 'select',
+		'options' => get_technology_posts_list(),
+	) );
 
 	$cmb_home->add_field( array(
 		'name'    => esc_html__( 'Section Mondaysys Main Services', 'cmb2' ),
@@ -1918,6 +1969,12 @@ $cmb_home = new_cmb2_box( array(
 		'name'    => esc_html__( 'Section Tech Stack', 'cmb2' ),
 		'id'      => $prefix . 'home_section_25',
 		'type'    => 'title',
+	) );
+	$cmb_home->add_field( array(
+		'name'    => 'Select Technology',
+		'id'      => $prefix . 'select_technology_title',
+		'type'    => 'select',
+		'options' => get_technology_posts_list(),
 	) );
 	$cmb_home->add_field( array(
 		'name'    => esc_html__( 'Section Title', 'cmb2' ),
@@ -2165,6 +2222,12 @@ $career_meta = new_cmb2_box( array(
 		'name'    => esc_html__( 'Description', 'cmb2' ),
 		'id'      => $prefix . 'technology_partner_description',
 		'type'    => 'textarea_small',
+	) );
+	$career_meta->add_field( array(
+		'name'    => 'Select Technology Post',
+		'id'      => $prefix . 'select_technology_post',
+		'type'    => 'select',
+		'options' => get_technology_posts_list(),
 	) );
 	//Expect from Mondysys
 	$career_meta->add_field( array(
@@ -2747,6 +2810,23 @@ $all_service_meta = new_cmb2_box( array(
         'id'   => $prefix . 'testimonial_section_desc',
         'type' => 'textarea_small',
     ) );
+	//FAQs
+	$all_service_meta->add_field( array(
+		'name'    => esc_html__( 'FAQs', 'cmb2' ),
+		'id'      => $prefix . 'title_14',
+		'type'    => 'title',
+	) );
+	$all_service_meta->add_field( array(
+        'name' => __( 'Section Title', 'mondaysys' ),
+        'id'   => $prefix . 'title_faqs',
+        'type' => 'text',
+    ) );
+	$all_service_meta->add_field( array(
+		'name'       => 'Select FAQ Category',
+		'id'         => $prefix .'faq_category',
+		'taxonomy'   => 'faq_cat', 
+		'type'       => 'taxonomy_select',
+	) );
 
 	// Footer Above
 	$all_service_meta->add_field( array(
@@ -2763,6 +2843,43 @@ $all_service_meta = new_cmb2_box( array(
 		'id'      => $prefix . 'footer_above_title',
 		'type'    => 'text',
 	) );
+$technology_meta = new_cmb2_box( array(
+        'id'            => $prefix . 'technology_meta',
+        'title'         => __( 'Technology Settings', 'cmb2' ),
+        'object_types'  => array( 'technology' ),
+    ) );
+	$technology_meta->add_field( array(
+        'name' => __( 'Technology Logo Section', 'mondaysys' ),
+        'id'   => $prefix . 'title_1',
+        'type' => 'title',
+    ) );
+	$technology_meta->add_field( array(
+        'name' => __( 'Technology Logos', 'mondaysys' ),
+        'id'   => $prefix . 'technology_logo',
+        'type' => 'file_list',
+		'preview_size' => array( 100, 100 ),
+    ) );
+	$technology_meta->add_field( array(
+        'name' => __( 'Technology Title Section', 'mondaysys' ),
+        'id'   => $prefix . 'title_2',
+        'type' => 'title',
+    ) );
+	$technology_title = $technology_meta->add_field( array(
+        'id'          => $prefix . 'technology_title_group',
+        'type'        => 'group',
+        'options'     => array(
+            'group_title'   => __( 'Technology Title {#}', 'mondaysys' ),
+            'add_button'    => __( 'Add Another', 'mondaysys' ),
+            'remove_button' => __( 'Remove', 'mondaysys' ),
+            'sortable'      => true,
+			'closed'      => true,
+        ),
+    ) );
+	$technology_meta->add_group_field( $technology_title, array(
+        'name' => __( 'Title', 'mondaysys' ),
+        'id'   => 'title',
+        'type' => 'text',
+    ) );
 
 
 }

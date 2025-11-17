@@ -367,60 +367,61 @@ add_shortcode('case_studies_list', 'mondaysys_case_studies_loop');
 
 //Show Technology Slider
 add_shortcode( 'technology_slider', 'technology_slider_init' );
-function technology_slider_init($atts) {	
-    $args = shortcode_atts(array(
-        'cat_slug' => '',
-    ), $atts);	
-	extract($args);
-	
-	$args_technology = array(
-		'post_type' => 'technology',
-		'posts_per_page' => '-1', 
-        'tax_query' => array(
-            array(
-                'taxonomy' => 'technology_cat',
-                'field' => 'slug',
-                'terms' => array($cat_slug),
-            ),
-        ),
-		'ignore_sticky_posts' => 1		
-	);
-				
-	$query_technology = new WP_Query( $args_technology);	
-	
-	$output = '';
-	
-    if ( $query_technology->have_posts() ):  
-        if($cat_slug == 'technology-partner'):
-            $output .='<div class="swiper mondaysys_carousel marquee_slide">';  
-            $output .='<ul class="swiper-wrapper unorder-list">'; 
-        else:
-                $output .='<ul class="marquee-list unorder-list">'; 
-        endif;
-			global $post;       
-			 while ( $query_technology->have_posts() ) : $query_technology->the_post(); 
-			 	 
-                 if($cat_slug == 'technology-partner'):
-                    $output .='<li class="swiper-slide">';
-                 else:
-                    $output .='<li>';
-                 endif;
-				 if(has_post_thumbnail()){	
-                    $feature_thumb = wp_get_attachment_image_src(get_post_thumbnail_id(), 'medium');
-				    $output .='<span class="marqee_logo"><img src="'.$feature_thumb[0].'" title="'.get_the_title().'" /></span>';
-                  } else{
-                    $output .='<span class="techonology_title">'.get_the_title().'</span>';
-                  }
-				 $output .='</li>';
-			 endwhile;
-		$output .='</ul>';
-        if($cat_slug == 'technology-partner'){
-		    $output .='</div>';
-        }
-       endif;
-	wp_reset_query();
-	return $output;				 
-}// End
+function technology_slider_init( $atts ) {
+    $selected_post_id = get_post_meta( get_queried_object_id(), '_cmb2_select_technology_post', true );
+    $args = shortcode_atts( array(
+        'post_id' => $selected_post_id, 
+    ), $atts );
+
+    $post_id = $args['post_id'];
+
+    if ( empty( $post_id ) ) {
+        return '<p>No technology post selected.</p>';
+    }
+    $args_technology = array(
+        'post_type'      => 'technology',
+        'posts_per_page' => 1,
+        'p'              => $post_id,
+    );
+
+    $query_technology = new WP_Query( $args_technology );
+
+    $output = '';
+
+    if ( $query_technology->have_posts() ) {
+
+        while ( $query_technology->have_posts() ) : $query_technology->the_post();
+
+            $tech_logo  = meta('technology_logo');
+            $tech_title = meta('technology_title_group');
+
+            if ( $tech_logo ) {
+                $output .= '<div class="swiper mondaysys_carousel marquee_slide">';
+                $output .= '<ul class="swiper-wrapper unorder-list">';
+
+                foreach ( $tech_logo as $attachment_id => $attachment_url ) {
+                    $output .= '<li class="swiper-slide"><span class="marqee_logo"><img src="'. esc_url( $attachment_url ) .'" alt=""></span></li>';
+                }
+
+                $output .= '</ul></div>';
+
+            } else {
+                $output .= '<ul class="marquee-list unorder-list">';
+                if ( !empty($tech_title) ) {
+                    foreach ( $tech_title as $item ) {
+                        if ( !empty( $item['title'] ) ) {
+                            $output .= '<li><span class="techonology_title">'. $item['title'] .'</span></li>';
+                        }
+                    }
+                }
+                $output .= '</ul>';
+            }
+        endwhile;
+    }
+    wp_reset_postdata();
+    return $output;
+}
+
 
 
 // Mondaysys Main Services

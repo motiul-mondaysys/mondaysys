@@ -171,36 +171,9 @@ function register_modaysys_cpt() {
         'exclude_from_search' => true,          
         'publicly_queryable'  => true, 
         'rewrite'             => false,
-        'supports'            => array('title', 'thumbnail', 'page-attributes'),
+        'supports'            => array('title'),
     );
     register_post_type('technology', $args_technology);
-
-    $taxonomy_labels_technology = array(
-        'name'              => __( 'Technology Categories', 'mondaysys' ),
-        'singular_name'     => __( 'Technology Category', 'mondaysys' ),
-        'search_items'      => __( 'Search Technology', 'mondaysys' ),
-        'all_items'         => __( 'All Categories', 'mondaysys' ),
-        'parent_item'       => __( 'Parent Category', 'mondaysys' ),
-        'parent_item_colon' => __( 'Parent Category:', 'mondaysys' ),
-        'edit_item'         => __( 'Edit Category', 'mondaysys' ),
-        'update_item'       => __( 'Update Category', 'mondaysys' ),
-        'add_new_item'      => __( 'Add New Category', 'mondaysys' ),
-        'new_item_name'     => __( 'New Category Name', 'mondaysys' ),
-        'menu_name'         => __( 'Categories', 'mondaysys' ),
-    );
-
-    $taxonomy_args_technology = array(
-        'hierarchical'      => true,
-        'labels'            => $taxonomy_labels_technology,
-        'show_ui'           => true,
-        'show_admin_column' => true,
-        'query_var'         => true,
-        'public'            => false, 
-        'show_in_nav_menus' => false,
-        'rewrite'           => false,
-    );
-
-    register_taxonomy( 'technology_cat', array( 'technology' ), $taxonomy_args_technology );
 
     $labels_industry = array(
         'name'                  => __('Industries We Serve', 'mondaysys'),

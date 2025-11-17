@@ -206,32 +206,20 @@ asort($sections);
                                 data-infinite-loop="true"
                                 data-center-mode="false">
                                     <?php 
-                                        echo do_shortcode('[technology_slider cat_slug="technology-partner"]');
+                                        $about_logo_id = get_post_meta( get_queried_object_id(), '_cmb2_select_technology_post', true );
+                                        echo do_shortcode('[technology_slider post_id="'.$about_logo_id.'"]')
                                     ?>
                                 </mondaysys-carousel> 
                         </div>
-                        <?php 
-                        $tech_partner_image = meta('technology_partner_image' );
-                        $tech_partner_desc  = meta('technology_partner_large_desc' );
-                        if ( $tech_partner_image ) {
-                            $attachment_id = attachment_url_to_postid( $tech_partner_image );
-                            $alt   = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
-                            $title = get_the_title( $attachment_id );
-                            if ( empty( $alt ) ) {
-                                $alt = $title ? $title : 'Technology Partner Logo';
-                            }
-                        }
-                        ?>
 
                         <div class="about-inner-bg">
-                            <?php if ( $tech_partner_image ) : ?>
-                                <img src="<?php echo esc_url( $tech_partner_image ); ?>" alt="<?php echo esc_attr( $alt ); ?>">
-                            <?php endif; ?>
+                            <?php if ( meta('technology_partner_image' ) ) : 
+                                    echo meta_image('technology_partner_image');
+                                 endif; ?>
                         </div>
-
-                        <?php if ( $tech_partner_desc ) : ?>
+                        <?php if ( meta('technology_partner_large_desc' ) ) : ?>
                             <p class="px-1 px-md-2 h3 py-3 py-lg-4">
-                                <?php echo esc_html( $tech_partner_desc ); ?>
+                                <?php echo esc_html( meta('technology_partner_large_desc' ) ); ?>
                             </p>
                         <?php endif; ?>
                     </div>
@@ -359,12 +347,13 @@ asort($sections);
                         <hr class="m-0">
                         <div class="marquee-container pt-2 pt-md-4">
                             <?php 
-                                echo do_shortcode('[technology_slider cat_slug="technology-expertise"]');
+                                $about_title_id = get_post_meta( get_queried_object_id(), '_cmb2_select_technology_title', true );
+                                echo do_shortcode('[technology_slider post_id="'.$about_title_id.'"]')
                             ?>
                         </div>
                         <div class="marquee-container reverse-marqee pt-1 pb-2 pb-md-4">
                             <?php 
-                                echo do_shortcode('[technology_slider cat_slug="technology-expertise"]');
+                                echo do_shortcode('[technology_slider post_id="'.$about_title_id.'"]')
                             ?>
                         </div>
                     </div>

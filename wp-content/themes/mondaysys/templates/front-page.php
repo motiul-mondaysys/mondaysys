@@ -171,7 +171,8 @@ global $post;
                             data-infinite-loop="true"
                             data-center-mode="false">
                                 <?php 
-                                    echo do_shortcode('[technology_slider cat_slug="technology-partner"]');
+                                    $selected_post_id = get_post_meta( get_queried_object_id(), '_cmb2_select_technology_post', true );
+                                    echo do_shortcode('[technology_slider post_id="'.$selected_post_id.'"]')
                                 ?>
                             </mondaysys-carousel> 
                         </div>       
@@ -289,13 +290,14 @@ global $post;
 
                     <div class="marquee-container pt-2 pt-md-4">
                         <?php 
-                            echo do_shortcode('[technology_slider cat_slug="technology-expertise"]');
+                            $home_bottom_id = get_post_meta( get_queried_object_id(), '_cmb2_select_technology_title', true );
+                            echo do_shortcode('[technology_slider post_id="'.$home_bottom_id.'"]')
                         ?>
                     </div>
                     
                     <div class="marquee-container reverse-marqee pt-1 pb-2 pb-md-4">
                         <?php 
-                            echo do_shortcode('[technology_slider cat_slug="technology-expertise"]');
+                            echo do_shortcode('[technology_slider post_id="'.$home_bottom_id.'"]')
                         ?>
                     </div>
                 </div>

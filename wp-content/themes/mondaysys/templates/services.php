@@ -84,7 +84,12 @@ get_header();
                                             </a>
                                         </h4>
                                         <p class="mb-0">
-                                            <?php echo wp_trim_words( get_the_excerpt(), 20, '...' ); ?>
+                                            <?php 
+                                                $content = apply_filters( 'the_content', get_the_content() );
+                                                if ( preg_match( '/<p>(.*?)<\/p>/i', $content, $matches ) ) {
+                                                    echo $matches[0]; 
+                                                }
+                                             ?>
                                         </p>
                                     </div>
                                 <?php 
@@ -215,6 +220,23 @@ get_header();
                     </div><!--End Testimonials--->
                 </div><!--End .section-column-->
             </section>
+            <?php if (meta('title_faqs')): ?>
+                <section class="border-container section-faq">
+                    <div class="empty-column"></div>
+                    <div class="section-column border-top">
+                        <h2 class="mb-0 section-spacing"><?php echo meta('title_faqs'); ?></h2>
+                        <?php 
+                            $faq_cat = wp_get_post_terms( get_the_ID(), 'faq_cat' );
+                            if ( ! empty( $faq_cat ) ) {
+                                $cat_id = $faq_cat[0]->term_id;
+                                echo do_shortcode('[display_faqs cat_name="'.$cat_id.'"]');
+                            } else {
+                                echo do_shortcode('[display_faqs]');
+                            }
+                        ?>
+                    </div>
+                </section>
+            <?php endif ; ?>
             <?php if (meta('footer_above_title')): ?>
                 <section class="border-container">
                     <div class="empty-column"></div>

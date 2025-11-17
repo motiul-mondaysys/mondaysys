@@ -53,7 +53,7 @@ if ( have_posts() ) {
                 <section class="border-container">
                         <div class="empty-column"></div>
                         <div class="section-column overflow-hidden">
-                            <?php if ( ! empty(meta('tech_logo'))) { ?>
+                            <?php if ( ! empty(meta('select_technology_post'))) { ?>
                                 <div class="py-2 py-md-3 py-lg-4 overflow-hidden">
                                     <mondaysys-carousel 
                                     data-desktop="6"
@@ -67,15 +67,10 @@ if ( have_posts() ) {
                                     data-item-speed="4000"
                                     data-infinite-loop="true"
                                     data-center-mode="false">
-                                    <div class="swiper mondaysys_carousel marquee_slide"> 
-                                        <ul class="swiper-wrapper unorder-list">
                                         <?php 
-                                            foreach ( meta('tech_logo') as $attachment_id => $attachment_url ) {
-                                                echo '<li class="swiper-slide"><span class="marqee_logo"><img src="'. esc_url( $attachment_url ) .'" alt=""></span></li>';
-                                            }
+                                            $service_tech_id = get_post_meta( get_queried_object_id(), '_cmb2_select_technology_post', true );
+                                            echo do_shortcode('[technology_slider post_id="'.$service_tech_id.'"]')
                                         ?>
-                                        </ul>
-                                    </div>
                                     </mondaysys-carousel> 
                                 </div>  
                             <?php } ?>

@@ -720,7 +720,8 @@ ul.programming-knowledge {
     overflow-x: hidden;
     scrollbar-width: none;
 }
-.process_steps .service-accorion-item.active {
+.process_steps .service-accorion-item.active,
+.process_steps .service-accorion-item:hover {
     flex: 12.1 1 0%;
 }
 .process_steps .service-accorion-item{
@@ -745,7 +746,6 @@ ul.programming-knowledge {
     margin-bottom: calc(26px + 1.04167vw);
 }
 .process_steps .service-accorion-item .process_content {
-    opacity: 0;
     display: block;
     min-width: 0px;
     margin: 0px;
@@ -754,7 +754,8 @@ ul.programming-knowledge {
     font-weight: 500;
     color: var(--heading-color);
 }
-.process_steps .service-accorion-item.active .process_content {
+.process_steps .service-accorion-item.active .process_content,
+.process_steps .service-accorion-item:hover .process_content {
   opacity: 1;
   width: calc(11.4286px + 36.9048vw);
   max-width: calc(11.4286px + 36.9048vw);
