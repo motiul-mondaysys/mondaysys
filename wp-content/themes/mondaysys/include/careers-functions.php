@@ -116,15 +116,15 @@ function mondaysys_register_jobs_and_taxonomies() {
     register_taxonomy( 'technology', array( 'jobs' ), $tech_args );
 
     $label_labels = array(
-        'name'              => _x( 'Labels', 'taxonomy general name', 'mondaysys' ),
+        'name'              => _x( 'Levels', 'taxonomy general name', 'mondaysys' ),
         'singular_name'     => _x( 'Label', 'taxonomy singular name', 'mondaysys' ),
-        'search_items'      => __( 'Search Labels', 'mondaysys' ),
-        'all_items'         => __( 'All Labels', 'mondaysys' ),
-        'edit_item'         => __( 'Edit Label', 'mondaysys' ),
+        'search_items'      => __( 'Search Level', 'mondaysys' ),
+        'all_items'         => __( 'All Level', 'mondaysys' ),
+        'edit_item'         => __( 'Edit Level', 'mondaysys' ),
         'update_item'       => __( 'Update Label', 'mondaysys' ),
-        'add_new_item'      => __( 'Add New Label', 'mondaysys' ),
-        'new_item_name'     => __( 'New Label Name', 'mondaysys' ),
-        'menu_name'         => __( 'Labels', 'mondaysys' ),
+        'add_new_item'      => __( 'Add New Level', 'mondaysys' ),
+        'new_item_name'     => __( 'New Level Name', 'mondaysys' ),
+        'menu_name'         => __( 'Levels', 'mondaysys' ),
     );
 
     $label_args = array(
@@ -158,7 +158,7 @@ function display_jobs_list() {
                         $taxonomies = [
                             'city'         => 'City',
                             'job-category' => 'Category',
-                            'label'        => 'Label',
+                            'label'        => 'Level',
                             'technology'   => 'Technology',
                         ];
 
@@ -319,6 +319,22 @@ function get_jobs_list($offset = 0, $filters = []) {
     wp_reset_postdata();
     return ob_get_clean();
 }
+
+add_filter('wpcf7_special_mail_tags', function($output, $name, $html) {
+    $name = strtolower($name);
+    if ($name === '_post_title') {
+        $ref = wp_get_referer();
+        if ($ref) {
+            $post_id = url_to_postid($ref);
+            if ($post_id) {
+                return get_the_title($post_id);
+            }
+        }
+        return get_bloginfo('name');
+    }
+    return $output;
+
+}, 10, 3);
 
 
 

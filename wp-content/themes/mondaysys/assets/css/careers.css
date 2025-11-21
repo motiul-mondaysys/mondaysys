@@ -255,6 +255,42 @@ a.view_job svg {
     gap: 20px;
 }
 
+/*____Single Job Posts____*/
+.job-specification li strong {
+    display: block;
+    font-family: var(--heading-font-family);
+    color: var(--heading-color);
+    margin-top: 10px;
+}
+
+.job_details_wrap .container, .single_jobs_head .container {
+    margin-left: auto;
+    margin-right: 0;
+    padding-right: 0;
+}
+.form-btn-wrap input {
+    width: calc(100% - 2rem);
+    text-align: left;
+    border-radius: 0;
+    padding: calc(14px + 0.3vw) calc(20px + 0.3vw);
+    margin-left: 2rem;
+    font-size: calc(16px + 0.3vw);
+    line-height: 1.3em;
+}
+.form-btn-wrap::after {
+    content: url('data:image/svg+xml; utf8, <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="white" d="M17 4.632V3.35H0V0h24v24h-3.349V7h-1.283L2.97 23.398.602 21.03z"></path></svg>');
+    position: absolute;
+    right: calc(20px + 0.3vw);
+    width: 1.2rem;
+    top: calc(14px + 0.3vw);
+}
+.job_sidebar .wpcf7{ position: sticky; top: 60px;}
+.jobs_footer_above{ 
+    background-image: url(../images/jobs-single-footer-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 @media (min-width: 1600px){
     .job_item { padding-bottom: calc(36px + 29 * ((100vw - 1080px) / 840)); }
 }
@@ -262,6 +298,18 @@ a.view_job svg {
     .icon-with-title h4 {
         font-size: calc(-5px + 1.66667vw);
     }
+    .job-specification li span { font-size: calc(-2px + 1.19048vw); }
+    .job_details{ padding-right: 2rem;}
+    .single_jobs_head{ background: linear-gradient(to right, #E3E3E5 0%, #E3E3E5 64.5%, #ECEBED 64.5%, #ECEBED 100%); }
+    .job_details_wrap { background: linear-gradient(to right, #ECEBED 0%, #ECEBED 64.5%, #E3E3E5 64.5%, #E3E3E5 100%); }
+    
+}
+@media (min-width: 768px) and (max-width: 1024px){
+    .job_details_wrap {
+        background: linear-gradient(to right, #ECEBED 0%, #ECEBED 63%, #E3E3E5 64%, #E3E3E5 100%);
+    }
+    .single_jobs_head { background: linear-gradient(to right, #E3E3E5 0%, #E3E3E5 63%, #ECEBED 63%, #ECEBED 100%); }
+    .job_details{ padding-right: 2rem;}
 }
 @media (max-width: 1024px){
     .our_approach_slider .swiper-button-prev.btn-slider {
@@ -282,4 +330,8 @@ a.view_job svg {
     .jobs_filter_area{ border-right: none;}
     .icon-with-title h4 { font-size: 16px; }
     .expect_item{ border-left: none; padding: 1rem;}
+    .job_sidebar .wpcf7 {
+        margin-left: -1rem;
+        position: static;
+    }
 }

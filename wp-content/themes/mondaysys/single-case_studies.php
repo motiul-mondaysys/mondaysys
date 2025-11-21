@@ -155,7 +155,7 @@ if ( have_posts() ) {
 
                 <?php $project_status = meta('experience_group');
                     if ( ! empty( $project_status ) ) : ?>
-                            <div class="number_counter_items grid-row border-top" style="--desk-col:4.8fr 6fr; --desk-gap:35px; --tab-gap:25px; --mob-gap:0; --mob-col:repeat(1, 1fr);">
+                            <div class="number_counter_items grid-row border-top" style="--desk-col:4.8fr 6fr; --desk-gap:35px; --tab-gap:25px; --mob-gap:0; --tab-col:repeat(2, 1fr); --mob-col:repeat(2, 1fr);">
                                 <h4 class="p-1 p-mb-2"><?php echo meta('status_title'); ?></h4>
                                 <div class="project_status_right border-left">
                                      <?php foreach ( $project_status as $item ) : 

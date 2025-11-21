@@ -91,7 +91,7 @@ asort($sections);
             if ( empty( meta('section_hide_2') ) ) : ?>
                 <section class="border-container">
                     <div class="empty-column"></div>
-                    <div class="section-column number_counter_items border-top grid-row" style="--desk-col:repeat(4, 1fr); --mob-col:repeat(2, 1fr);">
+                    <div class="section-column number_counter_items border-top grid-row" style="--desk-col:repeat(4, 1fr); --tab-col:repeat(2, 1fr); --mob-col:repeat(2, 1fr);">
                         <?php $experience_group = meta('experience_group'); ?>
                         <?php foreach ( $experience_group as $item ) : 
                             $number = isset( $item['counter_number'] ) ? esc_html( $item['counter_number'] ) : '';
@@ -192,7 +192,7 @@ asort($sections);
                                 <p class="mb-0"><?php echo meta('technology_partner_description'); ?></p>
                             </div>
                         </div>
-                        <div class="d-block overflow-hidden px-1 border-top py-3 py-lg-4">
+                        <div class="d-block overflow-hidden px-1 border-top py-3 py-lg-3">
                             <mondaysys-carousel 
                                 data-desktop="6"
                                 data-tablet="5"

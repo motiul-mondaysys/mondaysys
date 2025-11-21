@@ -54,7 +54,7 @@ if ( have_posts() ) {
                         <div class="empty-column"></div>
                         <div class="section-column overflow-hidden">
                             <?php if ( ! empty(meta('select_technology_post'))) { ?>
-                                <div class="py-2 py-md-3 py-lg-4 overflow-hidden">
+                                <div class="py-2 py-md-3 py-lg-3 overflow-hidden">
                                     <mondaysys-carousel 
                                     data-desktop="6"
                                     data-tablet="5"

@@ -732,7 +732,7 @@ ul.programming-knowledge {
     position: relative;
     overflow: hidden;
 }
-.process_steps .service-accorion-item:last-child{ border-right-color: transparent; }
+
 .process_inner_wrap{
     display: flex;
     min-width: 0px;
@@ -1171,7 +1171,7 @@ ul.footer_menu_list {
     display: inline-block;
     padding-right: 1.5vw;
     width: 100%;
-    max-width: 9vw;
+    max-width: 11vw;
 }
 ul.sub-menu {
     padding: 0;
@@ -1309,7 +1309,7 @@ button.submenu-toggle svg {
 }
 .inner_page_hero .titbar_bottom {
     background: rgba(221, 220, 220, 0.1);
-    width: calc(45% - calc(3% + 3.6vw));
+    width: calc(45% - calc(2% + 3rem));
     margin-left: 55%;
     backdrop-filter: blur(120px);
     -webkit-backdrop-filter: blur(120px);
@@ -1324,7 +1324,7 @@ button.submenu-toggle svg {
     -webkit-backdrop-filter: blur(120px);
     z-index: 5;
     height: calc(250px + 10vw);
-    width: calc(3% + 3.6vw);
+    width: calc(2% + 3rem);
 }
 .inner_page_hero .titbar_bottom .container{ padding: calc(20px + 2vw) calc(10px + 1vw); }
 .inner_page_hero .fw-btn-section { background-color: var(--secondary-color); }
@@ -1367,6 +1367,34 @@ button.submenu-toggle svg {
     padding: 2rem;
     border-left: 1px solid var(--border-color);
 }
+/*_____Tabs_____*/
+.faq-tab-content {
+    display: none;
+}
+.faq-tab-content.active {
+    display: block;
+}
+.faq-tab-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.faq-tab-btn {
+    padding: calc(2px + 0.6vw) calc(6px + 0.8vw);
+    background: #eee;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    font-weight: 500;
+    border: 1px solid var(--border-color);
+}
+.faq-tab-btn.active,
+.faq-tab-btn:hover {
+    background: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}
 
 
 
@@ -1376,8 +1404,7 @@ button.submenu-toggle svg {
     .btn_arrow_contain{ width: 0.9rem; height: 0.8rem;}
     .fw-btn-section .btn_arrow_contain { width: 1.3rem; height: 1.3rem; }
     .accordion_link svg { width: calc(20px + 0.4vw); }
-    .inner_page_hero:after { width: calc(3% + 3.4vw); }
-    .inner_page_hero .titbar_bottom { width: calc(45% - calc(3% + 3.4vw)); margin-bottom: -1px; }
+    .inner_page_hero .titbar_bottom { margin-bottom: -1px; }
 }
 @media screen and (min-width: 1025px) {
     body { font-size: calc(1.14286px + 1.19048vw); }
@@ -1412,6 +1439,7 @@ button.submenu-toggle svg {
     .header_menu { 
         border-left: 1px solid var(--border-color); 
         position: relative;
+        padding-right: 2rem;
     }
     .site-navigation > ul > li > a { 
         font-size: calc(3px + 0.952381vw);
@@ -1428,7 +1456,7 @@ button.submenu-toggle svg {
     }
     .mega_menu_enable .mega-menu-wrapper {
         left: -1px;
-        width: calc(100% - 3.4vw);
+        width: calc(100% - 2rem);
         position: absolute;
         top: 100%;
         display: grid;
@@ -1548,7 +1576,7 @@ button.submenu-toggle svg {
     .footer_address {
         font-size: calc(-1px + 1.19048vw);
     }
-    
+    .process_steps .service-accorion-item:last-child{ border-right-color: transparent; }
 }
 
 @media (max-width: 1024px) {
@@ -1641,6 +1669,23 @@ button.submenu-toggle svg {
         left: 0.5rem;
         margin-top: 30px;
     }
+    .process_steps {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .process_steps .service-accorion-item:nth-child(2n){ border-right: none;}
+    .process_steps .service-accorion-item { flex: 100% !important; }
+    .process_inner_wrap h4 { margin-bottom: 10px; }
+    .process_steps .service-accorion-item .process_inner_wrap .process_content{
+        width: 100%;
+        max-width: 100%;
+        opacity: 1;
+        max-height: none;
+        font-weight: 300;
+    }
+    .faq-tab-btn {
+        padding: 10px 20px;
+    }
 }
 
 @media (min-width: 768px){
@@ -1670,7 +1715,7 @@ button.submenu-toggle svg {
     .how_itwork_title{ min-height: 32vh; }
     .programming-skills .title_box { max-width: 100%; }
     .grid-row{
-        grid-template-columns: var(--tab-col);
+        grid-template-columns: var(--tab-col, 2);
         gap: var(--tab-gap);
     }
     .container{ max-width: 1024px;}
@@ -1693,12 +1738,12 @@ button.submenu-toggle svg {
     }
     .container{ max-width: 767px;}
     body{ font-size: 16px;}
-    h1, .h1{font-size: calc(18px + 5.20833vw);}
+    h1, .h1{font-size: calc(18px + 4.20833vw);}
     h2, .h2{ font-size: calc(26px + 1.04167vw);}
     h3, .h3{font-size: calc(20px + 0.89vw);}
     h4, .h4{ font-size: calc(16px + 0.520833vw);}
     .grid-row{
-        grid-template-columns: var(--mob-col);
+        grid-template-columns: var(--mob-col, 1);
         gap: var(--mob-gap);
     }
     .slider_title, .slider_content { grid-template-columns: 1fr; }
@@ -1753,9 +1798,6 @@ button.submenu-toggle svg {
     }
     .testimonial-item,
     .business-growth{ grid-template-columns: 1fr;}
-    .process_steps{ flex-wrap: wrap;}
-    .process_steps .service-accorion-item.active { flex: auto; }
-    .md-px-0{ padding-left: 0; padding-right: 0;}
     .testimonial { padding: 3rem 1rem 2rem; }
     .testimonial-content p:first-child{font-size: calc(21px + 0.78125vw);}
     .testimonial-author-box { clear: both; }
@@ -1766,9 +1808,6 @@ button.submenu-toggle svg {
     }
     .toggle-item { padding: 1rem 15px  0; }
     .growth-content-area { order: -1; padding: 2rem 1rem !important; }
-    .footer_above { grid-template-columns: 0% 70% 30% 0%; padding: 15px; }
-    .footer_widget_area_2 > div:not(.blank_space),
-    .footer_widget_area_1 > div:not(.blank_space) { padding: 40px 15px; }
     .service_content_area{ padding: 1rem;}
     .service_content_area ul{ gap: 5px;}
     .service_content_area ul li { padding: 2px 8px; }

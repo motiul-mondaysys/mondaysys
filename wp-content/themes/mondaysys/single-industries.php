@@ -337,7 +337,7 @@ if ( have_posts() ) {
                             endif;
                         ?>
                     </div>
-                    <div class="number_counter_items border-top grid-row" style="--desk-col:repeat(4, 1fr); --mob-col:repeat(2, 1fr);">
+                    <div class="number_counter_items border-top grid-row" style="--desk-col:repeat(4, 1fr); --tab-col:repeat(2, 1fr); --mob-col:repeat(2, 1fr);">
                         <?php foreach ( $experience_group as $item ) : 
                             $number = isset( $item['counter_number'] ) ? esc_html( $item['counter_number'] ) : '';
                             $suffix = isset( $item['suffix'] ) ? esc_html( $item['suffix'] ) : '';

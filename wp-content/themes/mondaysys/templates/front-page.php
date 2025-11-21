@@ -157,7 +157,7 @@ global $post;
                             <h2 class="mb-2"><?php echo meta('technology_partner_title'); ?></h2>
                             <p class="mb-0"><?php echo meta('technology_partner_description'); ?></p>
                         </div>
-                        <div class="border-top py-2 py-md-3 py-lg-4 overflow-hidden">
+                        <div class="border-top py-2 py-md-3 py-lg-3 overflow-hidden">
                             <mondaysys-carousel 
                             data-desktop="6"
                             data-tablet="5"
@@ -172,7 +172,7 @@ global $post;
                             data-center-mode="false">
                                 <?php 
                                     $selected_post_id = get_post_meta( get_queried_object_id(), '_cmb2_select_technology_post', true );
-                                    echo do_shortcode('[technology_slider post_id="'.$selected_post_id.'"]')
+                                        echo do_shortcode('[technology_slider post_id="'.$selected_post_id.'"]');
                                 ?>
                             </mondaysys-carousel> 
                         </div>       
@@ -192,7 +192,31 @@ global $post;
                             <div class="angle_corner position-relative">&nbsp;</div>
                             <div>&nbsp;</div>
                         </div>
-                        <?php echo display_working_process(); ?>
+                        <?php 
+                            echo '<div class="process_steps">';
+                                $working_process_items = meta('working_process_group');
+                                $counter = 0;
+                                foreach($working_process_items as $item ):
+                                    $counter++; 
+                                    ?>
+                                    <div class="service-accorion-item <?php echo $counter === 1 ? 'active' : ''; ?>">
+                                        <div class="process_inner_wrap">
+                                            <span class="number-circle"><?php echo sprintf('%02d', $counter); ?></span>
+                                            <?php 
+                                                if (!empty($item['title'])):
+                                                    echo '<h4>'.$item['title'].'</h4>';
+                                                endif;
+
+                                                if (!empty($item['title'])):
+                                                    echo '<div class="process_content">'.$item['content'].'</div>';
+                                                endif;
+                                            ?>
+                                        </div>
+                                    </div>
+                                    <?php 
+                                endforeach;
+                            echo '</div>';
+                        ?>
                     </div>
                 </section>
             <?php endif; ?>

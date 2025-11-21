@@ -9,13 +9,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function mondaysys_enqueue_assets() {
     wp_enqueue_style( 'swiper-style', get_theme_file_uri('/assets/css/swiper-bundle.min.css') );
-    wp_enqueue_style( 'parent-style', get_theme_file_uri('/style.css'), array(), '1.3.2');
+    wp_enqueue_style( 'parent-style', get_theme_file_uri('/style.css'), array(), '1.3.5');
     wp_enqueue_style( 'spacing-style', get_theme_file_uri('/assets/css/spacing.css'),array(), '1.0.4' );
     if(is_page_template ('templates/about-page.php')){
-        wp_enqueue_style( 'about-page-style', get_theme_file_uri('/assets/css/about-us.css'), array(), '1.0.6' );
+        wp_enqueue_style( 'about-page-style', get_theme_file_uri('/assets/css/about-us.css'), array(), '1.0.7' );
     }
     if(is_page_template ('templates/services.php') || is_singular( 'mondaysys_services' )){
-        wp_enqueue_style( 'service-page-style', get_theme_file_uri('/assets/css/services.css'), array(), '1.1.9' );
+        wp_enqueue_style( 'service-page-style', get_theme_file_uri('/assets/css/services.css'), array(), '1.2.1' );
     }
     if(is_page_template ('templates/contact-page.php')){
         wp_enqueue_style( 'contact-page-style', get_theme_file_uri('/assets/css/contact.css'), array(), '1.0.3' );
@@ -23,14 +23,14 @@ function mondaysys_enqueue_assets() {
     if(is_singular( 'industries' )){
         wp_enqueue_style( 'industries-style', get_theme_file_uri('/assets/css/industries.css'), array(), '1.0.1' );
     }
-    if(is_page_template ('templates/careers.php')){
-        wp_enqueue_style( 'careers-page-style', get_theme_file_uri('/assets/css/careers.css'), array(), '1.0.4' );
+    if(is_page_template ('templates/careers.php') || is_singular( 'jobs' )){
+        wp_enqueue_style( 'careers-page-style', get_theme_file_uri('/assets/css/careers.css'), array(), '1.0.6' );
     }
     if(is_page_template ('templates/solutions.php')){
-        wp_enqueue_style( 'solutions-page-style', get_theme_file_uri('/assets/css/solutions.css'), array(), '1.0.1' );
+        wp_enqueue_style( 'solutions-page-style', get_theme_file_uri('/assets/css/solutions.css'), array(), '1.0.2' );
     }
     if(is_page_template ('templates/case-studies.php')){
-        wp_enqueue_style( 'case-studies-page-style', get_theme_file_uri('/assets/css/case-studies.css'), array(), '1.0.2' );
+        wp_enqueue_style( 'case-studies-page-style', get_theme_file_uri('/assets/css/case-studies.css'), array(), '1.0.3' );
     }
     
 	wp_enqueue_script( 'jquery' );
@@ -46,7 +46,7 @@ function mondaysys_enqueue_assets() {
         'theme-js',
         get_template_directory_uri() . '/assets/js/theme.js',
         array('jquery'), // Dependencies (e.g., 'jquery' if your script relies on jQuery)
-        '1.0.9', 
+        '1.1.1', 
         true // Load in the footer (true) or header (false)
     );
     
@@ -296,6 +296,11 @@ class Mega_Menu_Walker extends Walker_Nav_Menu {
         $output .= '</li>';
     }
 }
+
+
+
+
+
 
 
 

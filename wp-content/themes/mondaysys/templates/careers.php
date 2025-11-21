@@ -45,24 +45,43 @@ global $post;
             <div class="jobs_container grid-row" style="--desk-col: 4fr 8fr; --mob-col:1fr;">
                 <?php echo do_shortcode('[jobs_list]') ?>
             </div><!--End Jobs Items-->
-            <div class="px-md-2 px-1 py-3 py-lg-7">
-                <h5 class="py-1" style="color:#002F5F">We’re driven by innovation, growth, and empathy</h5>
-                <p class="h3" style="line-height: 1.5em;">Our mission is to provide business leaders with expert talent and engineering peace of mind. We empower companies to scale with precision by leveraging our global talent network and technical expertise.</p>
-                <div class="global-grid pt-3" style="--grid-col:2;--mob-grid-col:1; --gap:0">
-                    <div></div>
-                    <p>Our vision is to be the go-to engineering partner for companies looking to innovate, transform, and grow — with a culture rooted in collaboration, agility, and sustainability.</p>
-                </div>                        
-            </div><!--End bottom job list pragraph-->
-            <div class="number_counter_items border-top grid-row" style="--desk-col:repeat(4, 1fr); --mob-col:repeat(2, 1fr);">
+            <?php
+                $content_custom = wpautop( meta('career_post_bottom_text'));
+                preg_match_all( '/<h5[^>]*>(.*?)<\/h5>/', $content_custom, $h5_matches );
+                preg_match_all( '/<p[^>]*>(.*?)<\/p>/', $content_custom, $paragraphs );
+                echo '<div class="px-md-2 px-1 py-3 py-lg-7">';
+                    if ( ! empty( $h5_matches[1] ) ) {
+                        echo '<h5 class="py-1" style="color:#002F5F">' . wp_kses_post( $h5_matches[1][0] ) . '</h5>';
+                    }
+                    if ( ! empty( $paragraphs[1] ) ) {
+                        echo '<p class="h3" style="line-height: 1.5em;">' . wp_kses_post( $paragraphs[1][0] ) . '</p>';
+                    }
+
+                    if ( count( $paragraphs[1] ) > 1 ) {
+                        echo '<div class="global-grid pt-3" style="--grid-col:2;--mob-grid-col:1; --gap:0">';
+                        echo '<div></div>';
+                        for ( $i = 1; $i < count( $paragraphs[1] ); $i++ ) {
+                            echo '<p>' . wp_kses_post( $paragraphs[1][$i] ) . '</p>';
+                        }
+                        echo '</div>';
+                    }
+                echo '</div><!--End bottom job list paragraph-->';
+                ?>
+
+            <div class="number_counter_items border-top grid-row" style="--desk-col:repeat(4, 1fr); --tab-col:repeat(2, 1fr); --mob-col:repeat(2, 1fr);">
                 <?php 
                 $experience_group = meta('experience_group');
                 foreach ( $experience_group as $item ) : 
                     $number = isset( $item['counter_number'] ) ? esc_html( $item['counter_number'] ) : '';
+                    $prefix = isset( $item['prefix'] ) ? esc_html( $item['prefix'] ) : '';
                     $suffix = isset( $item['suffix'] ) ? esc_html( $item['suffix'] ) : '';
                     $title  = isset( $item['title'] ) ? esc_html( $item['title'] ) : '';
                     $animation_speed = rand(1000, 3000);
                 ?>
                     <div class="counter">
+                        <?php if ( ! empty( $prefix ) ) : ?>
+                            <span class="counter_prefix"><?php echo $prefix; ?></span>
+                        <?php endif; ?>
                         <span class="counter_number" 
                             ending-number="<?php echo $number; ?>" 
                             counter-animation="<?php echo $animation_speed; ?>">

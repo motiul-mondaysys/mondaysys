@@ -87,28 +87,6 @@ function register_modaysys_cpt() {
 
     register_post_type('testimonials', $args_testimonials);
 
-    $labels_process = array(
-        'name'          => __('Working Process', 'mondaysys' ),
-        'singular_name' => __('Working Process','mondaysys' ),
-        'add_new'       => __( 'Add New', 'mondaysys' ),
-        'add_new_item'  => __( 'Add New Process', 'mondaysys' ),
-        'menu_name'     => __('Working Process', 'mondaysys' ),
-    );
-
-    $args_process = array(
-        'labels'              => $labels_process,
-        'public'              => false,         
-        'show_ui'             => true,           
-        'show_in_menu'        => true,
-        'exclude_from_search' => true,          
-        'publicly_queryable'  => false,          
-        'rewrite'             => false,          
-        'supports'            => array('title', 'editor', 'page-attributes'),
-        'menu_icon'           => 'dashicons-image-rotate-right',
-    );
-
-    register_post_type('working_process', $args_process);
-
     $labels_faq = array(
         'name'          => __('FAQs', 'mondaysys' ),
         'singular_name' => __('FAQs','mondaysys' ),

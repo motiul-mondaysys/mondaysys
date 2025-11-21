@@ -162,133 +162,81 @@ if ( ! function_exists( 'testimonial_slider' ) ) {
 }
 
 /**
-* Output Working Process
-*/
-if ( ! function_exists( 'display_working_process' ) ) {
-    function display_working_process() {
-        $args = array(
-            'post_type'      => 'working_process',
-            'posts_per_page' => -1,
-            'orderby'        => 'menu_order',
-            'order'          => 'ASC'
-        );
-
-        $query = new WP_Query($args);
-
-        if ($query->have_posts()) :
-            ob_start(); 
-            ?>
-            <!-- Desktop Process Steps -->
-            <div class="process_steps d-none d-md-flex">
-                <?php 
-                $counter = 1;
-                while ($query->have_posts()) : $query->the_post(); ?>
-                    <div class="service-accorion-item <?php echo $counter === 1 ? 'active' : ''; ?>">
-                        <div class="process_inner_wrap">
-                            <span class="number-circle"><?php echo sprintf('%02d', $counter); ?></span>
-                            <h4><?php the_title(); ?></h4>
-                            <div class="process_content"><?php the_content(); ?></div>
-                        </div>
-                    </div>
-                <?php 
-                    $counter++;
-                endwhile; 
-                ?>
-            </div>
-
-            <!-- Mobile Carousel -->
-            <mondaysys-carousel 
-                data-desktop="4"
-                data-tablet="2"
-                data-mobile="1"
-                data-extra-small="1"
-                data-autoplay="true"
-                data-autoplay-delay="7000"
-                data-deskitemspace="20"
-                data-mobitemspace="10"
-                data-item-speed="1000"
-                data-infinite-loop="true"
-                data-center-mode="false"
-                data-direction="left"
-                class="d-md-none px-1 mobile-process-slider">
-
-                <div class="swiper mondaysys_carousel">
-                    <div class="swiper-wrapper">
-                        <?php 
-                        $counter = 1;
-                        $query->rewind_posts();
-                        while ($query->have_posts()) : $query->the_post(); ?>
-                            <div class="swiper-slide">
-                                <span class="number-circle"><?php echo sprintf('%02d', $counter); ?></span>
-                                <h4 data-title="<?php the_title(); ?>"></h4>
-                                <div class="mob-process-content" data-content="<?php echo esc_attr(strip_tags(get_the_content())); ?>">
-                                </div>
-                            </div>
-                        <?php 
-                            $counter++;
-                        endwhile; 
-                        ?>
-                    </div>
-                </div>
-            </mondaysys-carousel>
-            <?php
-            wp_reset_postdata();
-            return ob_get_clean();
-        endif;
-    }
-}
-
-/**
 * Output FAQs
 */
-if ( ! function_exists( 'display_faqs_init' ) ) {
-    function display_faqs_init( $atts ) {
-        $atts = shortcode_atts( array(
-            'cat_name' => '', 
-        ), $atts );
 
-        $tax_query = array();
-
-        if ( ! empty( $atts['cat_name'] ) ) {
-            $tax_query[] = array(
+function faq_items_shortcode($atts) {
+    $atts = shortcode_atts([
+        'cat_id' => 'all', 
+    ], $atts, 'faq_items');
+    $args = [
+        'post_type'      => 'faqs',
+        'posts_per_page' => -1,
+        'orderby'        => 'menu_order',
+        'order'          => 'ASC',
+    ];
+    if ($atts['cat_id'] !== 'all') {
+        $args['tax_query'] = [
+            [
                 'taxonomy' => 'faq_cat',
                 'field'    => 'term_id',
-                'terms'    => array( $atts['cat_name'] ), // FIXED
-            );
-        }
-
-        $args = array(
-            'post_type'      => 'faqs',
-            'posts_per_page' => -1,
-            'orderby'        => 'menu_order',
-            'order'          => 'ASC',
-            'tax_query'      => $tax_query,
-        );
-
-        $faq_query = new WP_Query($args);
-
-        if ($faq_query->have_posts()) :
-            ob_start(); 
-            
-            while ($faq_query->have_posts()) : $faq_query->the_post(); ?>
-                <div class="toggle-item">
-                    <div class="toggle-header">
-                        <h4><?php the_title(); ?></h4>
-                        <button class="toggle-icon"></button>
-                    </div>
-                    <div class="toggle-content">
-                        <?php the_content(); ?>
-                    </div>
-                </div>
-            <?php 
-            endwhile; 
-
-            wp_reset_postdata();
-            return ob_get_clean();
-        endif;
+                'terms'    => intval($atts['cat_id']),
+            ]
+        ];
     }
-    add_shortcode('display_faqs', 'display_faqs_init');
+    $faq_query = new WP_Query($args);
+
+    if (!$faq_query->have_posts()) return "No FAQs found.";
+
+    ob_start();
+    while ($faq_query->have_posts()) : $faq_query->the_post(); ?>
+        <div class="toggle-item">
+            <div class="toggle-header">
+                <h4><?php the_title(); ?></h4>
+                <button class="toggle-icon"></button>
+            </div>
+            <div class="toggle-content">
+                <?php the_content(); ?>
+            </div>
+        </div>
+    <?php endwhile;
+
+    wp_reset_postdata();
+    return ob_get_clean();
 }
+add_shortcode('faq_items', 'faq_items_shortcode');
+
+function faq_tabs_shortcode() {
+    $categories = get_terms([
+        'taxonomy'   => 'faq_cat',
+        'hide_empty' => false,
+        'orderby'    => 'name',
+        'order'      => 'ASC',
+    ]);
+
+    if (empty($categories)) return "No FAQ categories found.";
+
+    ob_start();
+
+    echo '<div class="faq-tab-buttons px-1 px-md-2">';
+    echo '<button class="faq-tab-btn active" data-tab="faq-tab-all">All</button>'; 
+    foreach ($categories as $cat) {
+        echo '<button class="faq-tab-btn" data-tab="faq-tab-' . $cat->term_id . '">' . esc_html($cat->name) . '</button>';
+    }
+    echo '</div>';
+
+    echo '<div class="faq-tab-content" id="faq-tab-all">';
+    echo do_shortcode('[faq_items cat_id="all"]');
+    echo '</div>';
+    foreach ($categories as $cat) {
+        echo '<div class="faq-tab-content" id="faq-tab-' . $cat->term_id . '">';
+        echo do_shortcode('[faq_items cat_id="' . $cat->term_id . '"]');
+        echo '</div>';
+    }
+
+    return ob_get_clean();
+}
+add_shortcode('display_faqs', 'faq_tabs_shortcode');
 
 
 

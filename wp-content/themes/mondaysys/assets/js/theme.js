@@ -358,33 +358,6 @@ function counter(selector) {
 }
 counter(".counter_number");
 
-/*document.addEventListener("DOMContentLoaded", function() {
-  const items = document.querySelectorAll('.benefits_item');
-
-  const updateScrollClasses = () => {
-    const scrollTop = window.scrollY || window.pageYOffset;
-
-    items.forEach((item, index) => {
-      const rect = item.getBoundingClientRect();
-      const offsetTop = rect.top + window.scrollY;
-      
-      // Check if the scroll has passed the item
-      if (scrollTop + window.innerHeight / 2 > offsetTop) {
-        item.classList.add('scroll_done');
-      } else {
-        item.classList.remove('scroll_done');
-      }
-    });
-  };
-
-  window.addEventListener('scroll', updateScrollClasses);
-  window.addEventListener('resize', updateScrollClasses);
-
-  // Initial check
-  updateScrollClasses();
-});*/
-
-
 class CaseStudyCarousel extends HTMLElement {
   connectedCallback() {
     const swiperContainer = this.querySelector(".casestudy_carousel");
@@ -482,6 +455,47 @@ class CaseStudyCarousel extends HTMLElement {
 }
 
 customElements.define("casestudy-carousel", CaseStudyCarousel);
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const navigationLinks = document.querySelectorAll('.site-navigation > ul > li.mega_menu_enable');
+    const siteHeader = document.querySelector('.site-header');
+    if (siteHeader) { 
+        navigationLinks.forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                siteHeader.classList.add('active-mega-menu');
+            });
+
+            link.addEventListener('mouseleave', function() {
+                siteHeader.classList.remove('active-mega-menu');
+            });
+        });
+    }
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const tabs = document.querySelectorAll(".faq-tab-btn");
+    const contents = document.querySelectorAll(".faq-tab-content");
+    if (tabs.length) {
+        tabs[0].classList.add("active");
+        contents[0].classList.add("active");
+        tabs.forEach(tab => {
+            tab.addEventListener("click", function () {
+
+                let target = this.getAttribute("data-tab");
+
+                tabs.forEach(t => t.classList.remove("active"));
+                contents.forEach(c => c.classList.remove("active"));
+
+                this.classList.add("active");
+                document.getElementById(target).classList.add("active");
+            });
+        });
+    }
+});
+
 
 
 

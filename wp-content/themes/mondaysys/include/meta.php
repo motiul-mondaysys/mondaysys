@@ -1895,7 +1895,7 @@ $cmb_home = new_cmb2_box( array(
 		'id'      => $prefix . 'industry_service_title',
 		'type'    => 'text',
 	) );
-
+	//Working Process
 	$cmb_home->add_field( array(
 		'name'    => esc_html__( 'Section Working Process', 'cmb2' ),
 		'id'      => $prefix . 'home_section_23',
@@ -1911,6 +1911,27 @@ $cmb_home = new_cmb2_box( array(
 		'id'      => $prefix . 'process_inner_title',
 		'type'    => 'text',
 	) );
+	$working_process_group = $cmb_home->add_field( array(
+        'id'          => $prefix . 'working_process_group',
+        'type'        => 'group',
+        'options'     => array(
+            'group_title'   => __( '{#}', 'cmb2' ),
+            'add_button'    => __( 'Add Another', 'cmb2' ),
+            'remove_button' => __( 'Remove', 'cmb2' ),
+            'sortable'      => true,
+			'closed'      => true,
+        ),
+    ) );
+	$cmb_home->add_group_field( $working_process_group, array(
+        'name' => 'Title',
+        'id'   => 'title',
+        'type' => 'text',
+    ) );
+	$cmb_home->add_group_field( $working_process_group, array(
+        'name' => 'Title',
+        'id'   => 'content',
+        'type'    => 'textarea_small',
+    ) );
 
 	$cmb_home->add_field( array(
 		'name'    => esc_html__( 'Section Why Choose Mondaysys', 'cmb2' ),
@@ -2093,11 +2114,34 @@ $career_meta = new_cmb2_box( array(
 		'id'      => $prefix . 'page_title',
 		'type'    => 'text',
 	) );
+
+	$career_meta->add_field( array(
+		'id'      => $prefix . 'title_25',
+		'type' => 'text',
+		'default' => 'Job Post Bottom Text',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
+	) );
+	$career_meta->add_field( array(
+		'name' => __( 'Content', 'mondaysys' ),
+		'id'      => $prefix . 'career_post_bottom_text',
+		'type'    => 'wysiwyg',
+		'options' => array(
+			'textarea_rows' => 5,
+		),
+	) );
+	
 	//Counter
 	$career_meta->add_field( array(
-		'name'    => esc_html__( 'Experience', 'cmb2' ),
 		'id'      => $prefix . 'title_1',
-		'type'    => 'title',
+		'type' => 'text',
+		'default' => 'Experience',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$group_field_experience = $career_meta->add_field( array(
         'id'          => $prefix . 'experience_group',
@@ -2123,6 +2167,11 @@ $career_meta = new_cmb2_box( array(
 		),
     ) );
 	$career_meta->add_group_field( $group_field_experience, array(
+        'name' => __( 'Prefix', 'mondaysys' ),
+        'id'   => 'prefix',
+        'type' => 'text_small',
+    ) );
+	$career_meta->add_group_field( $group_field_experience, array(
         'name' => __( 'Suffix', 'mondaysys' ),
         'id'   => 'suffix',
         'type' => 'text_small',
@@ -2134,9 +2183,13 @@ $career_meta = new_cmb2_box( array(
     ) );
 	//Trusted Featured
 	$career_meta->add_field( array(
-		'name'    => esc_html__( 'Trusted Featured', 'cmb2' ),
 		'id'      => $prefix . 'title_2',
-		'type'    => 'title',
+		'type' => 'text',
+		'default' => 'Trusted Featured',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$career_meta->add_field( array(
 		'name'    => esc_html__( 'Section Title', 'cmb2' ),
@@ -2172,9 +2225,13 @@ $career_meta = new_cmb2_box( array(
     ) );
 	//Mondaysys Culture
 	$career_meta->add_field( array(
-		'name'    => esc_html__( 'Mondaysys Culture', 'cmb2' ),
 		'id'      => $prefix . 'title_3',
-		'type'    => 'title',
+		'type' => 'text',
+		'default' => 'Mondaysys Culture',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$career_meta->add_field( array(
 		'name'    => esc_html__( 'Section Title', 'cmb2' ),
@@ -2209,9 +2266,13 @@ $career_meta = new_cmb2_box( array(
     ) );
 	//Technology Partner
 	$career_meta->add_field( array(
-		'name'    => esc_html__( 'Section Technology Partner', 'cmb2' ),
 		'id'      => $prefix . 'title_4',
-		'type'    => 'title',
+		'type' => 'text',
+		'default' => 'Technology Partner',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$career_meta->add_field( array(
 		'name'    => esc_html__( 'Title', 'cmb2' ),
@@ -2231,9 +2292,13 @@ $career_meta = new_cmb2_box( array(
 	) );
 	//Expect from Mondysys
 	$career_meta->add_field( array(
-		'name'    => esc_html__( 'Expect from Mondysys', 'cmb2' ),
 		'id'      => $prefix . 'title_5',
-		'type'    => 'title',
+		'type' => 'text',
+		'default' => 'Expect from Mondysys',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$career_meta->add_field( array(
 		'name'    => esc_html__( 'Section Title', 'cmb2' ),
@@ -2273,9 +2338,13 @@ $career_meta = new_cmb2_box( array(
     ) );
 	//Hiring Process
 	$career_meta->add_field( array(
-		'name'    => esc_html__( 'Hiring Process', 'cmb2' ),
 		'id'      => $prefix . 'title_6',
-		'type'    => 'title',
+		'type' => 'text',
+		'default' => 'Hiring Process',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$career_meta->add_field( array(
 		'name'    => esc_html__( 'Section Title', 'cmb2' ),
@@ -2306,9 +2375,13 @@ $career_meta = new_cmb2_box( array(
 
 	//Employee Testimonial
 	$career_meta->add_field( array(
-		'name'    => esc_html__( 'Employee Testimonial', 'cmb2' ),
 		'id'      => $prefix . 'title_7',
-		'type'    => 'title',
+		'type' => 'text',
+		'default' => 'Employee Testimonial',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$career_meta->add_field( array(
         'name' => __( 'Section Title', 'mondaysys' ),
@@ -2357,9 +2430,13 @@ $career_meta = new_cmb2_box( array(
     ) );
 	//Employee Testimonial
 	$career_meta->add_field( array(
-		'name'    => esc_html__( 'Case Studies', 'cmb2' ),
 		'id'      => $prefix . 'title_8',
-		'type'    => 'title',
+		'type' => 'text',
+		'default' => 'Case Studies',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$career_meta->add_field( array(
         'name' => __( 'Section Title', 'mondaysys' ),
@@ -2368,9 +2445,13 @@ $career_meta = new_cmb2_box( array(
     ) );
 	//Footer Above
 	$career_meta->add_field( array(
-		'name'    => esc_html__( 'Footer Above', 'cmb2' ),
-		'id'      => $prefix . 'title_15',
-		'type'    => 'title',
+		'id'      => $prefix . 'title_9',
+		'type' => 'text',
+		'default' => 'Footer Above',
+		'attributes' => array(
+			'class'       => 'custom-section-title',
+			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
+		)
 	) );
 	$career_meta->add_field( array(
         'name' => __( 'Section Image', 'mondaysys' ),
