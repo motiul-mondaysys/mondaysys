@@ -1,31 +1,44 @@
 <?php get_header(); ?>
 
 <?php if ( have_posts() ) : ?>
-  <div class="posts-loop">
-    <?php
-    while ( have_posts() ) :
-      the_post();
-      // Use a template part for content
-      get_template_part( 'template-parts/content', get_post_type() );
-    endwhile;
-    ?>
-  </div>
+<h1 class="mb-0 section-spacing">
+  <?php 
+    if (is_home()):
+      echo get_the_title( get_queried_object_id() ); 
+    else:
+        the_archive_title();
+    endif;
+  ?>
+</h1>
 
-  <div class="pagination">
-    <?php the_posts_pagination( array(
-      'mid_size' => 2,
-      'prev_text' => __( '‹ Prev', 'my-theme' ),
-      'next_text' => __( 'Next ›', 'my-theme' ),
-    ) ); ?>
-  </div>
-
-<?php else : ?>
-  <section class="no-results not-found">
-    <h2><?php _e( 'Nothing Found', 'my-theme' ); ?></h2>
-    <p><?php _e( 'It seems we can’t find what you’re looking for.', 'my-theme' ); ?></p>
-    <?php get_search_form(); ?>
+<?php if ( is_home() && !is_paged() ) : ?>
+  <section class="border-top">
+    <?php echo do_shortcode('[latest_blogs]'); ?>
   </section>
 <?php endif; ?>
 
-<?php get_sidebar(); ?>
+
+<section class="border-container border-top">
+    <div class="empty-column"></div>
+    <div class="section-column">
+      <?php if ( is_home() && !is_paged() ) : 
+            echo '<h2 class="mb-0 section-spacing">All Articles</h2>';
+        endif; 
+      ?>
+      <div class="article_card_container grid-row <?php if ( is_home() && !is_paged() ){ echo 'border-top'; }?>" style="--desk-col: 3fr 9fr; --tab-col:1fr; --mob-col:1fr;">
+        <?php echo do_shortcode('[blog_list]') ?>
+      </div>
+      
+    </div>
+</section>
+  
+
+<?php else : ?>
+  <section class="no-results not-found"><div class="container">
+    <h2><?php _e( 'Nothing Found', 'mondaysys' ); ?></h2>
+    <p><?php _e( 'It seems we can’t find what you’re looking for.', 'mondaysys' ); ?></p>
+    <?php get_search_form(); ?>
+  </div></section>
+<?php endif; ?>
+
 <?php get_footer(); ?>

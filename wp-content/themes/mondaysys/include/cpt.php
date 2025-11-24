@@ -2,7 +2,7 @@
 
 // Register Mondaysys Custom Post Type
 function register_modaysys_cpt() {
-    $labels_slideshow = array(
+    /*$labels_slideshow = array(
         'name'          => __('Banner Slideshow', 'mondaysys' ),
         'singular_name' => __('Banner Slider','mondaysys' ),
         'add_new'       => __( 'Add New', 'mondaysys' ),
@@ -22,7 +22,7 @@ function register_modaysys_cpt() {
         'menu_icon'           => 'dashicons-images-alt2',
     );
 
-    register_post_type('banner_slideshow', $args_slideshow);
+    register_post_type('banner_slideshow', $args_slideshow);*/
 
     $labels_services = array(
         'name'                  => __( 'Mondaysys Services', 'mondaysys' ),

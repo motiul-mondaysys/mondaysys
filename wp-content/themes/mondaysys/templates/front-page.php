@@ -66,6 +66,7 @@ global $post;
                     <div class="section-column overflow-hidden">
                         <?php 
                             $images = meta('case_studay_image'); 
+                            
                             if (!empty($images) && is_array($images)): ?>
                             <mondaysys-carousel 
                                 data-desktop="5"
@@ -81,9 +82,19 @@ global $post;
                                 data-center-mode="false" class="lh-0">
                                 <div class="swiper mondaysys_carousel marquee_slide"> 
                                     <ul class="swiper-wrapper unorder-list">
-                                        <?php foreach($images as $image_id => $image_url): ?>
+                                        <?php foreach($images as $image_id => $image_url): 
+                                            $image_id = attachment_url_to_postid($image_url);
+                                            $alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
+                                            $size = 'full';
+                                            $class = 'attachment-full size-full wp-post-image';
+                                            ?>
                                             <li class="swiper-slide">
-                                                <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" />
+                                                <?php echo wp_get_attachment_image($image_id, $size, false, [
+                                                    'alt'      => esc_attr($alt),
+                                                    'class'    => esc_attr($class),
+                                                    'loading'  => 'lazy',
+                                                    'decoding' => 'async',
+                                                ]); ?>
                                             </li>
                                         <?php endforeach; ?>
                                     </ul>

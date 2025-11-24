@@ -209,7 +209,7 @@ add_shortcode('faq_items', 'faq_items_shortcode');
 function faq_tabs_shortcode() {
     $categories = get_terms([
         'taxonomy'   => 'faq_cat',
-        'hide_empty' => false,
+        'hide_empty' => true,
         'orderby'    => 'name',
         'order'      => 'ASC',
     ]);
@@ -463,3 +463,199 @@ function industries_services_shortcode() {
 	wp_reset_postdata();
 	return $output;				 
 }
+
+
+add_shortcode( 'latest_blogs', 'latest_blogs_shortcode' );
+function latest_blogs_shortcode() {
+	$args = array(
+		'post_type'           => 'post',
+		'posts_per_page'      => 6,
+		'ignore_sticky_posts' => 1,
+	);
+	$query   = new WP_Query( $args );
+
+	$output  = '';
+	$counter = 1;
+
+	if ( $query->have_posts() ) :
+		$output .= '<div class="latest-blog-wrapper grid-row" style="--desk-col: 7fr 5fr;">';
+		while ( $query->have_posts() ) : $query->the_post();
+			global $post;
+			$thumb = get_the_post_thumbnail( $post->ID, $counter === 1 ? 'full' : 'large' );
+
+			if ( $counter === 1 ) {
+				$output .= '<div class="latest-blog-left py-2 py-lg-2 px-1 px-lg-2">';
+                $output .= '<h4 class="mb-2 mb-lg-2">Editor Picks</h4>';
+			}
+			if ( $counter === 2 ) {
+				$output .= '</div><div class="latest-blog-right border-left pt-0 pt-md-2 pt-lg-2">';
+                $output .= '<h4 class="mb-2 mb-lg-2">Latest Articles</h4>';
+			}
+
+			$output .= '<article class="latest-blog-card is-' . $counter . '">';
+				$output .= '<div class="thumb lh-0"><a href="' . get_permalink() . '" class="d-block">';
+					if ( $thumb ) {
+						$output .= $thumb;
+					}
+				$output .= '</a></div>';
+                $output .='<div clas="latest_blog_entry_content">';
+                    $term = get_the_category();
+                    if ( ! empty( $term ) ) {
+                        $cat_link = get_category_link( $term[0]->term_id );
+                        $output .= '<div class="cat-name pb-1"><a href="' . esc_url( $cat_link ) . '">' . esc_html( $term[0]->name ) . '</a></div>';
+                    }
+                    $title_tag = ( $counter === 1 ) ? 'h3' : 'h4';
+                    $output .= '<'.$title_tag.'><a href="' . get_permalink() . '">' . esc_html( get_the_title() ) . '</a></'.$title_tag.'>';
+                    if ( $counter === 1 ) {
+                        $output .= '<p class="mb-0">' . wp_trim_words( get_the_content(), 80 ) . '</p>';
+                    }
+                $output .='</div>';
+			$output .= '</article>';
+			$counter++;
+		endwhile;
+		$output .= '</div>';
+		$output .= '</div>'; 
+
+	endif;
+	wp_reset_postdata();
+	return $output;
+}
+
+// Blog Page Filter Shortcode
+function get_blog_list_shortcode() {
+    ob_start(); ?>
+
+    <div class="blog_filter_area position-relative">
+        <div class="sicky_filter">
+            <div class="filter_title py-2 py-lg-2 px-lg-2 px-1 fw-500">
+                <span>
+                    <svg width="18" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <path fill="var(--body-text-color)" d="M0 3h24v2.5H0zm5 8h14v2.5H5zm4 8h6v2.5H9z"></path>
+                    </svg>
+                </span>
+                <span>Filters</span>
+            </div>
+            <?php if ( is_home() && !is_paged() ){ ?>
+                <form class="article-filter-form border-top py-2 px-1 px-lg-2">
+                    <?php
+                    $terms = get_terms(['taxonomy' => 'category', 'hide_empty' => true]);
+
+                    if ($terms && !is_wp_error($terms)) :
+                        echo '<div class="filter-group">';
+                        echo '<div class="filter-header h4 mb-1">Topics <span class="arrow"></span></div>';
+                        echo '<div class="filter-content">';
+                        foreach ($terms as $term) {
+                            printf(
+                                '<label><input type="checkbox" name="tax_category[]" value="%s"> <span>%s</span></label>',
+                                esc_attr($term->slug),
+                                esc_html($term->name)
+                            );
+                        }
+                        echo '</div></div>';
+                    endif;
+                    ?>
+                </form>
+            <?php } ?>
+        </div>
+    </div>
+
+    <div class="article_list_area">
+        <div id="blog-post-body">
+            <?php echo get_blog_list_init(); ?>
+        </div>
+
+        <?php
+        $show_load_more = false;
+        if ( is_category() ) {
+            $cat = get_queried_object();
+            if ( $cat ) {
+                $show_load_more = ( $cat->count > 10 );
+            }
+        } else {
+            $total_posts = wp_count_posts('post')->publish;
+            $show_load_more = ( $total_posts > 10 );
+        }
+        if ( $show_load_more ) :
+        ?>
+            <button class="btn py-1" id="load_more_blogs">
+                Load More Blogs
+            </button>
+        <?php endif; ?>
+    </div>
+
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('blog_list', 'get_blog_list_shortcode');
+
+// AJAX Handler
+function ajax_load_more_blogs() {
+    $offset  = intval($_POST['offset'] ?? 0);
+    $filters = $_POST['filters'] ?? [];
+    echo get_blog_list_init($offset, $filters);
+    wp_die();
+}
+add_action('wp_ajax_ajax_load_more_blogs', 'ajax_load_more_blogs');
+add_action('wp_ajax_nopriv_ajax_load_more_blogs', 'ajax_load_more_blogs');
+
+// Query Builder
+function get_blog_list_init($offset = 0, $filters = []) {
+    $tax_query = [];
+    if ( empty($filters) && is_category() ) {
+        $current_cat = get_queried_object();
+        if ( $current_cat && isset($current_cat->slug) ) {
+            $tax_query[] = [
+                'taxonomy' => 'category',
+                'field'    => 'slug',
+                'terms'    => sanitize_text_field($current_cat->slug),
+            ];
+        }
+    }
+    if (!empty($filters['category'])) {
+        $tax_query[] = [
+            'taxonomy' => 'category',
+            'field'    => 'slug',
+            'terms'    => array_map('sanitize_text_field', $filters['category']),
+        ];
+    }
+
+    $skip_posts = ( empty($filters) && !is_category() ) ? 6 : 0;
+
+    $args = [
+        'post_type'      => 'post',
+        'posts_per_page' => 10,
+        'offset'         => $offset + $skip_posts,
+        'tax_query'      => $tax_query,
+    ];
+
+    $query = new WP_Query($args);
+    $output = '';
+    if ($query->have_posts()) :
+        while ($query->have_posts()) : $query->the_post();
+            global $post;
+			$thumb = get_the_post_thumbnail( $post->ID, 'large' );
+            $output .='<article class="article_card_item px-1 px-lg-2 py-2 py-lg-2 grid-row border-top" style="--desk-col: 5fr 7fr; --tab-col: 5fr 7fr; --desk-gap: calc(10px + 1vw); --tab-gap: calc(12px + 0.8vw);">';
+                $output .= '<div class="thumb lh-0"><a href="' . get_permalink() . '" class="d-block">';
+					if ( $thumb ) {
+						$output .= $thumb;
+					}
+				$output .= '</a></div>';
+                $output .='<div clas="blog_entry_content">';
+                    $term = get_the_category();
+                    if ( ! empty( $term ) ) {
+                        $cat_link = get_category_link( $term[0]->term_id );
+                        $output .= '<div class="cat-name pt-1 pt-lg-0 pb-1"><a href="' . esc_url( $cat_link ) . '">' . esc_html( $term[0]->name ) . '</a></div>';
+                    }
+                    $output .= '<h4 class="mb-1"><a href="' . get_permalink() . '">' . esc_html( get_the_title() ) . '</a></h4>';
+                    $output .= '<p class="mb-0 article_excerpt">' . wp_trim_words( get_the_content(), 70 ) . '</p>';
+                $output .='</div>';
+            $output .='</article>';
+        endwhile;
+    else :
+        echo '<div class="no_blos">No Blog Posts found.</div>';
+    endif;
+    wp_reset_postdata();
+    return $output;
+}
+
+

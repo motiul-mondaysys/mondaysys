@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function mondaysys_enqueue_assets() {
     wp_enqueue_style( 'swiper-style', get_theme_file_uri('/assets/css/swiper-bundle.min.css') );
-    wp_enqueue_style( 'parent-style', get_theme_file_uri('/style.css'), array(), '1.3.5');
+    wp_enqueue_style( 'parent-style', get_theme_file_uri('/style.css'), array(), '1.3.6');
     wp_enqueue_style( 'spacing-style', get_theme_file_uri('/assets/css/spacing.css'),array(), '1.0.4' );
     if(is_page_template ('templates/about-page.php')){
         wp_enqueue_style( 'about-page-style', get_theme_file_uri('/assets/css/about-us.css'), array(), '1.0.7' );
@@ -46,9 +46,13 @@ function mondaysys_enqueue_assets() {
         'theme-js',
         get_template_directory_uri() . '/assets/js/theme.js',
         array('jquery'), // Dependencies (e.g., 'jquery' if your script relies on jQuery)
-        '1.1.1', 
+        '1.1.3', 
         true // Load in the footer (true) or header (false)
     );
+
+    wp_localize_script('theme-js', 'mondaysys_ajax', [
+        'ajax_url' => admin_url('admin-ajax.php')
+    ]);
     
 }
 add_action( 'wp_enqueue_scripts', 'mondaysys_enqueue_assets' );

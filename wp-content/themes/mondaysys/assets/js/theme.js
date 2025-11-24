@@ -497,6 +497,45 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+jQuery(document).ready(function($) {
+    let offset = 10;
+    const collectFilters = () => {
+        const filters = { category: [] };
+        $('input[name="tax_category[]"]:checked').each(function() {
+            filters.category.push($(this).val());
+        });
+        return filters;
+    };
+    const loadJobs = (offsetVal = 0, append = false) => {
+        const filters = collectFilters();
+
+        $.post(mondaysys_ajax.ajax_url, {
+            action: 'ajax_load_more_blogs',
+            offset: offsetVal,
+            filters: filters
+        }, function(response) {
+            if (append) {
+                $('#blog-post-body').append(response);
+            } else {
+                $('#blog-post-body').html(response);
+                offset = 10;
+            }
+
+            const jobCount = $(response).filter('article').length;
+            $('#load_more_blogs').toggle(jobCount >= 10);
+        });
+    };
+    $('#load_more_blogs').on('click', function() {
+        loadJobs(offset, true);
+        offset += 10;
+    });
+    $(document).on('change', 'input[name="tax_category[]"]', function() {
+        loadJobs(0, false);
+    });
+});
+
+
+
 
 
 
