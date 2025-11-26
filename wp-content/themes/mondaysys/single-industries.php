@@ -37,12 +37,12 @@ if ( have_posts() ) {
                         <div class="empty"></div>
                         <div>
                         <?php 
-                            if (get_post_meta( get_the_ID(), '_cmb2_benifits_section_title', true )):
-                            echo '<h2>'.get_post_meta( get_the_ID(), '_cmb2_benifits_section_title', true ).'</h2>';
+                            if (meta('benifits_section_title')):
+                            echo '<h2>'.meta('benifits_section_title' ).'</h2>';
                             endif;
 
-                            if (get_post_meta( get_the_ID(), '_cmb2_benifits_section_description', true )):
-                            echo '<p>'.get_post_meta( get_the_ID(), '_cmb2_benifits_section_description', true ).'</p>';
+                            if (meta('benifits_section_description')):
+                            echo '<p>'.meta('benifits_section_description').'</p>';
                             endif;
                         ?>
                         </div>

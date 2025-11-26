@@ -312,8 +312,7 @@ function mondaysys_case_studies_loop() {
 add_shortcode('case_studies_list', 'mondaysys_case_studies_loop');
 
 
-
-//Show Technology Slider
+// === Show Technology Slider ===
 add_shortcode( 'technology_slider', 'technology_slider_init' );
 function technology_slider_init( $atts ) {
     $selected_post_id = get_post_meta( get_queried_object_id(), '_cmb2_select_technology_post', true );
@@ -370,9 +369,7 @@ function technology_slider_init( $atts ) {
     return $output;
 }
 
-
-
-// Mondaysys Main Services
+// === Mondaysys Main Services ===
 add_shortcode( 'mondaysys_services', 'mondaysys_services_shortcode' );
 function mondaysys_services_shortcode($atts) {	
 	$args = array(
@@ -424,9 +421,10 @@ function mondaysys_services_shortcode($atts) {
 	endif;
 	wp_reset_postdata();
 	return $output;				 
-}//End
+}
 
-//industries Shortocde
+
+// === industries Shortocde ===
 add_shortcode( 'display_industries', 'industries_services_shortcode' );
 function industries_services_shortcode() {	
 	$args = array(
@@ -464,7 +462,7 @@ function industries_services_shortcode() {
 	return $output;				 
 }
 
-
+// === Latest Blog Shortcode ===
 add_shortcode( 'latest_blogs', 'latest_blogs_shortcode' );
 function latest_blogs_shortcode() {
 	$args = array(
@@ -521,7 +519,7 @@ function latest_blogs_shortcode() {
 	return $output;
 }
 
-// Blog Page Filter Shortcode
+// === Blog Page Filter Shortcode ===
 function get_blog_list_shortcode() {
     ob_start(); ?>
 
@@ -535,7 +533,6 @@ function get_blog_list_shortcode() {
                 </span>
                 <span>Filters</span>
             </div>
-            <?php if ( is_home() && !is_paged() ){ ?>
                 <form class="article-filter-form border-top py-2 px-1 px-lg-2">
                     <?php
                     $terms = get_terms(['taxonomy' => 'category', 'hide_empty' => true]);
@@ -544,18 +541,29 @@ function get_blog_list_shortcode() {
                         echo '<div class="filter-group">';
                         echo '<div class="filter-header h4 mb-1">Topics <span class="arrow"></span></div>';
                         echo '<div class="filter-content">';
-                        foreach ($terms as $term) {
-                            printf(
-                                '<label><input type="checkbox" name="tax_category[]" value="%s"> <span>%s</span></label>',
-                                esc_attr($term->slug),
-                                esc_html($term->name)
-                            );
-                        }
+                        foreach ($terms as $term):
+                            if ( is_home() && !is_paged() ):
+                                printf(
+                                    '<label><input type="checkbox" name="tax_category[]" value="%s"> <span>%s</span></label>',
+                                    esc_attr($term->slug),
+                                    esc_html($term->name)
+                                );
+                            else:
+                                $term_link = get_term_link($term);
+                                $active    = (is_category($term->slug)) ? 'active-category' : '';
+
+                                printf(
+                                    '<a href="%s" class="category-link %s">%s</a>',
+                                    esc_url($term_link),
+                                    esc_attr($active),
+                                    esc_html($term->name)
+                                );
+                            endif;
+                        endforeach;
                         echo '</div></div>';
                     endif;
                     ?>
                 </form>
-            <?php } ?>
         </div>
     </div>
 
@@ -577,8 +585,9 @@ function get_blog_list_shortcode() {
         }
         if ( $show_load_more ) :
         ?>
-            <button class="btn py-1" id="load_more_blogs">
-                Load More Blogs
+            <hr>
+            <button id="load_more_blogs">
+                + Load More Blogs
             </button>
         <?php endif; ?>
     </div>
@@ -635,7 +644,7 @@ function get_blog_list_init($offset = 0, $filters = []) {
             global $post;
 			$thumb = get_the_post_thumbnail( $post->ID, 'large' );
             $output .='<article class="article_card_item px-1 px-lg-2 py-2 py-lg-2 grid-row border-top" style="--desk-col: 5fr 7fr; --tab-col: 5fr 7fr; --desk-gap: calc(10px + 1vw); --tab-gap: calc(12px + 0.8vw);">';
-                $output .= '<div class="thumb lh-0"><a href="' . get_permalink() . '" class="d-block">';
+                $output .= '<div class="thumb overflow-hidden lh-0"><a href="' . get_permalink() . '" class="d-block">';
 					if ( $thumb ) {
 						$output .= $thumb;
 					}
@@ -657,5 +666,95 @@ function get_blog_list_init($offset = 0, $filters = []) {
     wp_reset_postdata();
     return $output;
 }
+
+// === Related Post Shortcode ===
+function related_posts_shortcode( $atts ) {
+    if ( ! is_single() ) {
+        return '';
+    }
+    global $post;
+    $atts = shortcode_atts( array(
+        'posts_per_page' => 5,
+        'title'          => 'Latest Articles/Similar Topics',
+    ), $atts );
+
+    $categories = wp_get_post_categories( $post->ID );
+
+    if ( empty( $categories ) ) {
+        return '';
+    }
+
+    $args = array(
+        'category__in'   => $categories,
+        'post__not_in'   => array( $post->ID ),
+        'posts_per_page' => intval( $atts['posts_per_page'] ),
+    );
+
+    $related = new WP_Query( $args );
+    if ( ! $related->have_posts() ) {
+        return '';
+    }
+
+    $output = '<div class="related-posts">';
+    $output .= '<h4 class="mb-0 px-1 px-lg-2">' . esc_html( $atts['title'] ) . '</h4>';
+    $output .= '<ul class="unorder-list">';
+
+    while ( $related->have_posts() ) {
+        $related->the_post();
+        $thumb = get_the_post_thumbnail( $post->ID, 'large' );
+        $output .='<li class="px-1 px-lg-2 py-2">';
+            $output .= '<a href="' . get_permalink() . '" class="d-block thumb">';
+                if ( $thumb ) {
+                    $output .= $thumb;
+                }
+            $output .= '</a>';
+            $term = get_the_category();
+                if ( ! empty( $term ) ) {
+                    $cat_link = get_category_link( $term[0]->term_id );
+                    $output .= '<div class="cat-name py-1"><a href="' . esc_url( $cat_link ) . '">' . esc_html( $term[0]->name ) . '</a></div>';
+                }
+            $output .= '<h4 class="mb-0 related-card-title"><a href="' . get_permalink() . '">' . esc_html( get_the_title() ) . '</a></h4>';
+        $output .='</li>';
+    }
+
+    $output .= '</ul>';
+    $output .= '</div>';
+
+    wp_reset_postdata();
+    return $output;
+}
+add_shortcode( 'related_posts', 'related_posts_shortcode' );
+
+
+// === Social Share Shortcode ===
+// === Social Share Shortcode (Dynamic Title/Text) ===
+function social_share_shortcode() {
+
+    if ( ! is_single() ) {
+        return '';
+    }
+
+    $post_url     = urlencode( get_permalink() );
+    $post_title   = urlencode( get_the_title() );
+    $post_excerpt = urlencode( wp_trim_words( get_the_excerpt(), 25 ) );
+
+    $facebook  = 'https://www.facebook.com/sharer/sharer.php?u=' . $post_url;
+    $linkedin  = 'https://www.linkedin.com/shareArticle?mini=true&url=' . $post_url . '&title=' . $post_title . '&summary=' . $post_excerpt;
+    $twitter   = 'https://twitter.com/intent/tweet?url=' . $post_url . '&text=' . $post_title;
+
+    $output  = '<div class="social-share">';
+    $output .= '<span class="h4">Share:</span> ';
+    $output .= '<a href="' . esc_url( $facebook ) . '" target="_blank" rel="noopener">Facebook</a>';
+    $output .= '<a href="' . esc_url( $linkedin ) . '" target="_blank" rel="noopener">LinkedIn</a>';
+    $output .= '<a href="' . esc_url( $twitter ) . '" target="_blank" rel="noopener">X</a>';
+    
+    $output .= '</div>';
+
+    return $output;
+}
+add_shortcode( 'social_share', 'social_share_shortcode' );
+
+
+
 
 

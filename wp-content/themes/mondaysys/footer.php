@@ -1,6 +1,6 @@
 </main> <!-- #site-content -->
 
-<?php if(!is_page_template ('templates/contact-page.php')): ?>
+<?php if(!(is_page_template ('templates/contact-page.php') || is_singular('post'))): ?>
     <div class="border-container fw-btn-section position-relative">
         <div class="empty-column"></div>
         <div class="section-column px-1 px-lg-2 py-1">

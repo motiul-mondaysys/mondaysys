@@ -51,6 +51,7 @@ input[type="text"].custom-section-title:focus{
     box-shadow:none !important;
     border-color: #D60001 !important;
 }
+iframe, img{ max-width: 100%;}
 @media(min-width: 1024px){
     .cmb-type-group .cmb-th, .cmb2-postbox .cmb-th {
         width: 30% !important;

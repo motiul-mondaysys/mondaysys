@@ -66,41 +66,26 @@ global $post;
                     <div class="section-column overflow-hidden">
                         <?php 
                             $images = meta('case_studay_image'); 
-                            
-                            if (!empty($images) && is_array($images)): ?>
-                            <mondaysys-carousel 
-                                data-desktop="5"
-                                data-tablet="3"
-                                data-mobile="2"
-                                data-extra-small="2"
-                                data-autoplay="true"
-                                data-autoplay-delay="1"
-                                data-deskitemspace="0"
-                                data-mobitemspace="0"
-                                data-item-speed="4000"
-                                data-infinite-loop="true"
-                                data-center-mode="false" class="lh-0">
-                                <div class="swiper mondaysys_carousel marquee_slide"> 
-                                    <ul class="swiper-wrapper unorder-list">
-                                        <?php foreach($images as $image_id => $image_url): 
+                            if (!empty($images) && is_array($images)):
+                                    echo '<ul class="marquee-list image_marqee unorder-list">';
+                                        foreach($images as $image_id => $image_url): 
                                             $image_id = attachment_url_to_postid($image_url);
                                             $alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
                                             $size = 'full';
                                             $class = 'attachment-full size-full wp-post-image';
-                                            ?>
-                                            <li class="swiper-slide">
-                                                <?php echo wp_get_attachment_image($image_id, $size, false, [
+                                            
+                                            echo '<li>';
+                                             echo wp_get_attachment_image($image_id, $size, false, [
                                                     'alt'      => esc_attr($alt),
                                                     'class'    => esc_attr($class),
                                                     'loading'  => 'lazy',
                                                     'decoding' => 'async',
-                                                ]); ?>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                </div> 
-                            </mondaysys-carousel>
-                        <?php endif; ?>
+                                                ]); 
+                                            echo '</li>';
+                                         endforeach;
+                                    echo '</ul>';
+                            endif; 
+                        ?>
                         <?php 
                             $content = apply_filters('the_content', get_the_content());
                             if ( preg_match('/<p>(.*?)<\/p>/s', $content, $matches) ) {

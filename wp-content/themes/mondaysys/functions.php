@@ -8,8 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Enqueue styles and scripts
  */
 function mondaysys_enqueue_assets() {
-    wp_enqueue_style( 'swiper-style', get_theme_file_uri('/assets/css/swiper-bundle.min.css') );
-    wp_enqueue_style( 'parent-style', get_theme_file_uri('/style.css'), array(), '1.3.6');
+    wp_enqueue_style( 'swiper-style', get_theme_file_uri('/assets/css/swiper-bundle.min.css'),array(), '6.8.3' );
+    wp_enqueue_style( 'parent-style', get_theme_file_uri('/style.css'), array(), '1.3.9');
     wp_enqueue_style( 'spacing-style', get_theme_file_uri('/assets/css/spacing.css'),array(), '1.0.4' );
     if(is_page_template ('templates/about-page.php')){
         wp_enqueue_style( 'about-page-style', get_theme_file_uri('/assets/css/about-us.css'), array(), '1.0.7' );
@@ -46,7 +46,7 @@ function mondaysys_enqueue_assets() {
         'theme-js',
         get_template_directory_uri() . '/assets/js/theme.js',
         array('jquery'), // Dependencies (e.g., 'jquery' if your script relies on jQuery)
-        '1.1.3', 
+        '1.1.4', 
         true // Load in the footer (true) or header (false)
     );
 
@@ -58,9 +58,14 @@ function mondaysys_enqueue_assets() {
 add_action( 'wp_enqueue_scripts', 'mondaysys_enqueue_assets' );
 
 function mondaysys_admin_enqueue() {
-    wp_enqueue_style( 'custom-admin-style', get_theme_file_uri('/assets/css/admin-style.css'), array(), '1.0.3' );
+    wp_enqueue_style( 'custom-admin-style', get_theme_file_uri('/assets/css/admin-style.css'), array(), '1.0.4' );
 }
 add_action( 'admin_enqueue_scripts', 'mondaysys_admin_enqueue' );
+
+add_action( 'wp_enqueue_scripts', function() {
+    wp_dequeue_style( 'wp-block-library' );
+}, 100 );
+
 
 if ( file_exists( dirname( __FILE__ ) . '/cmb2/init.php' ) ) {
 	require_once dirname( __FILE__ ) . '/cmb2/init.php';
