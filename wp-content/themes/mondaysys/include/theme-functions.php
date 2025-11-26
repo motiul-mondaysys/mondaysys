@@ -1,7 +1,5 @@
 <?php
-/**
-* Output Banner Slideshow
-**/
+// === Banner Slider ===
 if ( ! function_exists( 'mondaysys_banner_slideshow' ) ) {
     function mondaysys_banner_slideshow() {
         ob_start();
@@ -77,9 +75,7 @@ if ( ! function_exists( 'mondaysys_banner_slideshow' ) ) {
     }
 }
 
-/**
-* Output Testimonial Carousel
-*/
+// === Testimonial Slider ===
 if ( ! function_exists( 'testimonial_slider' ) ) { 
     function testimonial_slider() {
         ob_start();
@@ -161,10 +157,7 @@ if ( ! function_exists( 'testimonial_slider' ) ) {
     }
 }
 
-/**
-* Output FAQs
-*/
-
+// === FAQs ===
 function faq_items_shortcode($atts) {
     $atts = shortcode_atts([
         'cat_id' => 'all', 
@@ -207,6 +200,8 @@ function faq_items_shortcode($atts) {
 add_shortcode('faq_items', 'faq_items_shortcode');
 
 function faq_tabs_shortcode() {
+    global $post;
+    $selected_terms = wp_get_post_terms($post->ID, 'faq_cat', array('fields' => 'slugs')); 
     $categories = get_terms([
         'taxonomy'   => 'faq_cat',
         'hide_empty' => true,
@@ -219,17 +214,23 @@ function faq_tabs_shortcode() {
     ob_start();
 
     echo '<div class="faq-tab-buttons px-1 px-md-2">';
-    echo '<button class="faq-tab-btn active" data-tab="faq-tab-all">All</button>'; 
+    $active_all = empty($selected_terms) ? 'active' : '';
+    echo '<button class="faq-tab-btn ' . $active_all . '" data-tab="faq-tab-all">All</button>';
+
     foreach ($categories as $cat) {
-        echo '<button class="faq-tab-btn" data-tab="faq-tab-' . $cat->term_id . '">' . esc_html($cat->name) . '</button>';
+        $active_class = (in_array($cat->slug, $selected_terms)) ? 'active' : '';
+        echo '<button class="faq-tab-btn ' . $active_class . '" data-tab="faq-tab-' . $cat->term_id . '">' . esc_html($cat->name) . '</button>';
     }
     echo '</div>';
 
-    echo '<div class="faq-tab-content" id="faq-tab-all">';
+    $all_active_class = empty($selected_terms) ? 'active' : '';
+    echo '<div class="faq-tab-content ' . $all_active_class . '" id="faq-tab-all">';
     echo do_shortcode('[faq_items cat_id="all"]');
     echo '</div>';
+
     foreach ($categories as $cat) {
-        echo '<div class="faq-tab-content" id="faq-tab-' . $cat->term_id . '">';
+        $active_class = (in_array($cat->slug, $selected_terms)) ? 'active' : '';
+        echo '<div class="faq-tab-content ' . $active_class . '" id="faq-tab-' . $cat->term_id . '">';
         echo do_shortcode('[faq_items cat_id="' . $cat->term_id . '"]');
         echo '</div>';
     }
@@ -239,7 +240,7 @@ function faq_tabs_shortcode() {
 add_shortcode('display_faqs', 'faq_tabs_shortcode');
 
 
-
+// === CaseStuday Function ===
 function mondaysys_case_studies_loop() {
     ob_start();
 
@@ -467,7 +468,7 @@ add_shortcode( 'latest_blogs', 'latest_blogs_shortcode' );
 function latest_blogs_shortcode() {
 	$args = array(
 		'post_type'           => 'post',
-		'posts_per_page'      => 6,
+		'posts_per_page'      => 5,
 		'ignore_sticky_posts' => 1,
 	);
 	$query   = new WP_Query( $args );
@@ -505,7 +506,7 @@ function latest_blogs_shortcode() {
                     $title_tag = ( $counter === 1 ) ? 'h3' : 'h4';
                     $output .= '<'.$title_tag.'><a href="' . get_permalink() . '">' . esc_html( get_the_title() ) . '</a></'.$title_tag.'>';
                     if ( $counter === 1 ) {
-                        $output .= '<p class="mb-0">' . wp_trim_words( get_the_content(), 80 ) . '</p>';
+                        $output .= '<p class="mb-0">' . wp_trim_words( get_the_content(), 50 ) . '</p>';
                     }
                 $output .='</div>';
 			$output .= '</article>';
@@ -628,7 +629,7 @@ function get_blog_list_init($offset = 0, $filters = []) {
         ];
     }
 
-    $skip_posts = ( empty($filters) && !is_category() ) ? 6 : 0;
+    $skip_posts = ( empty($filters) && !is_category() ) ? 5 : 0;
 
     $args = [
         'post_type'      => 'post',

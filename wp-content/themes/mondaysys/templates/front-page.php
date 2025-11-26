@@ -329,13 +329,7 @@ global $post;
                 <div class="section-column border-top">
                     <h2 class="mb-0 section-spacing"><?php echo meta('title_faqs'); ?></h2>
                     <?php 
-                        $faq_cat = wp_get_post_terms( get_the_ID(), 'faq_cat' );
-                        if ( ! empty( $faq_cat ) ) {
-                            $cat_id = $faq_cat[0]->term_id;
-                            echo do_shortcode('[display_faqs cat_name="'.$cat_id.'"]');
-                        } else {
-                            echo do_shortcode('[display_faqs]');
-                        }
+                        echo do_shortcode('[display_faqs]');
                     ?>
                 </div>
             </section>

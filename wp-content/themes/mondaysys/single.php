@@ -25,7 +25,7 @@ if ( have_posts() ) {
               ?>
               <div class="post-author-box">
                   <img src="<?php echo esc_url( get_avatar_url($author_id, ['size' => 50]) ); ?>" alt="<?php echo $author_name; ?>">
-                  <h5><span class="fw-300">By</span> <?php echo $author_name; ?></h5>
+                  <h5><?php echo $author_name; ?></h5>
               </div>
 
           </div>

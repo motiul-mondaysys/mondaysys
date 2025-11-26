@@ -479,8 +479,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const tabs = document.querySelectorAll(".faq-tab-btn");
     const contents = document.querySelectorAll(".faq-tab-content");
     if (tabs.length) {
-        tabs[0].classList.add("active");
-        contents[0].classList.add("active");
         tabs.forEach(tab => {
             tab.addEventListener("click", function () {
 
@@ -495,7 +493,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
-
 
 jQuery(document).ready(function($) {
     let offset = 10;

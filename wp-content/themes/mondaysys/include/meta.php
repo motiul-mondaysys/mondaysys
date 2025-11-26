@@ -816,6 +816,9 @@ $service_meta = new_cmb2_box( array(
 		'id'         => $prefix .'faq_category',
 		'taxonomy'   => 'faq_cat', 
 		'type'       => 'taxonomy_select',
+		'query_args'       => array(
+			'hide_empty' => true, 
+		),
 	) );
     //Footer Above
 	$service_meta->add_field( array(
@@ -1186,11 +1189,14 @@ $industry_meta = new_cmb2_box( array(
         'id'   => $prefix . 'title_faqs',
         'type' => 'text',
     ) );
-	$service_meta->add_field( array(
+	$industry_meta->add_field( array(
 		'name'       => 'Select FAQ Category',
 		'id'         => $prefix .'faq_category',
 		'taxonomy'   => 'faq_cat', 
 		'type'       => 'taxonomy_select',
+		'query_args'       => array(
+			'hide_empty' => true, 
+		),
 	) );
 	//Footer Above
 	$industry_meta->add_field( array(
@@ -1776,6 +1782,9 @@ $cmb_about = new_cmb2_box( array(
 		'id'         => $prefix .'faq_category',
 		'taxonomy'   => 'faq_cat', 
 		'type'       => 'taxonomy_select',
+		'query_args'       => array(
+			'hide_empty' => true, 
+		),
 	) );
 	//About Footer Above
 	$cmb_about->add_field( array(
@@ -2023,6 +2032,9 @@ $cmb_home = new_cmb2_box( array(
 		'id'         => $prefix .'faq_category',
 		'taxonomy'   => 'faq_cat', 
 		'type'       => 'taxonomy_select',
+		'query_args'       => array(
+			'hide_empty' => true, 
+		),
 	) );
 
 	$cmb_home->add_field( array(
@@ -2755,6 +2767,15 @@ $solution_meta = new_cmb2_box( array(
         'id'   => $prefix . 'title_faqs',
         'type' => 'text',
     ) );
+	$solution_meta->add_field( array(
+		'name'       => 'Select FAQ Category',
+		'id'         => $prefix .'faq_category',
+		'taxonomy'   => 'faq_cat', 
+		'type'       => 'taxonomy_select',
+		'query_args'       => array(
+			'hide_empty' => true, 
+		),
+	) );
 	//Footer Above
 	$solution_meta->add_field( array(
 		'name'    => esc_html__( 'Footer Above', 'cmb2' ),
@@ -2907,6 +2928,9 @@ $all_service_meta = new_cmb2_box( array(
 		'id'         => $prefix .'faq_category',
 		'taxonomy'   => 'faq_cat', 
 		'type'       => 'taxonomy_select',
+		'query_args'       => array(
+			'hide_empty' => true, 
+		),
 	) );
 
 	// Footer Above

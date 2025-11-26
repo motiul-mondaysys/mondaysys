@@ -5,17 +5,19 @@ if ( have_posts() ) {
   while ( have_posts() ) {
     the_post();
     ?>
-    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-      <div class="container">
-            <header class="entry-header pt-4 pt-lg-5 pb-2">
-              <?php the_title( '<h1 class="page-title">', '</h1>' ); ?>
-            </header>
-
-            <div class="entry-content pb-3">
-              <?php the_content(); ?>
+    <article id="page-<?php the_ID(); ?>" <?php post_class(); ?>>
+        <div class="border-container">
+            <div class="empty-column"></div>
+            <div class="section-column">
+              <?php the_title( '<h1 class="page-title section-spacing mb-0">', '</h1>' ); ?>
             </div>
-      </div>
-      
+        </div>
+        <div class="border-container border-top">
+            <div class="empty-column"></div>
+            <div class="section-column">
+              <div class="page-entry-content py-2 py-lg-4 px-1 px-lg-2"><?php the_content(); ?></div>
+            </div>
+        </div>
     </article>
     <?php
   }

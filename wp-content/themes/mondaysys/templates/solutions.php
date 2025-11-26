@@ -326,7 +326,7 @@ global $post;
                 <div class="empty-column"></div>
                 <div class="section-column border-top">
                     <h2 class="mb-0 section-spacing"><?php echo meta('title_faqs'); ?></h2>
-                    <?php echo display_faqs_init(); ?>
+                    <?php echo do_shortcode('[display_faqs]'); ?>
                 </div>
             </section>
         <?php endif ; ?>

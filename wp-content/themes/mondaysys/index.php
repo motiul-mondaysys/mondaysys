@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <?php if ( have_posts() ) : ?>
-<h1 class="mb-0 section-spacing">
+<h1 class="mb-0 py-2 py-lg-2 px-1 px-lg-2">
   <?php 
     if (is_home()):
       echo get_the_title( get_queried_object_id() ); 
