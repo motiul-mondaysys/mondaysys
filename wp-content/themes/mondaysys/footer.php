@@ -12,7 +12,7 @@
     </div>
 <?php endif; ?>
 
-<footer class="site_footer grid-row" style="--desk-col:2fr 22fr; --mob-col:1fr">
+<footer class="site_footer grid-row" style="--desk-col:2fr 22fr; --tab-col:1fr; --mob-col:1fr">
     <div class="blank_space"></div>
     <div class="footer_widget_area">
         <div class="footer_subscribe">

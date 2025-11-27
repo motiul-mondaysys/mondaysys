@@ -168,58 +168,13 @@ a.view_job svg {
 .hiring_process .service-accorion-item.active .process_number_count{
     color: #ffffff;
 }
-.our_approach_slider .swiper-slide {
-    padding: 2rem;
-    border-left: 1px solid var(--border-color);
-}
+
 .our_approach_slider {
-    padding-left: 15%;
-    position: relative;
-}
-.our_approach_slider{
     padding-left: 15%;
     position: relative;
 }
 .single_service_item_list .service-accorion-item:last-child  .single_accordion_head {
     border-bottom: none;
-}
-.our_approach_slider mondaysys-carousel,
-.our_approach_slider .swiper-wrapper,
-.our_approach_slider .swiper{
-    position: static;
-}
-.our_approach_slider .swiper-slide {
-    padding: 2rem;
-    border-left: 1px solid var(--border-color);
-}
-.our_approach_slider .btn-slider{
-    height: 40px;
-    width: 40px;
-    padding: 10px;
-    border: 1px solid #000;
-    border-radius: 100%;
-    transition: all 0.4s;
-}
-.our_approach_slider .swiper-button-prev.btn-slider {
-    left: 2rem;
-}
-.our_approach_slider .swiper-button-next.btn-slider {
-    left: 5rem;
-}
-.our_approach_slider .swiper-slide p:last-of-type{ 
-    margin-bottom: 0;
-    font-weight: 300;
-    
-}
-.our_approach_slider .btn-slider svg{
-    fill: #000;
-}
-.our_approach_slider .btn-slider:hover svg{
-    fill: #ffffff;
-}
-.our_approach_slider .btn-slider:hover{
-    background: var(--primary-color);
-    border:1px solid var(--primary-color);
 }
 .testimonial_author {
     display: grid;
@@ -324,14 +279,27 @@ a.view_job svg {
     .titbar_bottom { width: calc(100% - calc(3% + 3.6vw)); margin-left: 0; }
     .about_page_titlebar { padding-top: 180px; }
     .about_page_titlebar:after{ height: 180px;}
-    .filter-group, .filter_title{ padding: 1rem;}
+    .filter-group, .filter_title{ padding: 1rem; cursor: pointer;}
     .arrow { width: 14px; }
     .job_item {  grid-template-columns: 11fr 3fr 13px; padding: 1rem; }
-    .jobs_filter_area{ border-right: none;}
+    .jobs_filter_area{ border-right: none; border-bottom: none;}
+    #jobs-filter-form {
+        max-height: 0;
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.4s;
+    }
+    .sicky_filter.active #jobs-filter-form {
+        max-height: 500px;
+        visibility: visible;
+        opacity: 1;
+    }
     .icon-with-title h4 { font-size: 16px; }
     .expect_item{ border-left: none; padding: 1rem;}
     .job_sidebar .wpcf7 {
         margin-left: -1rem;
         position: static;
     }
+    .filter-content label span{ font-size: 14px; padding: 5px 10px;}
+    .expect_image_area{ padding: 0;}
 }

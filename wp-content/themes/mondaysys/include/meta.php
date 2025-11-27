@@ -2137,6 +2137,24 @@ $career_meta = new_cmb2_box( array(
 		)
 	) );
 	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_1',
+		'type'       => 'text_small', 
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+		'default' => '1'
+	) );
+	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_1',
+		'type'    => 'checkbox',
+	) );
+	$career_meta->add_field( array(
 		'name' => __( 'Content', 'mondaysys' ),
 		'id'      => $prefix . 'career_post_bottom_text',
 		'type'    => 'wysiwyg',
@@ -2154,6 +2172,24 @@ $career_meta = new_cmb2_box( array(
 			'class'       => 'custom-section-title',
 			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
 		)
+	) );
+	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_2',
+		'type'       => 'text_small', 
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+		'default' => '2'
+	) );
+	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_2',
+		'type'    => 'checkbox',
 	) );
 	$group_field_experience = $career_meta->add_field( array(
         'id'          => $prefix . 'experience_group',
@@ -2204,6 +2240,24 @@ $career_meta = new_cmb2_box( array(
 		)
 	) );
 	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_3',
+		'type'       => 'text_small', 
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+		'default' => '3'
+	) );
+	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_3',
+		'type'    => 'checkbox',
+	) );
+	$career_meta->add_field( array(
 		'name'    => esc_html__( 'Section Title', 'cmb2' ),
 		'id'      => $prefix . 'trusted_title',
 		'type'    => 'text',
@@ -2244,6 +2298,24 @@ $career_meta = new_cmb2_box( array(
 			'class'       => 'custom-section-title',
 			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
 		)
+	) );
+	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_4',
+		'type'       => 'text_small', 
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+		'default' => '4'
+	) );
+	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_4',
+		'type'    => 'checkbox',
 	) );
 	$career_meta->add_field( array(
 		'name'    => esc_html__( 'Section Title', 'cmb2' ),
@@ -2287,6 +2359,24 @@ $career_meta = new_cmb2_box( array(
 		)
 	) );
 	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_5',
+		'type'       => 'text_small', 
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+		'default' => '5'
+	) );
+	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_5',
+		'type'    => 'checkbox',
+	) );
+	$career_meta->add_field( array(
 		'name'    => esc_html__( 'Title', 'cmb2' ),
 		'id'      => $prefix . 'technology_partner_title',
 		'type'    => 'text',
@@ -2311,6 +2401,24 @@ $career_meta = new_cmb2_box( array(
 			'class'       => 'custom-section-title',
 			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
 		)
+	) );
+	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_6',
+		'type'       => 'text_small', 
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+		'default' => '6'
+	) );
+	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_6',
+		'type'    => 'checkbox',
 	) );
 	$career_meta->add_field( array(
 		'name'    => esc_html__( 'Section Title', 'cmb2' ),
@@ -2359,6 +2467,24 @@ $career_meta = new_cmb2_box( array(
 		)
 	) );
 	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_7',
+		'type'       => 'text_small', 
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+		'default' => '7'
+	) );
+	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_7',
+		'type'    => 'checkbox',
+	) );
+	$career_meta->add_field( array(
 		'name'    => esc_html__( 'Section Title', 'cmb2' ),
 		'id'      => $prefix . 'hiring_process_title',
 		'type'    => 'text',
@@ -2394,6 +2520,24 @@ $career_meta = new_cmb2_box( array(
 			'class'       => 'custom-section-title',
 			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
 		)
+	) );
+	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_8',
+		'type'       => 'text_small', 
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+		'default' => '8'
+	) );
+	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_8',
+		'type'    => 'checkbox',
 	) );
 	$career_meta->add_field( array(
         'name' => __( 'Section Title', 'mondaysys' ),
@@ -2440,7 +2584,7 @@ $career_meta = new_cmb2_box( array(
 			'textarea_rows' => 5,
 		),
     ) );
-	//Employee Testimonial
+	//Case Studay
 	$career_meta->add_field( array(
 		'id'      => $prefix . 'title_8',
 		'type' => 'text',
@@ -2449,6 +2593,24 @@ $career_meta = new_cmb2_box( array(
 			'class'       => 'custom-section-title',
 			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
 		)
+	) );
+	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_9',
+		'type'       => 'text_small', 
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+		'default' => '9'
+	) );
+	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_9',
+		'type'    => 'checkbox',
 	) );
 	$career_meta->add_field( array(
         'name' => __( 'Section Title', 'mondaysys' ),
@@ -2464,6 +2626,24 @@ $career_meta = new_cmb2_box( array(
 			'class'       => 'custom-section-title',
 			'placeholder' => esc_html__( 'Enter section title', 'cmb2' ),
 		)
+	) );
+	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Section Order', 'cmb2' ),
+		'id'      => $prefix . 'section_order_10',
+		'type'       => 'text_small', 
+		'attributes' => array(
+			'type'  => 'number', 
+			'step'  => '1',     
+			'min'   => '0',      
+			'pattern' => '\d*',  
+			'inputmode' => 'numeric', 
+		),
+		'default' => '10'
+	) );
+	$career_meta->add_field( array(
+		'name'    => esc_html__( 'Do you want to hide this section?', 'cmb2' ),
+		'id'      => $prefix . 'section_hide_10',
+		'type'    => 'checkbox',
 	) );
 	$career_meta->add_field( array(
         'name' => __( 'Section Image', 'mondaysys' ),

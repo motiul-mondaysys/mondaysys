@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function mondaysys_enqueue_assets() {
     wp_enqueue_style( 'swiper-style', get_theme_file_uri('/assets/css/swiper-bundle.min.css'),array(), '6.8.3' );
-    wp_enqueue_style( 'parent-style', get_theme_file_uri('/style.css'), array(), '1.4.1');
+    wp_enqueue_style( 'parent-style', get_theme_file_uri('/style.css'), array(), '1.4.2');
     wp_enqueue_style( 'spacing-style', get_theme_file_uri('/assets/css/spacing.css'),array(), '1.0.4' );
     if(is_page_template ('templates/about-page.php')){
         wp_enqueue_style( 'about-page-style', get_theme_file_uri('/assets/css/about-us.css'), array(), '1.0.7' );
@@ -24,7 +24,7 @@ function mondaysys_enqueue_assets() {
         wp_enqueue_style( 'industries-style', get_theme_file_uri('/assets/css/industries.css'), array(), '1.0.1' );
     }
     if(is_page_template ('templates/careers.php') || is_singular( 'jobs' )){
-        wp_enqueue_style( 'careers-page-style', get_theme_file_uri('/assets/css/careers.css'), array(), '1.0.6' );
+        wp_enqueue_style( 'careers-page-style', get_theme_file_uri('/assets/css/careers.css'), array(), '1.0.7' );
     }
     if(is_page_template ('templates/solutions.php')){
         wp_enqueue_style( 'solutions-page-style', get_theme_file_uri('/assets/css/solutions.css'), array(), '1.0.2' );
@@ -46,7 +46,7 @@ function mondaysys_enqueue_assets() {
         'theme-js',
         get_template_directory_uri() . '/assets/js/theme.js',
         array('jquery'), // Dependencies (e.g., 'jquery' if your script relies on jQuery)
-        '1.1.5', 
+        '1.1.6', 
         true // Load in the footer (true) or header (false)
     );
     wp_localize_script('theme-js', 'mondaysys_ajax', [

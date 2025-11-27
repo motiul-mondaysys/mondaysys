@@ -492,6 +492,8 @@ body.admin-bar .site-header{ top: 32px; }
 .marquee-list.image_marqee li{ 
     flex: 0 0 auto;
     max-width: 300px;
+    border-right: 1px solid white;
+    line-height: 0;
 }
 .reverse-marqee .marquee-list{
     animation: slide-right 20s linear infinite;
@@ -1398,6 +1400,12 @@ button.submenu-toggle svg {
 .our_approach_slider .swiper-slide {
     padding: 2rem;
     border-left: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+.our_approach_slider .swiper-slide p:last-of-type{ 
+    margin-bottom: 0;
 }
 /*_____Tabs_____*/
 .faq-tab-content {
@@ -1731,20 +1739,23 @@ button.submenu-toggle svg {
         font-size: calc(8px + 0.5vw);
         padding: calc(2px + 0.3vw) calc(6px + 0.6vw); 
     }
+    .left-square-bg .section-column > div:last-child {
+        margin-bottom: 6vw;
+    }
+    .left-square-bg .empty-column::after{
+        content: "";
+        position:absolute;
+        bottom: 0;
+        right: 0;
+        background-color: var(--secondary-color);
+        width: 100%;
+        height: 6vw;
+    }
     .footer_above_business_growth h2 {
         max-width: 70%;
     }
     .testimonial-author-box p { font-size: calc(2px + 0.8vw); }
     .testimonial-section .section-column{ padding-bottom: 8vw;}
-    .testimonial-section .empty-column:before {
-        content: "";
-        height: 8vw;
-        width: 100%;
-        position: absolute;
-        right: 0px;
-        bottom: 0;
-        background: var(--secondary-color);
-    }
     .single_excerpt:after {
         content: "";
         clip-path: polygon(70% 60%, 100% 60%, 100% 100%, 50% 100%);
@@ -1902,18 +1913,6 @@ button.submenu-toggle svg {
 @media (min-width: 768px){
     .section-spacing{ padding: calc(97.1579px + 4.27632vw) calc(5.89474px + 1.31579vw) calc(23.8947px + 1.31579vw);}
     .border-left{ border-left: 1px solid var(--border-color);}
-    .left-square-bg .section-column > div:last-child {
-        margin-bottom: 6vw;
-    }
-    .left-square-bg .empty-column::after{
-        content: "";
-        position:absolute;
-        bottom: 0;
-        right: 0;
-        background-color: var(--secondary-color);
-        width: 100%;
-        height: 6vw;
-    }
     .single_case_study_hero .title_area {
         border-right: 1px solid var(--border-color);
         height: 100%;
@@ -2051,7 +2050,7 @@ button.submenu-toggle svg {
     .inner_page_hero { padding-top: 180px; }
     .inner_page_hero:after { height: 180px; }
     .inner_page_hero .titbar_bottom {
-        width: calc(100% - calc(3% + 3.6vw));
+        width: calc(100% - calc(2% + 3rem));
         margin-left: 0;
     } 
     .related-posts ul {

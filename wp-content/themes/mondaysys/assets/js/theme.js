@@ -1,4 +1,16 @@
-document.addEventListener("DOMContentLoaded", function() {
+/** ----------------------------------------------------
+ * Helper: Run when DOM is ready
+ ---------------------------------------------------- */
+const ready = (fn) => {
+    if (document.readyState !== "loading") fn();
+    else document.addEventListener("DOMContentLoaded", fn);
+};
+
+
+/** -----------------------------
+ * * onHover active class
+ * ------------------------------ */
+ready(() => {
     const accordionItems = document.querySelectorAll(".service-accorion-item");
 
     accordionItems.forEach(item => {
@@ -16,8 +28,10 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
-document.addEventListener("DOMContentLoaded", function() {
+/** -----------------------------
+ * * Mobiel sub menu toggle
+ * ------------------------------ */
+ready(() => {
   const menuItems = document.querySelectorAll(".primary-menu li.menu-item-has-children");
 
   menuItems.forEach(item => {
@@ -45,10 +59,10 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
+/** -----------------------------
+ * * Toggle content
+ * ------------------------------ */
+ready(() => {
   const toggleItems = document.querySelectorAll('.toggle-item');
 
   toggleItems.forEach(item => {
@@ -74,7 +88,10 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+/** -----------------------------
+ * * Mobile Menu Togglaling
+ * ------------------------------ */
+ready(() => {
   const menuToggle = document.querySelector(".menu-toggle");
   const primaryMenu = document.querySelector(".primary-menu");
 
@@ -83,7 +100,6 @@ document.addEventListener("DOMContentLoaded", function() {
       this.classList.toggle("active");
       primaryMenu.classList.toggle("show");
 
-      // Update ARIA attribute for accessibility
       const expanded = this.classList.contains("active");
       this.setAttribute("aria-expanded", expanded);
     });
@@ -91,7 +107,9 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-
+/** -----------------------------
+ * * Site Carousel slider
+ * ------------------------------ */
 class customCarousel extends HTMLElement {
   connectedCallback() {
     const swiperContainer = this.querySelector(".mondaysys_carousel");
@@ -227,7 +245,6 @@ class customCarousel extends HTMLElement {
           else bottomContainer.appendChild(div);
         });
 
-        // Click bottom titles to navigate
         bottomContainer.querySelectorAll('.vertical-slide-title').forEach(t=>{
           t.addEventListener('click', ()=> swiper.slideTo(parseInt(t.dataset.index)));
         });
@@ -238,11 +255,12 @@ class customCarousel extends HTMLElement {
 
   }
 }
-
 customElements.define('mondaysys-carousel', customCarousel);
 
 
-
+/** -----------------------------
+ * * Banner Slider
+ * ------------------------------ */
 class bannerSlideshow extends HTMLElement {
   connectedCallback() {
     const swiperContainer = this.querySelector(".banner-slideshow");
@@ -320,8 +338,10 @@ class bannerSlideshow extends HTMLElement {
 }
 customElements.define('banner-slideshow', bannerSlideshow);
 
-
-document.addEventListener("DOMContentLoaded", function() {
+/** -------------------------------
+ * * Button add icon for anmiation
+ * -------------------------------- */
+ready(() => {
     const arrowHTML = `
     <span class="btn_arrow_contain">
         <svg class="btn_arrow btn_normal_icon" width="35" height="35" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.63889 2.44444L0.305556 9.77778L1.22222 10.6944L8.86111 3.05556H9.47222V11H11V0H0V1.52778H7.63889V2.44444Z"></svg>
@@ -337,6 +357,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+/** -----------------------------
+ * * Number animated counter 
+ * ------------------------------ */
 function counter(selector) {
   let elements = document.querySelectorAll(selector);
   elements.forEach((element) => {
@@ -358,6 +381,9 @@ function counter(selector) {
 }
 counter(".counter_number");
 
+/** -------------------------------
+ * * CaseStuday Archive page slider 
+ * -------------------------------- */
 class CaseStudyCarousel extends HTMLElement {
   connectedCallback() {
     const swiperContainer = this.querySelector(".casestudy_carousel");
@@ -457,8 +483,10 @@ class CaseStudyCarousel extends HTMLElement {
 customElements.define("casestudy-carousel", CaseStudyCarousel);
 
 
-
-document.addEventListener('DOMContentLoaded', function() {
+/** -----------------------------
+ * * Mega Menu hover class 
+ * ------------------------------ */
+ready(() => {
     const navigationLinks = document.querySelectorAll('.site-navigation > ul > li.mega_menu_enable');
     const siteHeader = document.querySelector('.site-header');
     if (siteHeader) { 
@@ -474,8 +502,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-
-document.addEventListener("DOMContentLoaded", function () {
+/** -----------------------------
+ * * Site Tabs
+ * ------------------------------ */
+ready(() => {
     const tabs = document.querySelectorAll(".faq-tab-btn");
     const contents = document.querySelectorAll(".faq-tab-content");
     if (tabs.length) {
@@ -494,6 +524,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+/** -----------------------------
+ * * Blog Page Filter 
+ * ------------------------------ */
 jQuery(document).ready(function($) {
     let offset = 10;
     const collectFilters = () => {
@@ -529,6 +562,20 @@ jQuery(document).ready(function($) {
     $(document).on('change', 'input[name="tax_category[]"]', function() {
         loadJobs(0, false);
     });
+});
+
+/** -----------------------------
+ * * Filter icon toggling
+ * ------------------------------ */
+ready(() => {
+    const filterTitle = document.querySelector(".filter_title");
+    const filterBox = document.querySelector(".sicky_filter");
+
+    if (filterTitle) {
+        filterTitle.addEventListener("click", function () {
+            filterBox.classList.toggle("active");
+        });
+    }
 });
 
 
